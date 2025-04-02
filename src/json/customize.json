@@ -1,0 +1,193 @@
+[
+    {
+        "name": "戚風蛋糕",
+        "cover": "/img/Chiffon.png",
+        "size": [
+            "6inches",
+            "8inches",
+            "10inches",
+            "12inches"
+        ],
+        "fruit-img": [
+            "/img/strawberry.png",
+            "/img/blueberry.png",
+            "/img/kiwi.png",
+            "/img/grape.png"
+        ],
+        "fruit": [
+            "草莓",
+            "藍莓",
+            "奇異果",
+            "葡萄"
+        ],
+        "text-jam": [
+            "巧克力",
+            "糖霜",
+            "奶油"
+        ],
+        "candle": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "?",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0"
+        ],
+        "decoration-img": [
+            "/img/happybirthday.png",
+            "/img/love.png",
+            "/img/star.png"
+        ],
+        "decoration": [
+            "HAPPY BIRTHDAY",
+            "LOVE",
+            "STAR"
+        ]
+    },
+    {
+        "name": "生日蛋糕",
+        "cover": "/img/birthday.png",
+        "size": [
+            "6inches",
+            "8inches",
+            "10inches",
+            "12inches"
+        ],
+        "fruit-img": [
+            "/img/strawberry.png",
+            "/img/blueberry.png",
+            "/img/kiwi.png",
+            "/img/grape.png"
+        ],
+        "fruit": [
+            "草莓",
+            "藍莓",
+            "奇異果",
+            "葡萄"
+        ],
+        "inside-img": [
+            "/img/pudding.png",
+            "/img/taro.png",
+            "/img/cheese.png",
+            "/img/bluebarry.png"
+        ],
+        "inside": [
+            "布丁",
+            "芋頭",
+            "起司",
+            "藍莓"
+        ],
+        "text-jam": [
+            "巧克力",
+            "糖霜",
+            "奶油"
+        ],
+        "picture-img": [
+            "/img/heart.png",
+            "/img/star.png",
+            "/img/clover.png",
+            "/img/flower.png"
+        ],
+        "picture": [
+            "愛心",
+            "星星",
+            "幸運草",
+            "花朵"
+        ],
+        "picture-jam": [
+            "可可粉",
+            "抹茶粉",
+            "糖粉"
+        ],
+        "candle": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "?",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0"
+        ],
+        "decoration-img": [
+            "/img/happybirthday.png",
+            "/img/love.png",
+            "/img/star.png"
+        ],
+        "decoration": [
+            "HAPPY BIRTHDAY",
+            "LOVE",
+            "STAR"
+        ]
+    },
+    {
+        "name": "造型蛋糕",
+        "cover": "/img/style.png",
+        "size": [
+            "6inches",
+            "8inches",
+            "10inches",
+            "12inches"
+        ],
+        "style-img": [
+            "/img/capybara.png",
+            "/img/snowman.png",
+            "/img/cat.png",
+            "/img/dog.png"
+        ],
+        "style": [
+            "水豚",
+            "雪人",
+            "貓咪",
+            "狗狗"
+        ],
+        "inside-img": [
+            "/img/pudding.png",
+            "/img/taro.png",
+            "/img/cheese.png",
+            "/img/bluebarry.png"
+        ],
+        "inside": [
+            "布丁",
+            "芋頭",
+            "起司",
+            "藍莓"
+        ],
+        "text-jam": [
+            "巧克力",
+            "糖霜",
+            "奶油"
+        ],
+        "candle": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "?",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0"
+        ],
+        "decoration-img": [
+            "/img/happybirthday.png",
+            "/img/love.png",
+            "/img/star.png"
+        ],
+        "decoration": [
+            "HAPPY BIRTHDAY",
+            "LOVE",
+            "STAR"
+        ]
+    }
+]
