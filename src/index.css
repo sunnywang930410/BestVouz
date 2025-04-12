@@ -1,75 +1,156 @@
 @import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "./pages";
+@source "./components";
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@plugin "daisyui" {
+  themes: light, dark;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-base: #FFFEE9;
+  /*背景圖顏色*/
+  --color-base-content: #A55E00;
+  /*文字顏色*/
+  --color-primary: #E8D69A;
+  /*土黃按鈕，輪播圖顏色,按鈕以外的border顏色*/
+  --color-primary-content: #C8B885;
+  /*土黃按鈕Press,數量按鈕Press,滾輪*/
+  --color-secondary: #6B7280;
+  /*藍色按鈕顏色*/
+  --color-secondary-content: #434751
+    /*藍色按鈕Press*/
+    --color-accent: #A55E00
+    /*咖啡按鈕顏色*/
+    --color-accent-content: #734201
+    /*咖啡按鈕Press*/
+    --color-neutral: #F3E7BE;
+  /*卡片跟資料欄位，數量+-顏色,蠟燭defalt*/
+  --color-info: #FFFFFF --color-info-content: #000000 --color-success: #22C55E
+    /*綠色*/
+    --color-warning: #FECCD2
+    /*粉色*/
+    --color-warning-content: #A78BFA
+    /*紫色*/
+
+    /* border radius */
+    --radius-selector: 0.5rem;
+  /*8px*/
+
+  --radius-field: 0.625rem;
+  /*10px*/
+  --radius-box: 1.25rem;
+  /*20px*/
 }
 
-a:hover {
-  color: #535bf2;
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-base: #1F2937;
+  /*背景圖顏色*/
+  --color-base-content: #FFFFFF
+    /*文字顏色*/
+    --color-primary: #6B7280;
+  /*土黃按鈕，輪播圖顏色,按鈕以外的border顏色*/
+  --color-primary-content: #CBD5E1;
+  /*土黃按鈕Press,數量按鈕Press,滾輪*/
+  --color-secondary: #FDA4AF;
+  /*dark改 紅色按鈕顏色*/
+  --color-secondary-content: #E66877
+    /*dark改 紅色按鈕Press*/
+    --color-accent: #ffffff
+    /*dark改 白色按鈕顏色*/
+    --color-accent-content: #6B7CAF
+    /*dark改 白色按鈕Press*/
+    --color-neutral: #334155;
+  /*卡片跟資料欄位，數量+-顏色,蠟燭defalt*/
+  --color-info: #FFFFFF --color-info-content: #000000 --color-success: #22C55E
+    /*綠色*/
+    --color-warning: #EEAF00
+    /*dark改 橘色*/
+    --color-warning-content: #EEAF00
+    /*dark改 橘色*/
+
+    /* border radius */
+    --radius-selector: 0.5rem;
+  /*8px*/
+
+  --radius-field: 0.625rem;
+  /*10px*/
+  --radius-box: 1.25rem;
+  /*20px*/
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+[data-theme="light"] {
+  .header-bg {
+    background-color: #FFFEE9;
   }
 
-  a:hover {
-    color: #747bff;
+  .footer-bg {
+    background-color: #FFFEE9;
   }
 
-  button {
-    background-color: #f9f9f9;
+  .drawer-bg {
+    background-color: #FFFEE9;
   }
+
+  .body-text {
+    color: #A55E00;
+  }
+}
+
+[data-theme="dark"] {
+  .header-bg {
+    background-color: #1F2937;
+  }
+
+  .footer-bg {
+    background-color: #1F2937;
+  }
+
+  .drawer-bg {
+    background-color: #334155;
+  }
+
+  .body-text {
+    color: #FFFFFF;
+  }
+}
+
+
+/*文字大小*/
+.h1 {
+  font-size: 2rem;
+  /*32px*/
+}
+
+.h2 {
+  font-size: 1.75rem;
+  /*28px*/
+}
+
+.h3 {
+  font-size: 1.5rem;
+  /*24px*/
+}
+
+.h4 {
+  font-size: 1.25rem;
+  /*20px*/
+}
+
+.h5 {
+  font-size: 1rem;
+  /*16px*/
+}
+
+.h6 {
+  font-size: 0.875rem;
+  /*14px*/
+}
+
+p {
+  font-size: 0.75rem;
+  /*12px*/
 }
