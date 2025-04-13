@@ -4,7 +4,8 @@ import viteLogo from '/vite.svg'
 import './assets/fonts/font.css'
 import './App.css'
 import Home from '../pages/Home'
-import Product from "../pages/Product"
+import { BrowserRouter } from 'react-router'
+import './index.css'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,8 +13,10 @@ function App() {
   return (
     <>
       <div>
-        {/* <Home /> */}
-        <Product/>
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+
       </div>
     </>
   )
