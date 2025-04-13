@@ -2,7 +2,9 @@
 @import "tailwindcss" source(none);
 @source "./pages";
 @source "./components";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @plugin "daisyui" {
   themes: light, dark;
 }
