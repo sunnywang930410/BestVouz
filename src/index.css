@@ -5,6 +5,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @plugin "daisyui" {
   themes: light, dark;
 }
@@ -84,11 +85,11 @@
   /*20px*/
 }
 
-[data-theme="light"] {
-  .header-bg {
-    background-color: #FFFEE9
-  }
+[data-theme="light"] .header-bg {
+  background-color: #FFFEE9;
+}
 
+[data-theme="light"] {
   .footer-bg {
     background-color: #FFFEE9;
   }
