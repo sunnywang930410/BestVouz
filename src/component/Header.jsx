@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { User, Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, CircleUserRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import HamMenu from './HamMenu';
 
 const Header = () => {
     // 移動版菜單開關狀態
@@ -13,11 +14,11 @@ const Header = () => {
 
     return (
         // css grid 排版
-        <header className="w-full header-bg shadow-sm py-3 px-4 md:px-6" data-theme="light">
-            <div className="container mx-auto flex items-center justify-between">
+        <header className="fixed top-0 left-0 w-full h-auto header-bg shadow-sm px-4 md:px-6 header" data-theme="light" >
+            <div className="mx-8 my-2 flex items-center justify-between">
                 {/* ===== Logo 部分 ===== */}
-                <div className="flex items-center">
-                    <div className="w-15 h-auto rounded-full flex items-center justify-center ">
+                <div className="hidden md:block flex items-center">
+                    <div className="w-16 h-auto rounded-full flex items-center justify-center ">
                         <Link to="/" className="">
                             <img src="/img/Logo.png" alt="Logo" />
                         </Link>
@@ -25,39 +26,42 @@ const Header = () => {
                 </div>
 
                 {/* ===== 桌面版導航菜單 ===== */}
-                <nav className="hidden md:flex justify-end flex-1">
-                    <ul className="flex space-x-16 font-medium">
-                        <li>
-                            <Link to="/" className="hover:text-amber-600 transition-colors">
+                <nav className="hidden items-center md:flex justify-end flex-1 mr-10">
+                    <ul className="flex space-x-16">
+                        <li className='flex items-center' >
+                            <Link to="/" className="hover:text-amber-600 transition-colors text-base">
                                 首頁
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/menu" className="hover:text-amber-600 transition-colors">
+                        <li className='flex items-center'>
+                            <Link to="/menu" className="hover:text-amber-600 transition-colors text-base">
                                 菜單
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/about" className="hover:text-amber-600 transition-colors">
+                        <li className='flex items-center'>
+                            <Link to="/about" className="hover:text-amber-600 transition-colors text-base">
                                 關於我們
                             </Link>
                         </li>
-                        { /* 用戶按鈕 */}
-                        <button className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-800 border border-amber-100">
-                            <User size={18} />
-                        </button>
-
-                        {/* 購物車按鈕 */}
-                        <button className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-800 border border-amber-100">
-                            <ShoppingCart size={18} />
-                        </button>
-
-                        {/* 開關切換器 */}
-                        <div className="w-12 h-6 bg-gray-200 rounded-full flex items-center px-1 cursor-pointer">
-                            <div className="w-4 h-4 rounded-full bg-amber-500 shadow-sm"></div>
-                        </div>
                     </ul>
                 </nav>
+
+                <div className=' flex items-center space-x-6 md:justify-end md:items-center'>
+                    { /* 用戶按鈕 */}
+                    <button className="w-8 h-8 flex items-center justify-center ">
+                        <CircleUserRound strokeWidth={2.5} className='w-10 h-auto' />
+                    </button>
+
+                    {/* 購物車按鈕 */}
+                    <button className="w-8 h-8 flex items-center justify-center">
+                        <ShoppingCart strokeWidth={2.5} className='w-10 h-auto' />
+                    </button>
+
+                    {/* 開關切換器 */}
+                    <div className="hidden md:block w-12 h-6 ">
+                        <input type="checkbox" value="synthwave" className="toggle theme-controller" />
+                    </div>
+                </div>
 
                 {/* ===== 用戶功能區 ===== */}
                 <div className="flex items-center space-x-4">
@@ -68,7 +72,7 @@ const Header = () => {
                         className="ml-2 md:hidden w-8 h-8 flex items-center justify-center text-amber-800"
                         onClick={toggleMobileMenu}
                     >
-                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        <HamMenu />
                     </button>
                 </div>
             </div>
@@ -92,21 +96,14 @@ const Header = () => {
                                 關於我們
                             </Link>
                         </li>
-                        <li className="pt-2 border-t border-gray-100">
-                            <div className="flex items-center">
-                                <span className="mr-2">為您獻上最好的祝福</span>
-                                <div className="flex space-x-2">
-                                    <div className="w-4 h-4 rounded-full bg-purple-300"></div>
-                                    <div className="w-4 h-4 rounded-full bg-gray-300"></div>
-                                    <div className="w-4 h-4 rounded-full bg-gray-300"></div>
-                                    <div className="w-4 h-4 rounded-full bg-gray-300"></div>
-                                </div>
-                            </div>
+                        <li>
+                            {/* 開關切換器 */}
+                            <input type="checkbox" value="synthwave" className="toggle theme-controller" />
                         </li>
                     </ul>
                 </nav>
-            )}
 
+            )}
         </header>
     );
 };
