@@ -10,6 +10,8 @@ function Product() {
     const testProduct = {
         name: "水果蛋糕",
         price: 800,
+        candle: ["Red", "Blue", "Green"],
+        decoration: ["Star", "Flower"],
         cover: "/images/cake-cover.jpg", // 確保圖片有放
         size: ["6吋", "8吋", "10吋", "12吋"],
         fruit: ["草莓", "芒果"],

@@ -8,14 +8,14 @@ const QuantitySelector = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <button className="btn btn-outline btn-sm" onClick={decrease}>-</button>
+      <button className="btn btn-outline btn-sm text-lg" onClick={decrease}>-</button>
       <input
         type="number"
-        className="input input-bordered w-16 text-center"
+        className="input input-bordered text-center"
         value={quantity}
         readOnly
       />
-      <button className="btn btn-outline btn-sm" onClick={increase}>+</button>
+      <button className="btn btn-outline btn-sm text-lg" onClick={increase}>+</button>
     </div>
   );
 };

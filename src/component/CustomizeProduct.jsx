@@ -1,18 +1,27 @@
 import CustomizationOption from "./CustomizationOption";
+import { useState } from "react";
+import QuantitySelector from "./QuantitySelector"
 
 function CustomizeProduct({ product }) {
+    const [text, setText] = useState(""); // 用來儲存文字留言的狀態
+
+    const handleTextChange = (e) => {
+        if (e.target.value.length <= 30) { // 檢查輸入的字數
+            setText(e.target.value); // 更新文字狀態
+        }
+    };
     return (
         <div>
             {/* 客製化選單標題 */}
-            <div className="p-8">
-                <h2>
+            <div className="p-16">
+                <h2 className="text-2xl">
                     客製化選單
                 </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">
-                    <div className="flex justify-between w-[400px] px-4 text-lg font-semibold">
+                    <div className="flex justify-between w-[400px] px-4 text-lg">
                         <span>{product.name}</span>
                         <span>${product.price}</span>
                     </div>
@@ -24,9 +33,9 @@ function CustomizeProduct({ product }) {
                 </div>
                 {/* 右側：客製化選項 */}
                 <div className="flex flex-col gap-6">
-                    <h4>蛋糕內容</h4>
+                    <h4 className="text-left text-lg">蛋糕內容</h4>
                     {/* 蛋糕內容 */}
-                    <div className="card bg-base-100 shadow-md p-4 border border-base-200">
+                    <div className="border-[3px] border-primary rounded-xl p-4 mb-16">
                         {/* 尺寸 */}
                         <CustomizationOption
                             type="selector"
@@ -66,13 +75,24 @@ function CustomizeProduct({ product }) {
                             tip={10}
                         />
                         {/* 文字留言 */}
-                        <CustomizationOption
-                            type="Input"
-                            product={product} // 哪種商品
-                            label="Input-text"
-                            title="文字留言"
-                            tip={5}
-                        />
+                        <div className="mb-4">
+                            <div className="flex items-center gap-2 mb-2 text-left">
+                                {/* 左側標題 */}
+                                <h4 className="text-lg">文字留言</h4>
+                            </div>
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    value={text}
+                                    onChange={handleTextChange}
+                                    maxLength={30}
+                                    placeholder="為壽星寫下祝福吧！（最多30字）"
+                                    className="input w-full pr-12" // 添加了 pr-12 來騰出空間
+                                />
+                                {/* 字數計數器 */}
+                                <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm">{text.length}/30</span>
+                            </div>
+                        </div>
                         {/* 選擇文字醬料 */}
                         <CustomizationOption
                             type="text"
@@ -89,16 +109,32 @@ function CustomizeProduct({ product }) {
                             tip={5}
                         />)}
                         {/* 數量 */}
-                        <CustomizationOption
-                            type="counter"
-                            product={product} // 哪種商品
-                            label="qty"
-                            title="數量"
-                        />
+                        <div className="mb-6 flex items-center justify-between">
+                            <h4 className="text-lg text-left">數量</h4>
+                            <QuantitySelector />
+                        </div>
                     </div>
+                    <h4 className="text-left text-lg">配件選擇</h4>
                     {/* 配件選擇 */}
-                    <div className="card bg-base-100 shadow-md p-4 border border-base-200">
-
+                    <div className="border-[3px] border-primary rounded-xl p-4">
+                        {/* 蠟燭 */}
+                        <CustomizationOption
+                            type="button"
+                            product = {product} // 哪種商品
+                            label = "candle"
+                            title = "蠟燭"
+                            tip = "最多選3個"
+                        />
+                        {/* 餐具數量 */}
+                        {/* 裝飾 */}
+                        <CustomizationOption
+                            type="image"
+                            product = {product} // 哪種商品
+                            label = "decoration"
+                            title = "裝飾"
+                            tip = {5}
+                        />
+                        
                     </div>
                 </div>
             </div>
