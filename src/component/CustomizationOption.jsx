@@ -1,9 +1,19 @@
 import QuantitySelector from "./QuantitySelector";
+import { useState } from "react";
 
 
 const CustomizationOption = ({ type, product, label, title, tip }) => {
   const data = product[label];
   if (!data) return null;
+  // case image 狀態變數：儲存已按過的內容
+  const [selectedItems, setSelectedItems] = useState([]);
+  const toggleSelection = (name) => {
+    setSelectedItems((prevSelected) =>
+      prevSelected.includes(name)
+        ? prevSelected.filter((item) => item !== name)
+        : [...prevSelected, name]
+    );
+  };
 
   const LabelTip = () => (
     <div className="flex justify-between items-center mb-2">
@@ -28,25 +38,29 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
 
     case "image":
       const images = product[`${label}-img`] || [];
-      const handleImageClick = (name) => {};
       return (
         <div className="mb-10">
           <LabelTip />
           <div className="grid grid-cols-4 gap-4 mt-2">
-            {data.map((name, index) => (
-              <button
-              key={index}
-              onClick={() => handleImageClick(name)}
-              className="flex flex-col items-center text-center border p-2 rounded-lg hover:bg-gray-100 transition"
-            >
-              <img
-                src={images[index]}
-                alt={name}
-                className="w-24 h-24 mx-auto rounded-md shadow"
-              />
-              <h6 className="mt-1 text-sm">{name}</h6>
-            </button>
-            ))}
+            {data.map((name, index) => {
+              const isSelected = selectedItems.includes(name);
+              return (
+                <button
+                  key={index}
+                  onClick={() => toggleSelection(name)}
+                  className={`flex flex-col items-center text-center p-2 rounded-md border transition 
+                    ${isSelected ? "border-orange-500 bg-orange-100" : "border-gray-200"} 
+                    hover:border-orange-300 hover:bg-orange-50`}
+                >
+                  <img
+                    src={images[index]}
+                    alt={name}
+                    className="w-24 h-24 object-cover rounded-md shadow"
+                  />
+                  <h6 className="mt-1 text-sm">{name}</h6>
+                </button>
+              );
+            })}
           </div>
         </div>
       );
@@ -108,36 +122,41 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
           </div>
         </div>
       );
-
-    case "counter":
-      return (
-        <div className="mb-10">
-          <h4 className="text-base font-semibold mb-2">{title}</h4>
-          <QuantitySelector />
-        </div>
-      );
+      
     case "button":
-      return(
+      const options = [...Array(10).keys()].map(String).concat("?");
+      return (
         <div className="mb-10">
           <LabelTip />
           <div className="grid grid-cols-11 gap-4">
-            {[...Array(10).keys()].map((num) => (
-              <button
-                key={num}
-                className="btn btn-outline btn-sm w-full"
-                onClick={() => console.log(num)} // 按鈕點擊事件
-              >
-                {num}
-              </button>
-            ))}
-            <button
-              className="btn btn-outline btn-sm w-full"
-              onClick={() => console.log('?')} // 按鈕點擊事件
-            >?</button>
+            {options.map((val) => {
+              const isSelected = selectedItems.includes(val);
+              return (
+                <button
+                  key={val}
+                  onClick={() => {
+                    if (isSelected) {
+                      setSelectedItems((prev) =>
+                        prev.filter((item) => item !== val)
+                      );
+                    } else if (selectedItems.length < 3) {
+                      setSelectedItems((prev) => [...prev, val]);
+                    }
+                  }}
+                  className={`btn btn-sm w-full border transition
+                ${isSelected
+                      ? "border-pink-300 bg-pink-200"
+                      : "btn-outline border-gray-300"}
+                hover:border-pink-200 hover:bg-orange-50`}
+                >
+                  {val}
+                </button>
+              );
+            })}
           </div>
         </div>
       );
-    
+
 
     default:
       return null;

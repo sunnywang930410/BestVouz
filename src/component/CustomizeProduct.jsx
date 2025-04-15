@@ -3,7 +3,7 @@ import { useState } from "react";
 import QuantitySelector from "./QuantitySelector";
 import AddToCart from "./AddToCart";
 
-function CustomizeProduct({product}) {
+function CustomizeProduct({ product }) {
     const [text, setText] = useState(""); // 用來儲存文字留言的狀態
 
     const handleTextChange = (e) => {
@@ -22,9 +22,9 @@ function CustomizeProduct({product}) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">
-                    <div className="flex justify-between w-[400px] px-4 text-lg">
+                    <div className="flex justify-between w-[400px] px-4 text-xl">
                         <span>{product.name}</span>
-                        <span>${product.price}</span>
+                        <span>{product.price}</span>
                     </div>
                     <img
                         alt={product.name}
@@ -33,8 +33,8 @@ function CustomizeProduct({product}) {
                     />
                 </div>
                 {/* 右側：客製化選項 */}
-                <div className="flex flex-col gap-6">
-                    <h4 className="text-left text-lg">蛋糕內容</h4>
+                <div className="flex flex-col gap-4">
+                    <h4 className="text-left text-xl">蛋糕內容</h4>
                     {/* 蛋糕內容 */}
                     <div className="border-[3px] border-primary rounded-xl p-8 mb-16">
                         {/* 尺寸 */}
@@ -53,7 +53,7 @@ function CustomizeProduct({product}) {
                             tip={20}
                         />}
                         {/* 造型 */}
-                        {product.name=="造型蛋糕" && (<CustomizationOption
+                        {product.name == "造型蛋糕" && (<CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="style"
@@ -102,7 +102,7 @@ function CustomizeProduct({product}) {
                             title="選擇文字醬料"
                         />
                         {/* 插圖 */}
-                        {product.name=="戚風蛋糕" && (<CustomizationOption
+                        {product.name == "戚風蛋糕" && (<CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="picture"
@@ -110,7 +110,7 @@ function CustomizeProduct({product}) {
                             tip={5}
                         />)}
                         {/* 選擇插圖醬料 */}
-                        {product.name=="戚風蛋糕" && (<CustomizationOption
+                        {product.name == "戚風蛋糕" && (<CustomizationOption
                             type="text"
                             product={product} // 哪種商品
                             label="picture-jam"
@@ -128,26 +128,29 @@ function CustomizeProduct({product}) {
                         {/* 蠟燭 */}
                         <CustomizationOption
                             type="button"
-                            product = {product} // 哪種商品
-                            label = "candle"
-                            title = "蠟燭"
-                            tip = "最多選3個"
+                            product={product} // 哪種商品
+                            label="candle"
+                            title="蠟燭"
+                            tip="最多選3個"
                         />
                         {/* 餐具數量 */}
+                        <div className="mb-6 flex items-center justify-between">
+                            <h4 className="text-lg text-left">餐具數量</h4>
+                            <QuantitySelector />
+                        </div>
                         {/* 裝飾 */}
                         <CustomizationOption
                             type="image"
-                            product = {product} // 哪種商品
-                            label = "decoration"
-                            title = "裝飾"
-                            tip = {5}
+                            product={product} // 哪種商品
+                            label="decoration"
+                            title="裝飾"
+                            tip={5}
                         />
                     </div>
-                    <div>
-                        <span className="text-xl">Total:</span>
-                        <AddToCart/>
+                    <div className="flex items-center justify-between p-2 mb-16">
+                        <span className="text-2xl">Total:</span>
+                        <AddToCart />
                     </div>
-                    
                 </div>
             </div>
         </div>
