@@ -1,12 +1,12 @@
 import ProductItem from "./Productitem";
 
-const Productlist = ({ menu }) => {
+const Productlist = ({ product }) => {
 
     return (
         <div>
             {
-                menu.map((menu) => (
-                    <ProductItem menu={menu} />
+                product.map((product) => (
+                    <ProductItem product={product} />
                 ))
             }
         </div>

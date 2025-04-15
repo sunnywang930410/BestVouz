@@ -1,13 +1,13 @@
 import Footer from "../src/component/Footer";
 import Header from "../src/component/Header";
 import Productlist from "../src/component/Productlist";
-import menu from "../src/json/menu.json";
+import product from "../src/json/customize.json";
 
 function Home() {
     return (
         <div>
             <Header />
-            <Productlist menu={menu} />
+            <Productlist product={product} />
             <Footer />
         </div>
     )
