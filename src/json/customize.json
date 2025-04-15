@@ -1,6 +1,7 @@
 [
     {
         "name": "戚風蛋糕",
+        "id": "chiffon-cake",
         "price":"$450",
         "cover": "/img/Chiffon.png",
         "size": [
@@ -64,6 +65,7 @@
     },
     {
         "name": "生日蛋糕",
+        "id": "birthday-cake",
         "price":"$650",
         "cover": "/img/birthday.png",
         "size": [
@@ -161,6 +163,7 @@
     },
     {
         "name": "造型蛋糕",
+        "id": "style-cake",
         "price":"$550",
         "cover": "/img/style.png",
         "size": [

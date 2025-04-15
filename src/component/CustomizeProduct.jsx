@@ -1,8 +1,9 @@
 import CustomizationOption from "./CustomizationOption";
 import { useState } from "react";
-import QuantitySelector from "./QuantitySelector"
+import QuantitySelector from "./QuantitySelector";
+import AddToCart from "./AddToCart";
 
-function CustomizeProduct({ product }) {
+function CustomizeProduct({product}) {
     const [text, setText] = useState(""); // 用來儲存文字留言的狀態
 
     const handleTextChange = (e) => {
@@ -44,22 +45,22 @@ function CustomizeProduct({ product }) {
                             title="尺寸"
                         />
                         {/* 外層水果 */}
-                        <CustomizationOption
+                        {["生日蛋糕", "戚風蛋糕"].includes(product.name) && <CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="fruit"
                             title="外層水果"
                             tip={20}
-                        />
+                        />}
                         {/* 造型 */}
-                        {product.style && (<CustomizationOption
+                        {product.name=="造型蛋糕" && (<CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="style"
                             title="造型"
                         />)}
                         {/* 內餡 */}
-                        {product.inside && (<CustomizationOption
+                        {["生日蛋糕", "造型蛋糕"].includes(product.name) && (<CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="inside"
@@ -101,12 +102,19 @@ function CustomizeProduct({ product }) {
                             title="選擇文字醬料"
                         />
                         {/* 插圖 */}
-                        {product.picture && (<CustomizationOption
+                        {product.name=="戚風蛋糕" && (<CustomizationOption
                             type="image"
                             product={product} // 哪種商品
                             label="picture"
                             title="插圖"
                             tip={5}
+                        />)}
+                        {/* 選擇插圖醬料 */}
+                        {product.name=="戚風蛋糕" && (<CustomizationOption
+                            type="text"
+                            product={product} // 哪種商品
+                            label="picture-jam"
+                            title="選擇插圖醬料"
                         />)}
                         {/* 數量 */}
                         <div className="mb-6 flex items-center justify-between">
@@ -134,8 +142,12 @@ function CustomizeProduct({ product }) {
                             title = "裝飾"
                             tip = {5}
                         />
-                        
                     </div>
+                    <div>
+                        <span className="text-xl">Total:</span>
+                        <AddToCart/>
+                    </div>
+                    
                 </div>
             </div>
         </div>

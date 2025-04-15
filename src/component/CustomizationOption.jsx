@@ -1,5 +1,6 @@
 import QuantitySelector from "./QuantitySelector";
 
+
 const CustomizationOption = ({ type, product, label, title, tip }) => {
   const data = product[label];
   if (!data) return null;
@@ -84,7 +85,7 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
             <div className="flex items-center gap-8">
               <h4 className="text-base">{title}</h4>
               <div className="flex gap-8">
-                {product["text-jam"].map((option, index) => (
+                {product[label].map((option, index) => (
                   <label key={index} className="flex items-center gap-2">
                     <input
                       type="radio"
