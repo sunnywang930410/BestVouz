@@ -19,18 +19,16 @@ function App() {
     <>
       <div data-theme="light">
         <BrowserRouter>
-          <Header />  {/* 導航欄 */}
-          <main className="pt-24"> {/* 讓Header跟Footer可以正常顯示在所有頁面頂部 */}
+          <Header /> 
+          <main className="pt-24"> 
             <Routes>
-              <Route path="/" element={<Home />} />  {/* 根路由直接顯示 Home 頁面 */}
-              <Route path="/menu" element={<Menu />} />  {/* 這條路由可以用來顯示 Menu 頁面 */}
-              {/* <Route path="/" element={<Product />} />  根路由直接顯示 Product 頁面 */}
-              <Route path="/product/:id" element={<Product />} />  {/* 這條路由也可以用來顯示 Product 頁面，並且會帶有 id 參數 */}
+              <Route path="/" element={<Home />} />  
+              <Route path="/menu" element={<Menu />} />  
+              <Route path="/product/:id" element={<Product />} />  
             </Routes>
-            <Footer />  {/* 頁尾 */}
+            <Footer /> 
           </main>
         </BrowserRouter>
-
       </div>
     </>
   )

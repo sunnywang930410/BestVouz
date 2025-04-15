@@ -36,7 +36,7 @@ function CustomizeProduct({product}) {
                 <div className="flex flex-col gap-6">
                     <h4 className="text-left text-lg">蛋糕內容</h4>
                     {/* 蛋糕內容 */}
-                    <div className="border-[3px] border-primary rounded-xl p-4 mb-16">
+                    <div className="border-[3px] border-primary rounded-xl p-8 mb-16">
                         {/* 尺寸 */}
                         <CustomizationOption
                             type="selector"
@@ -124,7 +124,7 @@ function CustomizeProduct({product}) {
                     </div>
                     <h4 className="text-left text-lg">配件選擇</h4>
                     {/* 配件選擇 */}
-                    <div className="border-[3px] border-primary rounded-xl p-4">
+                    <div className="border-[3px] border-primary rounded-xl p-8">
                         {/* 蠟燭 */}
                         <CustomizationOption
                             type="button"

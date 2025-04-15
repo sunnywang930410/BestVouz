@@ -19,7 +19,7 @@ const ProductItem = ({ product }) => {
                     <p className="text-x1">{product.price}</p>
                     <div className="card-actions justify-end">
 
-                        <Link to={`/product/id/${product.id}`}>
+                        <Link to={`/product/${product.id}`}>
                             <button className="btn btn-primary">
                                 購買蛋糕
                             </button>

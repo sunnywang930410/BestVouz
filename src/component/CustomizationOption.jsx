@@ -28,19 +28,24 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
 
     case "image":
       const images = product[`${label}-img`] || [];
+      const handleImageClick = (name) => {};
       return (
         <div className="mb-10">
           <LabelTip />
-          <div className="grid grid-cols-2 gap-4 mt-2">
+          <div className="grid grid-cols-4 gap-4 mt-2">
             {data.map((name, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <img
-                  src={images[index]}
-                  alt={name}
-                  className="w-24 h-24 mx-auto rounded-md shadow"
-                />
-                <h6 className="mt-1 text-sm">{name}</h6>
-              </div>
+              <button
+              key={index}
+              onClick={() => handleImageClick(name)}
+              className="flex flex-col items-center text-center border p-2 rounded-lg hover:bg-gray-100 transition"
+            >
+              <img
+                src={images[index]}
+                alt={name}
+                className="w-24 h-24 mx-auto rounded-md shadow"
+              />
+              <h6 className="mt-1 text-sm">{name}</h6>
+            </button>
             ))}
           </div>
         </div>
