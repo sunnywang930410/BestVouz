@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div data-theme="light">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Product />} />  {/* 根路由直接顯示 Product 頁面 */}

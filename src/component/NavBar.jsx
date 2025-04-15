@@ -21,7 +21,7 @@ const NavBar = () => {
                 </Link>
             </div>
 
-            <div className="md:flex items-center space-x-10">
+            <div className="md:flex items-center space-x-10 justify-center">
                 {/* ===== 導覽列內容 ===== */}
 
                 <ul className="flex flex-col md:flex-row md:space-x-10">
@@ -64,12 +64,12 @@ const NavBar = () => {
         // 桌面板導覽列 
         <>
             {/* 桌面版導覽列 */}
-            <div className="hidden md:flex justify-between mt-4 mb-4 px-10 py-2 bg-white ">
+            <div className="hidden md:flex justify-between mt-4 mb-4 px-10 py-2">
                 <NavBarContent />
             </div>
 
             {/* 手機版 Drawer */}
-            <div className="drawer md:hidden w-full mt-4 mb-4 bg-white ">
+            <div className="drawer md:hidden w-full mt-4 mb-4 ">
                 <input id="drawer-toggle" type="checkbox" className="drawer-toggle" checked={isOpen} readOnly />
                 {/* 手機版Header */}
                 <div className="drawer-content z-999">
@@ -96,7 +96,7 @@ const NavBar = () => {
                         ? 'top-[84px] h-[calc(100vh-84px)]'
                         : 'top-[-100vh]'
                         }`}>
-                        <div className="menu w-full justify-center items-center drawer-bg">
+                        <div className="w-full justify-center items-center drawer-bg h-full">
                             <NavBarContent />
                         </div>
                     </div>
