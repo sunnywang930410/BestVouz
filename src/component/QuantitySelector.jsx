@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
-const QuantitySelector = () => {
+const QuantitySelector = ({qty}) => {
   const [quantity, setQuantity] = useState(1);
 
   const increase = () => setQuantity((prev) => prev + 1);
   const decrease = () => setQuantity((prev) => Math.max(1, prev - 1)); // 不低於 1
-
+  useEffect(() => {
+    if (qty) {
+      qty(quantity);
+    }
+  }, [quantity]);
   return (
     <div className="flex items-center gap-2">
       <button className="btn btn-outline btn-sm text-lg" onClick={decrease}>-</button>
