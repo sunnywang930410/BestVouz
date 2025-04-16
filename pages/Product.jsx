@@ -34,7 +34,6 @@ function Product() {
 
     return (
         <div className=" main-layout min-h-screen">
-            <Header />
             <CustomizeProduct product={product} />
         </div>
     );

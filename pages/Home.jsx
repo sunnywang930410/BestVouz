@@ -1,11 +1,10 @@
-
+import Homepage from "../src/component/Homepage";
+import product from "../src/json/customize.json";
 
 
 function Home() {
     return (
-        <div>
-
-        </div>
+        <Homepage product={product} />
     )
 }
 
