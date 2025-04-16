@@ -1,12 +1,21 @@
-import QuantitySelector from "./QuantitySelector";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 
-const CustomizationOption = ({ type, product, label, title, tip }) => {
-  const data = product[label];
+const CustomizationOption = ({ type, product, label, title, tip, onOptionChange }) => {
+  const data = product[label]||[];
   if (!data) return null;
+  // 儲存使用者選擇的狀態變數
+  const [selected, setSelected] = useState(null);
+
+
   // case image 狀態變數：儲存已按過的內容
   const [selectedItems, setSelectedItems] = useState([]);
+  useEffect(() => {
+    if (data && data.length > 0 && onOptionChange ) {
+      //console.log("🔥 onOptionChange triggered:", label, selectedItems);
+      onOptionChange(label, selectedItems,selectedItems.length*tip);
+    }
+  }, [selectedItems]);
   const toggleSelection = (name) => {
     setSelectedItems((prevSelected) =>
       prevSelected.includes(name)
@@ -53,10 +62,11 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
                     hover:border-orange-300 hover:bg-orange-50`}
                 >
                   <img
-                    src={images[index]}
-                    alt={name}
-                    className="w-24 h-24 object-cover rounded-md shadow"
+                  src={images[index]}
+                  alt={name}
+                  className="w-24 h-24 object-cover rounded-md shadow"
                   />
+                  
                   <h6 className="mt-1 text-sm">{name}</h6>
                 </button>
               );
@@ -66,14 +76,26 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
       );
 
     case "checkbox":
-      return (
+    return (
         <div className="mb-10">
           <div className="flex items-center justify-between">
             {/* 左側標題與 checkbox 區塊 */}
             <div className="flex items-center gap-18.5">
               <h4 className="text-base text-lg">{title}</h4>
               <label className="flex items-center gap-2">
-                <input type="checkbox" value={data[0]} className="checkbox" />
+              <input
+                  type="checkbox"
+                  value={data[0]}
+                  className="checkbox"
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    const value = e.target.value;
+                    // 這裡可搭配 onOptionChange 傳給父層
+                    if (onOptionChange) {
+                      onOptionChange(label, "鮮奶油",isChecked ? tip : 0);
+                    }
+                  }}
+                />
                 <span className="text-sm">{data[0]}</span>
               </label>
             </div>
@@ -104,7 +126,7 @@ const CustomizationOption = ({ type, product, label, title, tip }) => {
             <div className="flex items-center gap-8">
               <h4 className="text-base">{title}</h4>
               <div className="flex gap-8">
-                {product[label].map((option, index) => (
+                {data.map((option, index) => (
                   <label key={index} className="flex items-center gap-2">
                     <input
                       type="radio"
