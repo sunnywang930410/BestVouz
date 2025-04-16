@@ -4,12 +4,15 @@ const Productlist = ({ product }) => {
 
     return (
         <div>
-            <p>~Hot Sale~</p>
-            {
-                product.map((product) => (
-                    <ProductItem key={product.id} product={product} />
-                ))
-            }
+            <h2 className="my-6">~Hot Sale~</h2>
+            <div className="space-y-10">
+                {
+                    product.map((product) => (
+                        <ProductItem key={product.id} product={product} />
+                    ))
+                }
+            </div>
+
         </div>
     )
 }
