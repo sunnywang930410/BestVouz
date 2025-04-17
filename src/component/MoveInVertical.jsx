@@ -49,16 +49,16 @@ const MoveInVertical = () => {
 
         return (
             <div
-                className={`card bg-neutral w-full shadow-xl transform ${getRotationClass(index)} transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
+                className={`card bg-neutral w-[280px] sm:w-[320px] md:w-[300px] mx-auto shadow-xl transform ${getRotationClass(index)} transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
             >
-                <figure className="px-4 pt-4 py-8">
+                <figure className="py-6">
                     <img
                         src={picture.url}
                         alt={picture.title}
-                        className="rounded-xl"
+                        className="rounded-xl w-[150px] sm:w-[180px] md:w-[200px] h-auto"
                     />
                 </figure>
-                <div className="card-body items-center text-center">
+                <div className="card-body items-center text-center py-4">
                     <h2 className="text-base">{picture.title}</h2>
                 </div>
             </div>
@@ -66,7 +66,7 @@ const MoveInVertical = () => {
     }
 
     return (
-        <div className="container mx-auto px-4">
+        <div className="container px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {picture.map((pic, index) => (
                     <Card key={pic.ID} picture={pic} index={index} />

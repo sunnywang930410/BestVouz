@@ -1,14 +1,29 @@
 import Carousel from "./Carousel";
 import { useNavigate } from "react-router";
 import MoveInVertical from "./MoveInVertical";
+import { useEffect } from "react";
 
 function Homepage({ product }) {
 
     const navigate = useNavigate();
 
+    // 添加 useEffect 來處理頁面載入時滾動到頂部
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, []); // 空依賴數組表示只在組件掛載時執行
+
     const handleNavigateToMenu = () => {
-        navigate("/menu")
+        navigate("/menu");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
+
 
 
     const chiffonCake = product.find(item => item.name === "戚風蛋糕");
@@ -29,7 +44,7 @@ function Homepage({ product }) {
 
     return (
         <div className="justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">
                     <img
