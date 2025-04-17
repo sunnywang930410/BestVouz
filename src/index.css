@@ -98,8 +98,13 @@
   background-color: #FFFEE9;
 }
 
+[data-theme="light"] .footer-bg {
+  background-color: #FFFEE9;
+}
+
+
 [data-theme="light"] {
-  .footer-bg {
+  .body-bg {
     background-color: #FFFEE9;
   }
 
@@ -109,6 +114,14 @@
 
   .body-text {
     color: #A55E00;
+  }
+
+  .bg-neutral {
+    background-color: #F3E7BE;
+  }
+
+  .bg-primary {
+    background-color: #E8D69A;
   }
 }
 
@@ -121,12 +134,24 @@
     background-color: #1F2937;
   }
 
+  .body-bg {
+    background-color: #1F2937;
+  }
+
   .drawer-bg {
     background-color: #334155;
   }
 
   .body-text {
     color: #FFFFFF;
+  }
+
+  .bg-neutral {
+    background-color: #334155;
+  }
+
+  .bg-primary {
+    background-color: #6B7280;
   }
 }
 
@@ -165,4 +190,23 @@
 p {
   font-size: 0.75rem;
   /*12px*/
+}
+
+/*背景顏色設定*/
+html[data-theme="light"] {
+  background-color: #FFFEE9;
+}
+
+html[data-theme="dark"] {
+  background-color: #1F2937;
+}
+
+
+/*自定義header跟footer陰影*/
+.header {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
