@@ -23,23 +23,27 @@
   /*土黃按鈕Press,數量按鈕Press,滾輪*/
   --color-secondary: #6B7280;
   /*藍色按鈕顏色*/
-  --color-secondary-content: #434751
-    /*藍色按鈕Press*/
-    --color-accent: #A55E00
-    /*咖啡按鈕顏色*/
-    --color-accent-content: #734201
-    /*咖啡按鈕Press*/
-    --color-neutral: #F3E7BE;
+  --color-secondary-content: #434751;
+  /*藍色按鈕Press*/
+  --color-accent: #A55E00;
+  /*咖啡按鈕顏色*/
+  --color-accent-content: #734201;
+  /*咖啡按鈕Press*/
+  --color-neutral: #F3E7BE;
   /*卡片跟資料欄位，數量+-顏色,蠟燭defalt*/
-  --color-info: #FFFFFF --color-info-content: #000000 --color-success: #22C55E
-    /*綠色*/
-    --color-warning: #FECCD2
-    /*粉色*/
-    --color-warning-content: #A78BFA
-    /*紫色*/
+  --color-info: #FFFFFF;
+  /* 白色 */
+  --color-info-content: #000000;
+  /* 黑色 */
+  --color-success: #22C55E;
+  /*綠色*/
+  --color-warning: #FECCD2;
+  /*粉色*/
+  --color-warning-content: #A78BFA;
+  /*紫色*/
 
-    /* border radius */
-    --radius-selector: 0.5rem;
+  /* border radius */
+  --radius-selector: 0.5rem;
   /*8px*/
 
   --radius-field: 0.625rem;
@@ -52,31 +56,36 @@
   name: "dark";
   --color-base: #1F2937;
   /*背景圖顏色*/
-  --color-base-content: #FFFFFF
-    /*文字顏色*/
-    --color-primary: #6B7280;
+  --color-base-content: #FFFFFF;
+  /*文字顏色*/
+  --color-primary: #6B7280;
   /*土黃按鈕，輪播圖顏色,按鈕以外的border顏色*/
   --color-primary-content: #CBD5E1;
   /*土黃按鈕Press,數量按鈕Press,滾輪*/
   --color-secondary: #FDA4AF;
   /*dark改 紅色按鈕顏色*/
-  --color-secondary-content: #E66877
-    /*dark改 紅色按鈕Press*/
-    --color-accent: #ffffff
-    /*dark改 白色按鈕顏色*/
-    --color-accent-content: #6B7CAF
+  --color-secondary-content: #E66877;
+  /*dark改 紅色按鈕Press*/
+  --color-accent: #ffffff;
+  /*dark改 白色按鈕顏色*/
+  --color-accent-content: #6B7CAF
     /*dark改 白色按鈕Press*/
     --color-neutral: #334155;
   /*卡片跟資料欄位，數量+-顏色,蠟燭defalt*/
-  --color-info: #FFFFFF --color-info-content: #000000 --color-success: #22C55E
-    /*綠色*/
-    --color-warning: #EEAF00
-    /*dark改 橘色*/
-    --color-warning-content: #EEAF00
-    /*dark改 橘色*/
+  --color-info: #FFFFFF;
+  /* 白色 */
+  --color-info-content: #000000;
+  /* 黑色 */
+  --color-success: #22C55E;
+  /*綠色*/
+  /*綠色*/
+  --color-warning: #EEAF00;
+  /*dark改 橘色*/
+  --color-warning-content: #EEAF00;
+  /*dark改 橘色*/
 
-    /* border radius */
-    --radius-selector: 0.5rem;
+  /* border radius */
+  --radius-selector: 0.5rem;
   /*8px*/
 
   --radius-field: 0.625rem;

@@ -4,52 +4,44 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
-                <nav>
+        <div className="relative w-screen left-[50%] right-[50%] mx-[-50vw]">
+            <footer className="footer justify-around items-center md:footer-horizontal bg-base-300 text-base-content p-10">
+                <div>
                     <Link
                         className="w-16 h-auto"
                         to="/">
                         <img src="/img/Logo.png" alt="Logo" />
                     </Link>
-                    <p>
+                    <span className="text-sm mt-4">
                         Copyright © 2025 wish you have a bestvouz
-                    </p>
-                </nav>
-                <nav>
-                    <h6 className="footer-title">聯絡我們</h6>
-                    <div>
-                        <div className="flex">
-                            <a className="link link-hover"><Mail />
-                                <p className="text-sm">BestVouz@gmail.com</p>
-                            </a>
+                    </span>
+                </div>
+                <div>
+                    <span className="footer-title text-base mb-6">聯絡我們</span>
+                    <div className="justify-center items-center">
+                        <div className="flex flex-col flex-row mb-4">
+                            <a className="link link-hover"><Mail /></a>
+                            <span className="text-sm link link-hover px-4">BestVouz@gmail.com</span>
                         </div>
-                        <div className="flex">
-                            <a className="link link-hover"><Phone />
-                                <p className="mx-2">(02)2868-1012</p>
-                            </a>
+                        <div className="flex flex-row mb-4">
+                            <a className="link link-hover"><Phone /></a>
+                            <span className="mx-2 link link-hover px-4">(02)2868-1012</span>
                         </div>
                     </div>
-                </nav>
-                <nav>
-                    <h6 className="footer-title">訂閱我們</h6>
-                    <fieldset className="w-80">
-                        <div className="join">
-                            <input
-                                type="text"
-                                placeholder="輸入電子信箱"
-                                className="input input-bordered join-item" />
-                            <button className="btn btn-primary join-item">Enter</button>
-                        </div>
-                    </fieldset>
-                    <div className="grid grid-flow-col gap-4">
+                </div>
+                <div>
+                    <span className="footer-title text-base mb-6 ">Follow Us</span>
+                    <div className="mb-4">周一至周五 9:00~5:00
+                    </div>
+                    <div className="flex justify-center items-center gap-4 mb-4 ">
                         <Instagram />
                         <Facebook />
                         <Twitter />
                     </div>
-                </nav>
-            </footer>
-        </div>
+                </div>
+
+            </footer >
+        </div >
     )
 }
 
