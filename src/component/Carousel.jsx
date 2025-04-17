@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router";
 
 const Carousel = ({ product }) => {
     const settings = {
@@ -33,15 +34,17 @@ const Carousel = ({ product }) => {
     };
 
     const Card = ({ product }) => (
-        <div className="px-2">
+
+        <Link to={`/product/${product.id}`} className="px-2">
             <div className="card bg-base-100 shadow-lg transition-transform duration-300 hover:scale-105">
-                <figure className="">
+                <figure>
                     <img
                         src={product.cover}
                         alt={product.name}
                         className="rounded-t-xl h-64 w-full object-cover"
                     />
                 </figure>
+
                 <div className="card-body bg-primary rounded-b-xl items-center text-center">
                     <span className="card-title text-lg">{product.name}</span>
                     <span className="text-base">${product.price}</span>
@@ -59,7 +62,8 @@ const Carousel = ({ product }) => {
                     </div>
                 </div>
             </div>
-        </div>
+
+        </Link>
     );
 
     return (
