@@ -1,6 +1,18 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const ProductItem = ({ product }) => {
+    const navigate = useNavigate();
+
+    const handleNavigateTocake = () => {
+        navigate("/menu");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    
     return (
         <div className="card card-side flex-col sm:flex-row !rounded-lg border-2 border-primary bg-base-100 items-center space-y-2 sm:space-y-4 sm:space-x-10 p-2 sm:p-4">
             {/* 圖片區塊 */}
@@ -24,7 +36,8 @@ const ProductItem = ({ product }) => {
                 <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-2 sm:gap-4 pt-2 sm:pt-8">
                     <span className="text-base sm:text-lg md:text-xl text-center sm:text-left">${product.price}</span>
                     <Link to={`/product/${product.id}`}>
-                        <button className="btn btn-secondary w-full sm:w-auto active:bg-secondary-content text-info font-normal py-1 sm:py-2 px-4 sm:px-6 md:px-10 text-sm sm:text-base">
+                        <button className="btn btn-secondary w-full sm:w-auto active:bg-secondary-content text-info font-normal py-1 sm:py-2 px-4 sm:px-6 md:px-10 text-sm sm:text-base"
+                        onClick={handleNavigateTocake}>
                             購買蛋糕
                         </button>
                     </Link>
