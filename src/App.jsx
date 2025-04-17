@@ -1,22 +1,22 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
+import {Provider} from "react-redux"
 import './assets/fonts/font.css'
 import './App.css'
-import Home from '../pages/Home'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css'
+
+import Home from '../pages/Home'
 import Product from "../pages/Product"
-
-
-
 import Header from './component/Header'
 import Footer from './component/Footer'
 import Menu from '../pages/Menu';
+import store from "./redux/store"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <Provider store = {store}>
       <div data-theme="light">
         <BrowserRouter>
           <Header /> 
@@ -30,7 +30,7 @@ function App() {
           </main>
         </BrowserRouter>
       </div>
-    </>
+    </Provider>
   )
 }
 

@@ -193,7 +193,7 @@ function CustomizeProduct({ product }) {
                     <div className="flex justify-start text-lg p-2">加價小計：${totalTip} * {quantities}</div>
                     <div className="flex items-center justify-between p-2 mb-16">
                         <div className="text-2xl">Total: ${totalPrice}</div>
-                        <AddToCart />
+                        <AddToCart product = {product} quantities = {quantities} totalPrice = {totalPrice} customSelections={customSelections}/>
                     </div>
                 </div>
             </div>

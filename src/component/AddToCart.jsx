@@ -1,22 +1,70 @@
 import { ShoppingCart } from 'lucide-react';
+import { addCartItems } from '../redux/cartSlice';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { CircleCheckBig } from 'lucide-react';
 
-function AddToCart() {
+function AddToCart({ product, quantities, totalPrice, customSelections }) {
+    const dispatch = useDispatch();
+    const [showToast, setShowToast] = useState(false);
+    const addToCart = () => {
+        setShowToast(true);
+        dispatch(addCartItems(
+            {
+                id: product.id,
+                name: product.name,
+                cover: product.cover,
+                totalPrice,
+                quantities,
+                customSelections,
+            }
+        ))
+    };
+
     return (
-        <button
-            className="group flex items-center justify-center gap-2 px-3 py-2 rounded-lg 
+        <>
+            <button
+                className="group flex items-center justify-center gap-2 px-3 py-2 rounded-lg 
                  bg-[var(--color-secondary)] border-2 border-transparent 
                  transition-colors duration-200 
                  hover:bg-[#FFFEE9] hover:border-[#6B7280] 
                  active:bg-[#434751]"
-        >
-            <ShoppingCart
-                strokeWidth={2}
-                className="w-5 h-auto text-white group-hover:text-black"
-            />
-            <span className="text-lg text-white group-hover:text-black">
-                加入購物車
-            </span>
-        </button>
+                onClick={addToCart}>
+                <ShoppingCart
+                    strokeWidth={2}
+                    className="w-5 h-auto text-white group-hover:text-black"
+                />
+                <span className="text-lg text-white group-hover:text-black">
+                    加入購物車
+                </span>
+            </button>
+            {showToast && (
+                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
+                    <div className="bg-[#FFFEE9] px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4">
+                        <CircleCheckBig className="text-[#22C55E] w-16 h-16 mx-auto"/>
+                        <h2 className="text-xl">商品已加入購物車!!</h2>
+                        <div className="flex justify-center gap-4">
+                            <button
+                                 className="px-4 py-2 rounded-lg border border-[#A55E00] text-[#A55E00] hover:bg-[#A55E00] hover:text-white transition"
+                                onClick={() => setShowToast(false)}
+                            >
+                                繼續購買
+                            </button>
+                            <button
+                                className="px-4 py-2 rounded-lg bg-[#E8D69A] text-[#A55E00] hover:bg-[#C8B885] hover:text-[#ffffff] transition"
+                                onClick={() => {
+                                    setShowToast(false);
+                                    // 這邊導向購物車頁（如果你有設路由）
+                                    // window.location.href = "/cart"; // 或用 navigate('/cart') 如果你用 React Router
+                                }}
+                            >
+                                查看購物車
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 
