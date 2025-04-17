@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import HamMenu from "./HamMenu";
 import { CircleUserRound, ShoppingCart } from "lucide-react";
 import CartSummary from "./CartSummary";
+import SetColorMode from "./SetColorMode";
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,9 +53,7 @@ const NavBar = () => {
                     <CartSummary />
                 </div>
                 {/* 開關切換器 */}
-                <div className="md:block w-12 h-6 items-center">
-                    <input type="checkbox" value="synthwave" className="toggle theme-controller" />
-                </div>
+                <SetColorMode />
             </div>
         </div>
     )

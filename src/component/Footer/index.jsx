@@ -4,20 +4,20 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <div className="relative w-screen left-[50%] right-[50%] mx-[-50vw]">
-            <footer className="footer justify-around items-center md:footer-horizontal bg-base-300 text-base-content p-10">
+        <div className="relative w-screen left-[50%] right-[50%] mx-[-50vw]  ">
+            < footer className="footer justify-around items-center md:footer-horizontal bg-base text-base-content p-10" >
                 <div>
                     <Link
                         className="w-16 h-auto"
                         to="/">
                         <img src="/img/Logo.png" alt="Logo" />
                     </Link>
-                    <span className="text-sm mt-4">
+                    <span className="text-sm mt-4 text-base-content">
                         Copyright © 2025 wish you have a bestvouz
                     </span>
                 </div>
                 <div>
-                    <span className="footer-title text-base mb-6">聯絡我們</span>
+                    <span className="footer-title text-base text-base-content mb-6">聯絡我們</span>
                     <div className="justify-center items-center">
                         <div className="flex flex-col flex-row mb-4">
                             <a className="link link-hover"><Mail /></a>
