@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, NavLink } from "react-router";
 import HamMenu from "./HamMenu";
 import { CircleUserRound, ShoppingCart } from "lucide-react";
+import CartSummary from "./CartSummary";
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,9 +49,7 @@ const NavBar = () => {
                     </button>
 
                     {/* 購物車按鈕 */}
-                    <button className="hidden md:flex w-8 h-8 items-center">
-                        <ShoppingCart strokeWidth={2.5} className='w-10 h-auto' />
-                    </button>
+                    <CartSummary />
                 </div>
                 {/* 開關切換器 */}
                 <div className="md:block w-12 h-6 items-center">
@@ -84,9 +83,10 @@ const NavBar = () => {
                             <button className="w-8 h-8">
                                 <CircleUserRound strokeWidth={2.5} className="w-full h-full" />
                             </button>
-                            <button className="w-8 h-8">
-                                <ShoppingCart strokeWidth={2.5} className="w-full h-full" />
-                            </button>
+                            <div className="w-8 h-8">
+                                <CartSummary />
+                                {/* <ShoppingCart strokeWidth={2.5} className="w-full h-full" /> */}
+                            </div>
                         </div>
                     </div>
                 </div>
