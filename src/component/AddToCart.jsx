@@ -40,18 +40,18 @@ function AddToCart({ product, quantities, totalPrice, customSelections }) {
             </button>
             {showToast && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
-                    <div className="bg-[#FFFEE9] px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4">
+                    <div className="body-bg px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4">
                         <CircleCheckBig className="text-[#22C55E] w-16 h-16 mx-auto" />
-                        <h2 className="text-xl">商品已加入購物車!!</h2>
+                        <h2 className="text-xl body-text">商品已加入購物車!!</h2>
                         <div className="flex justify-center gap-4">
                             <button
-                                className="px-4 py-2 rounded-lg border border-[#A55E00] text-[#A55E00] hover:bg-[#A55E00] hover:text-white transition"
+                                className="px-4 py-2 rounded-lg border border-primary hover:bg-neutral hover:text-white transition"
                                 onClick={() => setShowToast(false)}
                             >
                                 繼續購買
                             </button>
                             <button
-                                className="px-4 py-2 rounded-lg bg-[#E8D69A] text-[#A55E00] hover:bg-[#C8B885] hover:text-white transition flex items-center justify-center"
+                                className="px-4 py-2 rounded-lg bg-primary body-text hover:bg-neutral hover:text-white transition flex items-center justify-center"
                                 onClick={() => {setShowToast(false);toggleModal();}}
                             >
                                 查看購物車

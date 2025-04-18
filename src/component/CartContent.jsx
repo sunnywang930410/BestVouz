@@ -19,14 +19,14 @@ function CartContent() {
         decoration: "裝飾"
     };
     return (
-        <div className="space-y-4">
+        <div className="body-bg space-y-4">
             {cartItems.length === 0 ? (
-                <div className="text-center text-gray-500">Cart is empty</div>
+                <div className="text-center ">Cart is empty</div>
             ) : (
                 cartItems.map((item) => (
-                    <div key={item.id} className="relative flex bg-[#FFFEE9] shadow-sm border border-2 border-[#E8D69A] rounded-lg overflow-hidden p-2">
+                    <div key={item.id} className="relative flex body-bg shadow-sm border border-2 border-primary rounded-lg overflow-hidden p-2">
                         {/* 圖片區 */}
-                        <div className="w-35 flex items-center justify-center bg-gray-100">
+                        <div className="w-35 flex items-center justify-center">
                             <img
                                 src={item.cover}
                                 alt={item.name}
@@ -50,7 +50,7 @@ function CartContent() {
 
                                 {/* 客製化選項 */}
                                 {item.customSelections && (
-                                    <div className="mt-1 text-sm text-gray-500 space-y-1">
+                                    <div className="mt-1 text-sm space-y-1">
                                         {Object.entries(item.customSelections).map(([key, value]) => (
                                             key !== "size" && value.length > 0 && (
                                                 <div key={key} className="flex gap-1">

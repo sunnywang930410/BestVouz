@@ -39,14 +39,14 @@ function CartSummary() {
             </div>
           </div>
         </nav>
-        <div className="drawer-side z-9999">
+        <div className="drawer-side  z-9999">
           <label
             htmlFor="cartModal"
             aria-label="close sidebar"
             className="drawer-overlay"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
           ></label>
-          <div className="menu bg-[#FFFEE9] text-base-content min-h-full w-80 p-4">
+          <div className="menu bg-[#FFFEE9] text-base-content min-h-full body-bg w-80 p-4">
             <CartContent />
           </div>
         </div>
