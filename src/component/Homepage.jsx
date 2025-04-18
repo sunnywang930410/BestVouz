@@ -43,7 +43,7 @@ function Homepage({ product }) {
 
 
     return (
-        <div className="justify-center">
+        <div className="justify-center pt-20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">

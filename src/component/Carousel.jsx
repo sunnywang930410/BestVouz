@@ -36,7 +36,7 @@ const Carousel = ({ product }) => {
     const Card = ({ product }) => (
 
         <Link to={`/product/${product.id}`} className="px-2">
-            <div className="card bg-base-100 shadow-lg transition-transform duration-300 hover:scale-105">
+            <div className="card shadow-lg transition-transform duration-300 hover:scale-105">
                 <figure>
                     <img
                         src={product.cover}
@@ -48,12 +48,12 @@ const Carousel = ({ product }) => {
                 <div className="card-body bg-primary rounded-b-xl items-center text-center">
                     <span className="card-title text-lg">{product.name}</span>
                     <span className="text-base">${product.price}</span>
-                    <div className="card-actions">
+                    <div className="card-actions ">
                         <div className="mt-2 flex flex-wrap justify-center gap-2 text-sm">
                             {product.tags.map((tag, id) => (
                                 <button
                                     key={id}
-                                    className="bg-white px-2 py-1 rounded-lg shadow text-[#333] hover:bg-gray-100 transition-colors"
+                                    className="bg-neutral body-text px-2 py-1 rounded-lg shadow text-[#333] hover:bg-gray-100 transition-colors"
                                 >
                                     {tag}+
                                 </button>

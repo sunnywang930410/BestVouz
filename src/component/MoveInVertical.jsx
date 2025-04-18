@@ -49,7 +49,7 @@ const MoveInVertical = () => {
 
         return (
             <div
-                className={`card bg-neutral w-[280px] sm:w-[320px] md:w-[300px] mx-auto shadow-xl transform ${getRotationClass(index)} transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
+                className={`card bg-neutral border-2 border-primary w-[280px] sm:w-[320px] md:w-[300px] mx-auto shadow-xl transform ${getRotationClass(index)} transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
             >
                 <figure className="py-6">
                     <img

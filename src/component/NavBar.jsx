@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link, NavLink } from "react-router";
 import HamMenu from "./HamMenu";
-import { CircleUserRound, ShoppingCart } from "lucide-react";
+import { CircleUserRound } from "lucide-react";
 import CartSummary from "./CartSummary";
 import SetColorMode from "./SetColorMode";
 
@@ -26,11 +26,12 @@ const NavBar = () => {
             <div className="md:flex items-center space-x-10 justify-center">
                 {/* ===== 導覽列內容 ===== */}
 
-                <ul className="flex flex-col md:flex-row md:space-x-10">
+                <ul className="flex flex-col pt-10 md:pt-0 space-y-10 md:flex-row md:space-x-10 md:space-y-0">
                     {navBarContent.map(({ to, label }) => (
                         <li key={to}>
                             <NavLink
                                 to={to}
+                                onClick={() => setIsOpen(false)}
                                 className={({ isActive }) =>
                                     `text-base transition-all duration-300 ease-in-out ${isActive ? "opacity-100" : "opacity-60"
                                     } hover:opacity-80`
@@ -50,10 +51,10 @@ const NavBar = () => {
                     </button>
 
                     {/* 購物車按鈕 */}
-                    <CartSummary />
+                    {!isOpen && <CartSummary />}
                 </div>
                 {/* 開關切換器 */}
-                <SetColorMode />
+                <SetColorMode isDrawerOpen={isOpen} />
             </div>
         </div>
     )
@@ -90,8 +91,8 @@ const NavBar = () => {
                     </div>
                 </div>
 
-                <div className="drawer-side z-50">
-                    <div className={`fixed w-full left-0 right-0 transition-all duration-300 ease-in-out z-40 ${isOpen
+                <div className="drawer-side drawer-bg z-50">
+                    <div className={`fixed w-full left-0 right-0 transition-all duration-700 ease-in-out z-40 ${isOpen
                         ? 'top-[84px] h-[calc(100vh-84px)]'
                         : 'top-[-100vh]'
                         }`}>

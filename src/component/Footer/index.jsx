@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const Footer = () => {
     return (
         <div className="relative w-screen left-[50%] right-[50%] mx-[-50vw]  ">
-            < footer className="footer justify-around items-center md:footer-horizontal bg-base text-base-content p-10" >
+            < footer className="footer footer-bg  justify-around items-center md:footer-horizontal text-base-content p-10" >
                 <div>
                     <Link
                         className="w-16 h-auto"
