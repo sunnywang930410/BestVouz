@@ -14,7 +14,7 @@ const ProductItem = ({ product }) => {
 
     
     return (
-        <div className="card card-side flex-col sm:flex-row !rounded-lg border-2 border-primary bg-base-100 items-center space-y-2 sm:space-y-4 sm:space-x-10 p-2 sm:p-4">
+        <div className="card card-side body-bg flex-col sm:flex-row !rounded-lg border-2 border-primary bg-base-100 items-center space-y-2 sm:space-y-4 sm:space-x-10 p-2 sm:p-4">
             {/* 圖片區塊 */}
             <div className="w-[200px] sm:w-1/4 aspect-square">
                 <figure className="w-full h-full">

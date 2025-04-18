@@ -18,7 +18,7 @@ function App() {
   return (
     <ModalProvider>
       <Provider store = {store}>
-        <div data-theme="light">
+        <div >
           <BrowserRouter>
             <Header /> 
             <main className="pt-24"> 
