@@ -1,7 +1,7 @@
 {/* 開關切換器 */ }
 import { useSelector, useDispatch } from "react-redux";
 import { Sun, Moon } from "lucide-react";
-import { selectLightMode, setColorMode } from "@/redux/colorSLice";
+import { selectLightMode, setColorMode } from "@/redux/colorSlice";
 
 export default function SetColorMode({ isDrawerOpen = false }) {
     const lightMode = useSelector(selectLightMode);
