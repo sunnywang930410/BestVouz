@@ -1,9 +1,9 @@
 import { ShoppingCart } from 'lucide-react';
 import { addCartItems } from '../redux/cartSlice';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { CircleCheckBig } from 'lucide-react';
-
+import { ModalContext } from "../component/ModalContext";
 function AddToCart({ product, quantities, totalPrice, customSelections }) {
     const dispatch = useDispatch();
     const [showToast, setShowToast] = useState(false);
@@ -20,7 +20,7 @@ function AddToCart({ product, quantities, totalPrice, customSelections }) {
             }
         ))
     };
-
+    const { toggleModal } = useContext(ModalContext);
     return (
         <>
             <button
@@ -41,22 +41,18 @@ function AddToCart({ product, quantities, totalPrice, customSelections }) {
             {showToast && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
                     <div className="bg-[#FFFEE9] px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4">
-                        <CircleCheckBig className="text-[#22C55E] w-16 h-16 mx-auto"/>
+                        <CircleCheckBig className="text-[#22C55E] w-16 h-16 mx-auto" />
                         <h2 className="text-xl">商品已加入購物車!!</h2>
                         <div className="flex justify-center gap-4">
                             <button
-                                 className="px-4 py-2 rounded-lg border border-[#A55E00] text-[#A55E00] hover:bg-[#A55E00] hover:text-white transition"
+                                className="px-4 py-2 rounded-lg border border-[#A55E00] text-[#A55E00] hover:bg-[#A55E00] hover:text-white transition"
                                 onClick={() => setShowToast(false)}
                             >
                                 繼續購買
                             </button>
                             <button
-                                className="px-4 py-2 rounded-lg bg-[#E8D69A] text-[#A55E00] hover:bg-[#C8B885] hover:text-[#ffffff] transition"
-                                onClick={() => {
-                                    setShowToast(false);
-                                    // 這邊導向購物車頁（如果你有設路由）
-                                    // window.location.href = "/cart"; // 或用 navigate('/cart') 如果你用 React Router
-                                }}
+                                className="px-4 py-2 rounded-lg bg-[#E8D69A] text-[#A55E00] hover:bg-[#C8B885] hover:text-white transition flex items-center justify-center"
+                                onClick={() => {setShowToast(false);toggleModal();}}
                             >
                                 查看購物車
                             </button>

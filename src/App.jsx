@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
-import { Provider } from "react-redux"
+import {Provider} from "react-redux"
 import './assets/fonts/font.css'
 import './App.css'
 import './index.css'
@@ -11,26 +11,28 @@ import Header from './component/Header'
 import Footer from './component/Footer'
 import Menu from '../pages/Menu';
 import store from "./redux/store"
-
+import { ModalProvider } from "./component/ModalContext";
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <Provider store={store}>
-      <div >
-        <BrowserRouter>
-          <Header />
-          <main className="pt-24">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/product/:id" element={<Product />} />
-            </Routes>
-            <Footer />
-          </main>
-        </BrowserRouter>
-      </div>
-    </Provider>
+    <ModalProvider>
+      <Provider store = {store}>
+        <div data-theme="light">
+          <BrowserRouter>
+            <Header /> 
+            <main className="pt-24"> 
+              <Routes>
+                <Route path="/" element={<Home />} />  
+                <Route path="/menu" element={<Menu />} />  
+                <Route path="/product/:id" element={<Product />} />  
+              </Routes>
+              <Footer /> 
+            </main>
+          </BrowserRouter>
+        </div>
+      </Provider>
+    </ModalProvider>
   )
 }
 

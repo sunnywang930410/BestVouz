@@ -7,10 +7,10 @@
         "price": "450",
         "cover": "/img/Chiffon.png",
         "size": [
-            "6inches",
-            "8inches",
-            "10inches",
-            "12inches"
+            "6吋",
+            "8吋",
+            "10吋",
+            "12吋"
         ],
         "fruit-img": [
             "/img/strawberry.png",
@@ -73,10 +73,10 @@
         "price": "650",
         "cover": "/img/birthday.png",
         "size": [
-            "6inches",
-            "8inches",
-            "10inches",
-            "12inches"
+            "6吋",
+            "8吋",
+            "10吋",
+            "12吋"
         ],
         "fruit-img": [
             "/img/strawberry.png",
@@ -173,10 +173,10 @@
         "price": "550",
         "cover": "/img/style.png",
         "size": [
-            "6inches",
-            "8inches",
-            "10inches",
-            "12inches"
+            "6吋",
+            "8吋",
+            "10吋",
+            "12吋"
         ],
         "style-img": [
             "/img/capybara.png",

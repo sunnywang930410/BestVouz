@@ -15,7 +15,7 @@ const QuantitySelector = ({qty}) => {
       <button className="btn btn-outline btn-sm text-lg" onClick={decrease}>-</button>
       <input
         type="number"
-        className="input input-bordered text-center"
+        className="input input-bordered text-center w-12 sm:w-16 md:w-30"
         value={quantity}
         readOnly
       />
