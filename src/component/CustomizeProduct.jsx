@@ -54,7 +54,7 @@ function CustomizeProduct({ product }) {
         <div>
             {/* 客製化選單標題 */}
             <div className="p-4 sm:p-8 md:p-16">
-                <h2 className="text-xl sm:text-2xl md:text-3xl">
+                <h2 className="text-xl sm:text-lg md:text-2xl">
                     客製化選單
                 </h2>
             </div>
