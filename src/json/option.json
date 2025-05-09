@@ -1,0 +1,48 @@
+{
+    "size": [
+        "6吋",
+        "8吋",
+        "10吋",
+        "12吋"
+    ],
+    "fruit-img": [
+        "/img/strawberry.png",
+        "/img/blueberry.png",
+        "/img/kiwi.png",
+        "/img/grape.png"
+    ],
+    "fruit": [
+        "草莓",
+        "藍莓",
+        "奇異果",
+        "葡萄"
+    ],
+    "text-jam": [
+        "巧克力",
+        "糖霜",
+        "奶油"
+    ],
+    "candle": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "?",
+        "6",
+        "7",
+        "8",
+        "9",
+        "0"
+    ],
+    "decoration-img": [
+        "/img/happybirthday.png",
+        "/img/love.png",
+        "/img/star.png"
+    ],
+    "decoration": [
+        "HAPPY BIRTHDAY",
+        "LOVE",
+        "STAR"
+    ]
+}

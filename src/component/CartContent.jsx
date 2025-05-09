@@ -63,12 +63,11 @@ function CartContent() {
                                         ))}
                                     </div>
                                 )}
-                                
                             </div>
                             {/* 總金額區塊 */}
                             <div className="text-right text-lg text-sm">
-                                    ${item.totalPrice}
-                                </div>
+                                ${item.totalPrice}
+                            </div>
                         </div>
                     </div>
                 ))

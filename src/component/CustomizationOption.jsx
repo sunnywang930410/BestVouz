@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 
-const CustomizationOption = ({ type, product, label, title, tip, onOptionChange }) => {
+const CustomizationOption = ({ type, product, options, label, title, tip, onOptionChange }) => {
   const data = product[label] || [];
   if (!data) return null;
 
@@ -42,7 +42,7 @@ const CustomizationOption = ({ type, product, label, title, tip, onOptionChange 
             }}
           >
             <option disabled>選擇尺寸</option>
-            {product.size.map((size, i) => (
+            {options.size.map((size, i) => (
               <option key={i}>{size}</option>
             ))}
           </select>
@@ -50,7 +50,7 @@ const CustomizationOption = ({ type, product, label, title, tip, onOptionChange 
       );
 
     case "image":
-      const images = product[`${label}-img`] || [];
+      const images = options[`${label}-img`] || [];
       return (
         <div className="mb-10">
           <LabelTip />
@@ -172,7 +172,7 @@ const CustomizationOption = ({ type, product, label, title, tip, onOptionChange 
 
 
       case "button":
-        const options = [...Array(10).keys()].map(String).concat("?");
+        const btnoption = [...Array(10).keys()].map(String).concat("?");
         // 最多只能選 3 個（總共上下排加起來）
         const maxSelection = 3;
         const [selectedButtons, setSelectedButtons] = useState([]); // e.g. ["0-1", "1-2"]
@@ -196,7 +196,7 @@ const CustomizationOption = ({ type, product, label, title, tip, onOptionChange 
       
         const renderButtonRow = (rowIndex) => (
           <div className="grid grid-cols-5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-4 mb-2">
-            {options.map((val) => {
+            {btnoption.map((val) => {
               const key = `${rowIndex}-${val}`;
               return (
                 <button

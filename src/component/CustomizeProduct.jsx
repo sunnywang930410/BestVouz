@@ -3,24 +3,19 @@ import { useState } from "react";
 import QuantitySelector from "./QuantitySelector";
 import AddToCart from "./AddToCart";
 
-function CustomizeProduct({ product }) {
+function CustomizeProduct({ product, options }) {
     const [customSelections, setCustomSelections] = useState({}); // 儲存每個選項的使用者選擇
     const [tipPrices, setTipPrices] = useState({}); // 儲存每個選項的加價（tip）
     const [text, setText] = useState(""); // 用來儲存文字留言的狀態
 
     // tip計算與紀錄使用者的選項
     const handleOptionChange = (label, value, tip = 0) => {
-        // console.log("✅ handleOptionChange 被呼叫！");
-        // console.log("label:", label);
-        //console.log("value:", value);
-        //console.log("tip:", tip);
         tip = (!isNaN(tip)) ? tip : 0;
         setCustomSelections((prev) => {
             const newSelections = {
                 ...prev,
                 [label]: value,
             };
-            //console.log("🟡 更新後 customSelections:", newSelections);
             return newSelections;
         });
 
@@ -29,14 +24,12 @@ function CustomizeProduct({ product }) {
                 ...prev,
                 [label]: tip,
             };
-            //console.log("🔵 更新後 tipPrices:", newTipPrices);
             return newTipPrices;
         });
     };
     const [quantities, setQuantity] = useState(1);
 
     const handleQuantityChange = (val) => {
-        //console.log("val 是：", val); 
         setQuantity(val);
     };
     // 計算總加價
@@ -80,15 +73,17 @@ function CustomizeProduct({ product }) {
                         <CustomizationOption
                             type="selector"
                             product={product} // 哪種商品
+                            options={options}
                             label="size"
                             title="尺寸"
                             onOptionChange={handleOptionChange}
                         />
                         {/* 外層水果 */}
-                        {["生日蛋糕", "戚風蛋糕"].includes(product.name) && (
+                        {["客製化蛋糕"].includes(product.category) && (
                             <CustomizationOption
                                 type="image"
                                 product={product} // 哪種商品
+                                options={options}
                                 label="fruit"
                                 title="外層水果"
                                 tip={20}
@@ -96,34 +91,37 @@ function CustomizeProduct({ product }) {
                             />
                         )}
                         {/* 造型 */}
-                        {product.name === "造型蛋糕" && (
+                        {/* {product.name === "造型蛋糕" && (
                             <CustomizationOption
                                 type="image"
                                 product={product} // 哪種商品
+                                options={options}
                                 label="style"
                                 title="造型"
                             />
-                        )}
+                        )} */}
                         {/* 內餡 */}
-                        {["生日蛋糕", "造型蛋糕"].includes(product.name) && (
+                        {/* {["生日蛋糕", "造型蛋糕"].includes(product.name) && (
                             <CustomizationOption
                                 type="image"
                                 product={product} // 哪種商品
+                                options={options}
                                 label="inside"
                                 title="內餡"
                                 tip={20}
                                 onOptionChange={handleOptionChange}
                             />
-                        )}
+                        )} */}
                         {/* 鮮奶油 */}
-                        <CustomizationOption
+                        {/* <CustomizationOption
                             type="checkbox"
                             product={product} // 哪種商品
+                            options={options}
                             label="cream"
                             title="鮮奶油"
                             tip={10}
                             onOptionChange={handleOptionChange}
-                        />
+                        /> */}
                         {/* 文字留言 */}
                         <div className="mb-4">
                             <div className="flex items-center gap-2 mb-2 text-left">
@@ -147,31 +145,34 @@ function CustomizeProduct({ product }) {
                         <CustomizationOption
                             type="text"
                             product={product} // 哪種商品
+                            options={options}
                             label="text-jam"
                             title="選擇文字醬料"
                             onOptionChange={handleOptionChange}
                         />
                         {/* 插圖 */}
-                        {product.name === "生日蛋糕" && (
+                        {/* {product.name === "生日蛋糕" && (
                             <CustomizationOption
                                 type="image"
                                 product={product} // 哪種商品
+                                options={options}
                                 label="picture"
                                 title="插圖"
                                 tip={5}
                                 onOptionChange={handleOptionChange}
                             />
-                        )}
+                        )} */}
                         {/* 選擇插圖醬料 */}
-                        {product.name === "生日蛋糕" && (
+                        {/* {product.name === "生日蛋糕" && (
                             <CustomizationOption
                                 type="text"
                                 product={product} // 哪種商品
+                                options={options}
                                 label="picture-jam"
                                 title="選擇插圖醬料"
                                 onOptionChange={handleOptionChange}
                             />
-                        )}
+                        )} */}
                         {/* 數量 */}
                         <div className="mb-4 sm:mb-6 flex items-center justify-between">
                             <h4 className="text-md sm:text-lg text-left">數量</h4>
@@ -185,6 +186,7 @@ function CustomizeProduct({ product }) {
                         <CustomizationOption
                             type="button"
                             product={product} // 哪種商品
+                            options={options}
                             label="candle"
                             title="蠟燭"
                             tip="最多選3個"
@@ -199,6 +201,7 @@ function CustomizeProduct({ product }) {
                         <CustomizationOption
                             type="image"
                             product={product} // 哪種商品
+                            options={options}
                             label="decoration"
                             title="裝飾"
                             tip={5}
@@ -210,7 +213,7 @@ function CustomizeProduct({ product }) {
                     </div>
                     <div className="flex items-center justify-between p-2 mb-12 sm:mb-16">
                         <div className="text-xl sm:text-2xl">Total: ${totalPrice}</div>
-                        <AddToCart product={product} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} />
+                        <AddToCart product={product} options={options} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} />
                     </div>
                 </div>
             </div>

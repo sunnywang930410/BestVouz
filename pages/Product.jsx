@@ -1,5 +1,6 @@
 import CustomizeProduct from "../src/component/CustomizeProduct"
 import products from "../src/json/customize.json"
+import options from "../src/json/option.json" 
 import { useParams } from "react-router-dom";
 
 function Product() {
@@ -12,7 +13,7 @@ function Product() {
 
     return (
         <div className=" main-layout min-h-screen">
-            <CustomizeProduct product={product} />
+            <CustomizeProduct product={product} options = {options} />
         </div>
     );
 }
