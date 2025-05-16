@@ -51,7 +51,7 @@ function AddToCart({ product, quantities, totalPrice, customSelections }) {
                                 繼續購買
                             </button>
                             <button
-                                className="px-4 py-2 rounded-lg bg-primary body-text hover:bg-neutral hover:text-white transition flex items-center justify-center"
+                                className="px-4 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white transition flex items-center justify-center"
                                 onClick={() => {setShowToast(false);toggleModal();}}
                             >
                                 查看購物車

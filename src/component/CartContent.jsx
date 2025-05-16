@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItems, removeCartItems, selectCartItems } from "@/redux/cartSlice";
+import { addCartItems, removeCartItems, clearCart, selectCartItems } from "@/redux/cartSlice";
 
 function CartContent() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
-    // const totalPrice = cartItems.reduce((total, item) => {
-    //     return total + (item.price * item.quantities);
-    // }, 0);
+    const totalPrice = cartItems.reduce((total, item) => {
+        return total + (item.price * item.quantities);
+    }, 0);
     const labelMap = {
         size: "尺寸",
         fruit: "外層水果",
@@ -33,7 +33,6 @@ function CartContent() {
                                 className="object-cover w-full h-full rounded-lg"
                             />
                         </div>
-
                         {/* 資訊區 */}
                         <div className="flex flex-col justify-between p-2 flex-grow relative w-full">
                             {/* 移除按鈕右上角 */}
@@ -51,8 +50,10 @@ function CartContent() {
                                 {/* 客製化選項 */}
                                 {item.customSelections && (
                                     <div className="mt-1 text-sm space-y-1">
-                                        {Object.entries(item.customSelections).map(([key, value]) => (
-                                            key !== "size" && value.length > 0 && (
+                                        {Object.entries(item.customSelections).map(([key, value]) => {
+                                            console.log("customSelections:", item.customSelections.fruit);
+                                            if (key === "size" || !value || value.length === 0) return null;
+                                            return (
                                                 <div key={key} className="flex gap-1">
                                                     <span className="font-medium capitalize">
                                                         {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + ":"}
@@ -60,17 +61,36 @@ function CartContent() {
                                                     <span>{value}</span>
                                                 </div>
                                             )
-                                        ))}
+                                        })}
                                     </div>
                                 )}
                             </div>
-                            {/* 總金額區塊 */}
+                            {/* 單品總金額區塊 */}
                             <div className="text-right text-lg text-sm">
                                 ${item.totalPrice}
                             </div>
                         </div>
                     </div>
                 ))
+            )}
+            {cartItems.length > 0 && (
+                <div className="fixed bottom-25 left-5 right-5">
+                    <hr className="mb-4" />
+                    <div className="text-right text-lg">
+                        TOTAL: $
+                    </div>
+                    <div className="flex justify-between gap-2 mt-12">
+                        <button
+                            className="w-2/5 px-4 py-2 rounded-lg border border-primary hover:bg-neutral hover:text-white transition"
+                            onClick={() => dispatch(clearCart())}
+                        >
+                            清除購物車
+                        </button>
+                        <button className="w-2/5 px-4 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white transition flex items-center justify-center">
+                            前往結帳
+                        </button>
+                    </div>
+                </div>
             )}
         </div>
     );
