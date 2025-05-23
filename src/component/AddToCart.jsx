@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useState, useContext } from 'react';
 import { CircleCheckBig } from 'lucide-react';
 import { ModalContext } from "../component/ModalContext";
-function AddToCart({ product, quantities, totalPrice, customSelections }) {
+function AddToCart({ product, quantities, totalPrice, customSelections, price }) {
     const dispatch = useDispatch();
     const [showToast, setShowToast] = useState(false);
     const addToCart = () => {
@@ -17,6 +17,7 @@ function AddToCart({ product, quantities, totalPrice, customSelections }) {
                 totalPrice,
                 quantities,
                 customSelections,
+                price
             }
         ))
     };

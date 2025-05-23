@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { cartItems: [] };
+const initialState = {
+    cartItems: [],
+    selectedItemsID: []
+};
+
 const cartSlice = createSlice(
     {
         name: 'cart',
@@ -17,20 +21,47 @@ const cartSlice = createSlice(
                     state.cartItems = cartItems;
                 }
                 // 當加入的商品不存在，加入購物車
-                else{
+                else {
                     state.cartItems = [...state.cartItems, item];
                 }
             },
-            removeCartItems:(state, action) =>{
+            removeCartItems: (state, action) => {
                 state.cartItems = state.cartItems.filter((x) => x.id !== action.payload);
             },
             clearCart: (state) => {
                 state.cartItems = [];
+            },
+            toggleSelectItem: (state, action) => {
+                const id = action.payload;
+                // 如果已經有這個 id → 代表原本是「勾選」狀態 → 現在要「取消勾選」
+                if (state.selectedItemsID.includes(id)) {
+                    state.selectedItemsID = state.selectedItemsID.filter(itemid => itemid !== id)
+                }
+                // 如果沒有這個 id → 代表原本是「未勾選」 → 現在要「加入勾選」
+                else {
+                    state.selectedItemsID.push(id);
+                }
+            },
+            updateQuantity: (state, action) => {
+                const { id, quantities } = action.payload;
+                state.cartItems = state.cartItems.map(item =>{
+                    console.log(item.price,quantities)
+                    return item.id === id
+                        ? {
+                            ...item,
+                            quantities: quantities,
+                            totalPrice: item.price * quantities
+                        }
+                        : item;
+                }
+                    
+                );
             }
         },
     }
 );
 
 export const selectCartItems = (state) => state.cart.cartItems;
-export const { addCartItems, removeCartItems, clearCart } = cartSlice.actions;
+export const selectedItemsID = (state) => state.cart.selectedItemsID;
+export const { addCartItems, removeCartItems, clearCart, toggleSelectItem, updateQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

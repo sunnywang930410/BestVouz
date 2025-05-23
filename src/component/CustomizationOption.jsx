@@ -13,22 +13,30 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
   const [selectedItems, setSelectedItems] = useState([]);
   useEffect(() => {
     if (names && names.length > 0 && onOptionChange) {
-      // console.log("🔥 onOptionChange triggered:", label, selectedItems);
       onOptionChange(label, selectedItems, selectedItems.length * tip);
     }
   }, [selectedItems]);
+
   const toggleSelection = (name) => {
     setSelectedItems((prevSelected) =>
-      prevSelected.includes(name)
-        ? prevSelected.filter((item) => item !== name)
-        : [...prevSelected, name]
+      prevSelected[0] === name ? [] : [name]
     );
+  };
+
+  // 蠟燭
+  const [selectedcandles, setSelectedcandles] = useState("");
+  const handlecandleChange = (e) => {
+    const value = e.target.value;
+    setSelectedcandles(value); // 2️⃣ 更新狀態
+    if (onOptionChange) {
+      onOptionChange(label, value, 0); // 3️⃣ 回傳給父層
+    }
   };
 
   const LabelTip = () => (
     <div className="flex justify-between items-center mb-2">
-      <h4 className="text-md md:text-lg">{title}</h4>
-      {tip && <span className="text-sm text-gray-500">+{tip}$</span>}
+      <h4 className="text-md md:text-lg text-gray-800">{title}</h4>
+      {tip && <span className="text-sm">+{tip}$</span>}
     </div>
   );
 
@@ -39,7 +47,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
           <LabelTip />
           <select
             defaultValue="Pick a size"
-            className="select"
+            className="select text-gray-500"
             onChange={(e) => {
               const selectedSize = e.target.value;
               onOptionChange(label, selectedSize, 0);
@@ -65,7 +73,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
                 <button
                   key={index}
                   onClick={() => toggleSelection(name)}
-                  className={`flex flex-col items-center text-center p-2 rounded-md border transition 
+                  className={`flex flex-col items-center text-center text-gray-500 p-2 rounded-md border transition 
                 ${isSelected ? "border-orange-500 bg-orange-100" : "border-gray-200"} 
                 hover:border-orange-300 hover:bg-orange-50`}
                 >
@@ -78,7 +86,6 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
                   </div>
                   <h6 className="mt-1 text-sm">{name}</h6>
                 </button>
-
               );
             })}
           </div>
@@ -91,12 +98,12 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
           <div className="flex items-center justify-between">
             {/* 左側標題與 checkbox 區塊 */}
             <div className="flex items-center gap-18.5">
-              <h4 className="text-base text-lg">{title}</h4>
+              <h4 className="text-base text-lg text-gray-800">{title}</h4>
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   value={data[0]}
-                  className="checkbox"
+                  className="checkbox text-gray-800"
                   onChange={(e) => {
                     const isChecked = e.target.checked;
                     const value = e.target.value;
@@ -110,7 +117,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
               </label>
             </div>
             {/* 右側加價提示 */}
-            {tip && <span className="text-sm text-gray-500">+{tip}$</span>}
+            {tip && <span className="text-sm">+{tip}$</span>}
           </div>
         </div>
       );
@@ -124,20 +131,19 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
             type="text"
             maxLength={30}
             placeholder="為壽星寫下祝福吧！（最多30字）"
-            className="input w-full md:w-80 text-sm md:text-base py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="text-gray-800 input w-full md:w-80 text-sm md:text-base py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
       );
-
 
     case "text":
       return (
         <div className="mb-12">
           <div className="flex items-start justify-between flex-wrap gap-y-2">
             {/* 左側標題 */}
-            <h4 className="text-sm md:text-base whitespace-nowrap mr-4">{title}</h4>
+            <h4 className="text-sm md:text-base whitespace-nowrap mr-4 text-gray-500">{title}</h4>
             {/* 中間選項 + 價格提示 */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 gap-2 sm:gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 gap-2 sm:gap-6 text-gray-500">
               {/* 選項區塊 */}
               <div className="flex flex-wrap gap-4 sm:gap-6">
                 {names.map((name, index) => (
@@ -149,7 +155,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
                       type="radio"
                       name={`${label}-radio`}
                       value={name}
-                      className="checkbox"
+                      className="checkbox text-gray-800"
                       onChange={(e) => {
                         const value = e.target.value;
                         if (onOptionChange) {
@@ -176,8 +182,12 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
     case 'button':
       return (
         <div className="flex justify-between items-center mb-6">
-          <h4 className="text-md md:text-lg">{title}</h4>
-          <select defaultValue="Pick a color" className="select">
+          <h4 className="text-md md:text-lg text-gray-800">{title}</h4>
+          <select
+            defaultValue="Pick a color"
+            className="select text-gray-500"
+            value={selectedcandles}
+            onChange={handlecandleChange}>
             <option disabled={true}>Pick number</option>
             <option value="?">?</option>
             {[...Array(100)].map((_, i) => (
@@ -188,7 +198,6 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
           </select>
         </div>
       );
-
 
     default:
       return null;

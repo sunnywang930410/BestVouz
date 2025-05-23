@@ -2,7 +2,6 @@ import CustomizationOption from "./CustomizationOption";
 import { useState } from "react";
 import QuantitySelector from "./QuantitySelector";
 import AddToCart from "./AddToCart";
-import Checkout from "./Checkout";
 
 function CustomizeProduct({ product, options }) {
     const [customSelections, setCustomSelections] = useState({}); // 儲存每個選項的使用者選擇
@@ -49,7 +48,6 @@ function CustomizeProduct({ product, options }) {
         <div>
             {/* 客製化選單標題 */}
             <div className="p-4 sm:p-8 md:p-16">
-                <Checkout/>
                 <h2 className="text-xl sm:text-lg md:text-2xl">
                     客製化選單
                 </h2>
@@ -107,7 +105,7 @@ function CustomizeProduct({ product, options }) {
                         <div className="mb-4">
                             <div className="flex items-center gap-2 mb-2 text-left">
                                 {/* 左側標題 */}
-                                <h4 className="text-md sm:text-lg">文字留言</h4>
+                                <h4 className="text-md sm:text-lg text-gray-800">文字留言</h4>
                             </div>
                             <div className="relative">
                                 <input
@@ -133,8 +131,12 @@ function CustomizeProduct({ product, options }) {
                         />
                         {/* 數量 */}
                         <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                            <h4 className="text-md sm:text-lg text-left">數量</h4>
-                            <QuantitySelector qty={(val) => handleQuantityChange(val)} />
+                            <h4 className="text-md sm:text-lg text-left text-gray-800">數量</h4>
+                            {/* <QuantitySelector qty={(val) => handleQuantityChange(val)} /> */}
+                            <QuantitySelector
+                                value={quantities}
+                                onChange={handleQuantityChange}
+                            />
                         </div>
                     </div>
                     <h4 className="text-left text-lg md:text-xl">配件選擇</h4>
@@ -147,15 +149,9 @@ function CustomizeProduct({ product, options }) {
                             options={options}
                             label="candle"
                             title="蠟燭歲數"
-                            tip="最多選3個"
                             onOptionChange={handleOptionChange}
                         />
-                        {/* 餐具數量 */}
-                        <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                            <h4 className="text-md md:text-lg whitespace-nowrap">餐具數量</h4>
-                            <QuantitySelector />
-                        </div>
-                        {/* 裝飾 */}
+                       {/* 裝飾 */}
                         <CustomizationOption
                             type="image"
                             product={product} // 哪種商品
@@ -171,7 +167,7 @@ function CustomizeProduct({ product, options }) {
                     </div>
                     <div className="flex items-center justify-between p-2 mb-12 sm:mb-16">
                         <div className="text-xl sm:text-2xl">Total: ${totalPrice}</div>
-                        <AddToCart product={product} options={options} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} />
+                        <AddToCart product={product} options={options} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} price={totalPrice/quantities} />
                     </div>
                 </div>
             </div>

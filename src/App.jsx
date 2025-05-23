@@ -12,6 +12,7 @@ import Footer from './component/Footer'
 import Menu from '../pages/Menu';
 import store from "./redux/store"
 import { ModalProvider } from "./component/ModalContext";
+import Checkout from '../pages/Checkout';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/" element={<Home />} />  
                 <Route path="/menu" element={<Menu />} />  
                 <Route path="/product/:id" element={<Product />} />  
+                <Route path='/checkout' element={<Checkout />}/>
               </Routes>
               <Footer /> 
             </main>
