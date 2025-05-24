@@ -40,14 +40,14 @@ function CheckoutList() {
                         />
                     </div>
                     {/* 圖片區 */}
-                    <div className="w-80 flex items-center justify-center ml-16">
+                    <div className="w-40 flex items-center justify-center ml-16">
                         <img
                             src={item.cover}
                             alt={item.name}
                             className="object-cover w-full h-full rounded-lg"
                         />
                     </div>
-                    <div className="flex justify-between items-center w-full relative">
+                    <div className="flex justify-between items-center w-2/3 relative">
                         {/* 商品標題 + 客製化內容 */}
                         <div className="flex flex-col">
                             <h2 className="text-lg font-medium text-left font-semibold mb-1">
@@ -75,16 +75,16 @@ function CheckoutList() {
                         </div>
                     </div>
                     {/* 右側：數量、價格、移除 */}
-                    <div className="flex items-center gap-4 sm:gap-6">
+                    <div className="flex items-center gap-4 sm:gap-6 w-1/3 text-gray-800">
                         <QuantitySelector
                             value={item.quantities}
-                            onChange={(newQty) => handleChange(item.id, newQty)} 
+                            onChange={(newQty) => handleChange(item.id, newQty)}
                         />
                         <div className="text-lg w-20 text-right whitespace-nowrap font-medium text-gray-800">
                             ${item.totalPrice}
                         </div>
                         <button
-                            className="btn btn-xs btn-circle btn-outline"
+                            className="btn btn-xs btn-circle bg-[#FFFEE9] hover:bg-[#F3E7BE]"
                             onClick={() => dispatch(removeCartItems(item.id))}
                         >
                             ✕

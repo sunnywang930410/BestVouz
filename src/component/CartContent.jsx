@@ -3,6 +3,7 @@ import { removeCartItems, clearCart, selectCartItems, updateQuantity } from "@/r
 import { useNavigate } from "react-router";
 import { ModalContext } from "../component/ModalContext";
 import { useContext } from 'react';
+import { Trash } from 'lucide-react';
 function CartContent() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
@@ -36,25 +37,34 @@ function CartContent() {
                 cartItems.map((item) => (
                     <div key={item.id} className="relative flex body-bg shadow-sm border border-2 border-primary rounded-lg overflow-hidden p-2">
                         {/* 圖片區 */}
-                        <div className="w-35 flex items-center justify-center">
+                        <div className="w-20 flex flex-col items-center justify-end gap-2">
                             <img
                                 src={item.cover}
                                 alt={item.name}
-                                className="object-cover w-full h-7/8 rounded-lg"
+                                className="object-cover w-full h-3/4 rounded-lg"
                             />
+                            <div className="text-left text-gray-800">
+                                <label className="text-sm">數量</label>
+                                <select
+                                    value={item.quantities}
+                                    onChange={(e) =>
+                                        dispatch(updateQuantity({
+                                            id: item.id,
+                                            quantities: parseInt(e.target.value)
+                                        }))
+                                    }
+                                    className="text-sm"
+                                >
+                                    {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                                        <option key={num} value={num}>{num}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                         {/* 資訊區 */}
-                        <div className="flex flex-col justify-between p-2 flex-grow relative w-full">
-                            {/* 移除按鈕右上角 */}
-                            <button
-                                className="absolute top-2 right-0 btn btn-xs btn-circle btn-outline"
-                                onClick={() => dispatch(removeCartItems(item.id))}
-                            >
-                                ✕
-                            </button>
-
+                        <div className="flex flex-col p-2 flex-grow relative w-30 whitespace-nowrap">
                             <div>
-                                <h2 className="text-base font-medium text-left font-medium mb-1">{item.name}({item.customSelections["size"].length < 2 ? "6吋" : item.customSelections["size"]})</h2>
+                                <h2 className="text-base font-semibold text-left mb-1">{item.name}({item.customSelections["size"].length < 2 ? "6吋" : item.customSelections["size"]})</h2>
 
                                 {/* 客製化選項 */}
                                 {item.customSelections && (
@@ -73,30 +83,20 @@ function CartContent() {
                                         })}
                                     </div>
                                 )}
-
                             </div>
-                            <div className="flex justify-between">
-                                <div className="text-left">
-                                    <label className="text-sm text-gray-400">數量:</label>
-                                    <select
-                                        value={item.quantities}
-                                        onChange={(e) =>
-                                            dispatch(updateQuantity({
-                                                id: item.id,
-                                                quantities: parseInt(e.target.value)
-                                            }))
-                                        }
-                                        className="text-sm"
-                                    >
-                                        {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                                            <option key={num} value={num}>{num}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                {/* 單品總金額區塊 */}
-                                <div className="text-right text-sm">
-                                    ${item.totalPrice}
-                                </div>
+
+                        </div>
+                        <div className="flex flex-col justify-end">
+                            {/* 移除按鈕右上角 */}
+                            <button
+                                className="absolute top-4 right-2 btn btn-xs btn-circle bg-[#FFFEE9] hover:bg-[#F3E7BE]"
+                                onClick={() => dispatch(removeCartItems(item.id))}
+                            >
+                                ✕
+                            </button>
+                            {/* 單品總金額區塊 */}
+                            <div className="text-right text-sm text-gray-800">
+                                ${item.totalPrice}
                             </div>
                         </div>
                     </div>
