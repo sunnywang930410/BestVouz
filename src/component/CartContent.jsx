@@ -3,7 +3,6 @@ import { removeCartItems, clearCart, selectCartItems, updateQuantity } from "@/r
 import { useNavigate } from "react-router";
 import { ModalContext } from "../component/ModalContext";
 import { useContext } from 'react';
-import { Trash } from 'lucide-react';
 function CartContent() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
@@ -22,7 +21,7 @@ function CartContent() {
     const { toggleModal } = useContext(ModalContext);
     const navigate = useNavigate();
     const handleNavigate = () => {
-        navigate("/checkout");
+        navigate("/checkout/step1");
         // 導航時也滾動到頂部
         window.scrollTo({
             top: 0,

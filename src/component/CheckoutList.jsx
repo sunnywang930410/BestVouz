@@ -1,16 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItems, selectCartItems, toggleSelectItem, selectedItemsID, updateQuantity } from "@/redux/cartSlice";
 import QuantitySelector from "./QuantitySelector"
-
+import { useNavigate } from "react-router";
 function CheckoutList() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
     const selectItemsID = useSelector(selectedItemsID);
     const isSelected = (id) => selectItemsID.includes(id);
-    const totalPrice = cartItems.reduce((total, item) => {
-        console.log(item.totalPrice)
-        return total + item.totalPrice;
-    }, 0);
+    const selectedItems = cartItems.filter(item => isSelected(item.id));
+    const selectedCount = selectedItems.length;
+    const selectedQuantity = selectedItems.reduce((sum, item) => sum + item.quantities, 0);
+    const selectedTotal = selectedItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    const navigate = useNavigate();
+    const handleNavigate = () => {
+        navigate("/checkout/step2");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     const labelMap = {
         size: "尺寸",
         fruit: "外層水果",
@@ -92,6 +101,30 @@ function CheckoutList() {
                     </div>
                 </div>
             ))}
+            <div className="mt-12">
+                {/* 計算勾選商品數 */}
+                <div>
+                    {selectedCount >= 0 && (
+                        <div className="text-right text-base mt-12 font-semibold text-gray-800">
+                            已勾擇 <span className="text-gray-800">{selectedCount}</span> 筆商品（共{selectedQuantity}件）
+                        </div>
+                    )}
+                    {/* 價格總計 */}
+                    <div className="text-right text-xl mt-8 font-semibold text-red-600">
+                        總計：${selectedTotal}
+                    </div>
+                </div>
+                {/* 下一步按鈕 */}
+                <div className="flex justify-end mt-12">
+                    <button
+                        className="px-10 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white"
+                        onClick={() => { handleNavigate(); }}
+                    >
+                        下一步
+                    </button>
+                </div>
+
+            </div>
         </div>
     );
 }

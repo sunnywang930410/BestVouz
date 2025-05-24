@@ -37,10 +37,10 @@
   /* 黑色 */
   --color-success: #22C55E;
   /*綠色*/
-  --color-warning: #FECCD2;
-  /*粉色*/
-  --color-warning-content: #A78BFA;
-  /*紫色*/
+  --color-warning: #A78BFA;
+  /*紫色背景*/
+  --color-warning-content:  #ffffff;
+  /*白色字體*/
 
   /* border radius */
   --radius-selector: 0.5rem;
@@ -80,9 +80,9 @@
   /*綠色*/
   /*綠色*/
   --color-warning: #EEAF00;
-  /*dark改 橘色*/
-  --color-warning-content: #EEAF00;
-  /*dark改 橘色*/
+  /*dark改 橘色背景*/
+  --color-warning-content: #ffffff;
+  /*dark改 白字*/
 
   /* border radius */
   --radius-selector: 0.5rem;
