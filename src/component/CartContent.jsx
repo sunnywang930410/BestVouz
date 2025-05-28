@@ -70,7 +70,8 @@ function CartContent() {
                                     <div className="text-sm text-gray-400">
                                         {Object.entries(item.customSelections).map(([key, value]) => {
                                             console.log("customSelections:", item.customSelections.fruit);
-                                            if (key === "size" || !value || value.length === 0) return null;
+                                            if (key === "size" || !value || value === "無" || value === "none" || value === "null" || value === "" || value.length === 0) return null;
+                                            console.log(value);
                                             return (
                                                 <div key={key} className="flex gap-1">
                                                     <span className="font-medium capitalize">

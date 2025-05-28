@@ -1,7 +1,11 @@
 import Step from "../src/component/Step"
-function Form(){
-    return(
-        <Step/>
+import CheckoutForm from "../src/component/CheckoutForm";
+function Form() {
+    return (
+        <div>
+            <Step />
+            <CheckoutForm />
+        </div>
     );
 }
 export default Form;

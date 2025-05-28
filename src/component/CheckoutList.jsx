@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeCartItems, selectCartItems, toggleSelectItem, selectedItemsID, updateQuantity } from "@/redux/cartSlice";
 import QuantitySelector from "./QuantitySelector"
 import { useNavigate } from "react-router";
+import { useState } from "react";
 function CheckoutList() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
@@ -11,8 +12,13 @@ function CheckoutList() {
     const selectedCount = selectedItems.length;
     const selectedQuantity = selectedItems.reduce((sum, item) => sum + item.quantities, 0);
     const selectedTotal = selectedItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     const handleNavigate = () => {
+        if (selectedCount === 0) {
+            setShowModal(true);
+            return;
+        }
         navigate("/checkout/step2");
         // 導航時也滾動到頂部
         window.scrollTo({
@@ -123,8 +129,23 @@ function CheckoutList() {
                         下一步
                     </button>
                 </div>
-
             </div>
+            {showModal && (
+                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
+                    <div className="min-h-[220px] body-bg px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4 flex flex-col justify-center">
+                        <div className="text-xl text-gray-800">您尚未勾選任何商品，請選擇後再繼續！</div>
+                        <div className="mt-4">
+                            <button
+                                className="px-10 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white transition text-lg"
+                                onClick={() => setShowModal(false)}
+                            >
+                                確認
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
