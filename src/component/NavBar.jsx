@@ -16,7 +16,7 @@ const NavBar = () => {
     ]
 
     const NavBarContent = () => (
-        <div className="w-full navbar shadow-sm  md:justify-between items-center">
+        <div className="w-full navbar md:justify-between items-center">
             <div className="navbar-start">
                 <div className="md:hidden dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -74,7 +74,7 @@ const NavBar = () => {
 
     const NavBarContentDown = () => (
 
-        <div className="w-full navbar shadow-sm  md:justify-between items-center">
+        <div className="w-full navbar md:justify-between items-center">
             <ul
                 className="w-full flex md:flex-row justify-between items-center md:mx-70 gap-10 md:gap-4">
                 {navBarContent.map(({ to, label }) => (

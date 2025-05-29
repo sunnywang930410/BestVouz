@@ -45,13 +45,7 @@ function CustomizeProduct({ product, options }) {
     };
 
     return (
-        <div>
-            {/* 客製化選單標題 */}
-            <div className="p-4 sm:p-8 md:p-16">
-                <h2 className="text-xl sm:text-lg md:text-2xl">
-                    客製化選單
-                </h2>
-            </div>
+        <div className="mt-36">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                 {/* 左側：蛋糕圖片、名稱、原價 */}
                 <div className="flex flex-col items-center gap-4">
