@@ -41,6 +41,7 @@ const NavBar = () => {
                                     </NavLink>
                                 </li>
                             ))}
+
                         </ul>
                     </div>
 
@@ -61,9 +62,8 @@ const NavBar = () => {
                     </button>
 
                     {/* 購物車按鈕 */}
-                    <button className="md:flex w-8 h-8 items-center btn btn-ghost btn-circle">
-                        {!isOpen && <CartSummary />}
-                    </button>
+                    {!isOpen && <CartSummary />}
+
                     {/* 開關切換器 */}
                     <SetColorMode className="md:flex" isDrawerOpen={isOpen} />
 

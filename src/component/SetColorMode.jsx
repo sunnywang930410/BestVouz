@@ -17,7 +17,7 @@ export default function SetColorMode({ isDrawerOpen = false }) {
     }
 
     return (
-        <div className="hidden md:flex items-center gap-2">
+        <div className={`items-center gap-2 ${isDrawerOpen ? 'flex' : 'hidden'} md:flex`}>
             {isDrawerOpen ? (
                 <button
                     onClick={toggleColor}
