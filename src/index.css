@@ -39,7 +39,7 @@
   /*綠色*/
   --color-warning: #A78BFA;
   /*紫色背景*/
-  --color-warning-content:  #ffffff;
+  --color-warning-content: #ffffff;
   /*白色字體*/
 
   /* border radius */
@@ -94,11 +94,11 @@
   /*20px*/
 }
 
-[data-theme="light"] .header-bg {
-  background-color: #FFFEE9;
-}
-
 [data-theme="light"] {
+  .header-bg {
+    background-color: #FFFEE9;
+  }
+
   .body-bg {
     background-color: #FFFEE9;
   }

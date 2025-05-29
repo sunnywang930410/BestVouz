@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Link, NavLink } from "react-router";
-import HamMenu from "./HamMenu";
 import { CircleUserRound } from "lucide-react";
 import CartSummary from "./CartSummary";
 import SetColorMode from "./SetColorMode";
@@ -14,20 +13,19 @@ const NavBar = () => {
         { to: "/FAQ", label: "FAQ" },
         { to: "/about", label: "關於BestVouz" },
         { to: "/comment", label: "評論區" }
-
     ]
 
     const NavBarContent = () => (
         <div className="w-full navbar shadow-sm  md:justify-between items-center">
             <div className="navbar-start">
-                <div className=" md:hidden dropdown">
+                <div className="md:hidden dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
                     </div>
-                    <div className="">
+                    <div>
                         <ul
                             tabIndex={0}
-                            className="drawer-bg fixed inset-0 top-20 z-50 dropdown-content  flex flex-col items-center text-center md:pt-0 space-y-10"
+                            className="dropdown-content absolute top-19 left-[-50px] w-screen h-screen menu z-50  shadow-sm justify-content items-center drawer-bg"
                         >
                             {navBarContent.map(({ to, label }) => (
                                 <li key={to}>
@@ -68,6 +66,7 @@ const NavBar = () => {
                     </button>
                     {/* 開關切換器 */}
                     <SetColorMode className="md:flex" isDrawerOpen={isOpen} />
+
                 </div>
             </div>
         </div>
