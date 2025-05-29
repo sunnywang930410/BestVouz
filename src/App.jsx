@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
-import {Provider} from "react-redux"
+import { Provider } from "react-redux"
 import './assets/fonts/font.css'
 import './App.css'
 import './index.css'
@@ -19,19 +19,19 @@ function App() {
 
   return (
     <ModalProvider>
-      <Provider store = {store}>
+      <Provider store={store}>
         <div >
           <BrowserRouter>
-            <Header /> 
-            <main className="pt-24"> 
+            <Header />
+            <main className="pt-24">
               <Routes>
-                <Route path="/" element={<Home />} />  
-                <Route path="/menu" element={<Menu />} />  
-                <Route path="/product/:id" element={<Product />} />  
-                <Route path='/checkout/step1' element={<Checkout />}/>
-                <Route path='/checkout/step2' element={<Form />}/>
+                <Route path="/" element={<Home />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path='/checkout/step1' element={<Checkout />} />
+                <Route path='/checkout/step2' element={<Form />} />
               </Routes>
-              <Footer /> 
+              <Footer />
             </main>
           </BrowserRouter>
         </div>

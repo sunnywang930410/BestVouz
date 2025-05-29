@@ -84,7 +84,7 @@ function Homepage({ product }) {
                 <h2 className={`text-2xl`}>
                     選擇你想要的蛋糕
                 </h2>
-                <Carousel product={product} />
+                {/* <Carousel product={product} /> */}
             </div>
             <div className="my-14">
                 <button
