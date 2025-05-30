@@ -79,8 +79,8 @@
   --color-success: #22C55E;
   /*綠色*/
   /*綠色*/
-  --color-warning: #EEAF00;
-  /*dark改 橘色背景*/
+  --color-warning: #A78BFA;
+  /*dark改 紫色背景*/
   --color-warning-content: #ffffff;
   /*dark改 白字*/
 
@@ -118,6 +118,31 @@
   .bg-primary {
     background-color: #E8D69A;
   }
+
+  .custom-text-gray-800 {
+    color: #1F2937;
+  }
+
+  .custom-text-gray-500 {
+    color: #6B7280;
+  }
+
+  .custom-text-red-600 {
+    color: #DC2626;
+  }
+
+  .custom-button {
+    background-color: #E8D69A;
+  }
+
+  .custom-button:hover {
+    background-color: #C8B885;
+  }
+
+  .image-hover:hover {
+    background-color: #FFF7ED;
+    border-color: #FDBA74;
+  }
 }
 
 [data-theme="dark"] {
@@ -147,6 +172,26 @@
 
   .bg-primary {
     background-color: #6B7280;
+  }
+
+  .custom-text-gray-500 {
+    color: #969eb1;
+  }
+
+  .custom-text-red-600 {
+    color: #EEAF00;
+  }
+
+  .custom-button {
+    background-color: #6B7280;
+  }
+
+  .custom-button:hover {
+    background-color: #434751;
+  }
+
+  .image-hover:hover {
+    border-color: #fcc489;
   }
 }
 

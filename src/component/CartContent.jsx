@@ -7,7 +7,7 @@ function CartContent() {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
     const totalPrice = cartItems.reduce((total, item) => {
-        console.log(item.totalPrice)
+        // console.log(item.totalPrice)
         return total + item.totalPrice;
     }, 0);
     const labelMap = {
@@ -69,9 +69,9 @@ function CartContent() {
                                 {item.customSelections && (
                                     <div className="text-sm text-gray-400">
                                         {Object.entries(item.customSelections).map(([key, value]) => {
-                                            console.log("customSelections:", item.customSelections.fruit);
+                                            // console.log("customSelections:", item.customSelections.fruit);
                                             if (key === "size" || !value || value === "無" || value === "none" || value === "null" || value === "" || value.length === 0) return null;
-                                            console.log(value);
+                                            // console.log(value);
                                             return (
                                                 <div key={key} className="flex gap-1">
                                                     <span className="font-medium capitalize">
@@ -89,7 +89,7 @@ function CartContent() {
                         <div className="flex flex-col justify-end">
                             {/* 移除按鈕右上角 */}
                             <button
-                                className="absolute top-4 right-2 btn btn-xs btn-circle bg-[#FFFEE9] hover:bg-[#F3E7BE]"
+                                className="absolute top-4 right-2 btn btn-xs btn-circle body-bg hover:bg-[#F3E7BE]"
                                 onClick={() => dispatch(removeCartItems(item.id))}
                             >
                                 ✕
@@ -104,19 +104,22 @@ function CartContent() {
             )}
             {cartItems.length > 0 && (
                 <div className="fixed bottom-25 left-5 right-5">
-                    <hr className="mb-4 text-gray-800" />
-                    <div className="text-right text-lg font-medium text-gray-800">
+                    <hr className="mb-4 custom-text-gray-800" />
+                    <div className="text-right text-lg font-medium custom-text-gray-800">
                         TOTAL: ${totalPrice}
                     </div>
                     <div className="flex justify-between gap-2 mt-12">
                         <button
-                            className="w-2/5 px-4 py-2 rounded-lg border border-primary hover:bg-neutral hover:text-white transition"
+                            className="w-2/5 px-4 py-2 rounded-lg custom-text-gray-800 border border-2 border-secondary hover:bg-secondary-content/25"
                             onClick={() => dispatch(clearCart())}
                         >
                             清除購物車
                         </button>
                         <button
-                            className="w-2/5 px-4 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white transition flex items-center justify-center"
+                            className="w-2/5 px-4 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
+                 transition-colors duration-200 
+                 hover:bg-secondary-content
+                 active:bg-secondary-content"
                             onClick={() => { handleNavigate(); toggleModal(); }}
                         >
                             前往結帳

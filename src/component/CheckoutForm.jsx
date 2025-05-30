@@ -56,7 +56,7 @@ function CheckoutForm() {
                     {/* 會員資料 */}
                     <section>
                         <h3 className="text-xl mb-2 text-left">會員資料</h3>
-                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 text-gray-800 space-y-4">
+                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
                             <div className="text-left">
                                 <label className="label text-base p-2">姓名</label>
                                 <input
@@ -90,7 +90,7 @@ function CheckoutForm() {
                     {/* 送貨／付款 */}
                     <section className="mb-24">
                         <h3 className="text-xl mb-2 text-left">選擇送貨與付款方式</h3>
-                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 text-gray-800 space-y-4">
+                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
                             {/* 送貨方式 */}
                             <div className="text-left">
                                 <label className="label text-base p-2">送貨方式</label>
@@ -154,7 +154,7 @@ function CheckoutForm() {
                                             {item.name} (
                                             {item.customSelections.size.length < 2 ? "6吋" : item.customSelections.size})
                                         </h4>
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm custom-text-gray-500">
                                             {Object.entries(item.customSelections).map(([k, v]) =>
                                                 k === "size" || !v ? null : (
                                                     <div key={k}>
@@ -165,8 +165,8 @@ function CheckoutForm() {
                                                 )
                                             )}
                                         </div>
-                                        <div className="text-sm text-gray-800">NT$ {item.totalPrice}</div>
-                                        <div className="absolute bottom-6 right-6 w-[calc(100%-3rem)] mt-12 text-right space-y-2 text-gray-800">
+                                        <div className="text-sm custom-text-gray-800">NT$ {item.totalPrice}</div>
+                                        <div className="absolute bottom-6 right-6 w-[calc(100%-3rem)] mt-12 text-right space-y-2 custom-text-gray-800">
                                             <div className="flex justify-between text-base">
                                                 <span>小計：</span>
                                                 <span>NT$ {subtotal}</span>
@@ -178,7 +178,7 @@ function CheckoutForm() {
                                                 </div>
                                             )}
                                             <div className="border-t mt-2"></div>
-                                            <div className="flex justify-between font-semibold text-xl text-red-600">
+                                            <div className="flex justify-between font-semibold text-xl custom-text-red-600">
                                                 <span>總計：</span>
                                                 <span>NT$ {total}</span>
                                             </div>
@@ -193,13 +193,16 @@ function CheckoutForm() {
             </div>
             <div className="flex justify-between mb-12">
                 <button
-                    className="px-10 py-2 rounded-lg border border-2 body-text hover:bg-[#F9F3DE] hover:text-white"
+                    className="px-10 py-2 rounded-lg custom-text-gray-800 border border-2 border-secondary hover:bg-secondary-content/25"
                     onClick={() => { handleNavigateBack(); }}
                 >
                     上一步
                 </button>
                 <button
-                    className="px-10 py-2 rounded-lg bg-[#E8D69A] body-text hover:bg-[#C8B885] hover:text-white"
+                    className="px-10 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
+                 transition-colors duration-200 
+                 hover:bg-secondary-content
+                 active:bg-secondary-content"
                     onClick={() => { handleNavigateNext(); }}
                 >
                     下一步

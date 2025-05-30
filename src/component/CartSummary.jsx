@@ -6,7 +6,7 @@ import CartContent from './CartContent';
 import { ModalContext } from "../component/ModalContext";
 
 function CartSummary() {
-    const { toggleModal, drawerCheckboxRef, isChecked, setIsChecked } = useContext(ModalContext);  // 使用 context 中的值
+  const { toggleModal, drawerCheckboxRef, isChecked, setIsChecked } = useContext(ModalContext);  // 使用 context 中的值
   const cartItems = useSelector(selectCartItems) || [];
   const count = cartItems.reduce((sum, item) => sum + item.quantities, 0);
   const handleCheckboxChange = () => {
@@ -27,7 +27,7 @@ function CartSummary() {
         <nav onClick={toggleModal} className="w-8 h-8 items-center cursor-pointer">
           <div className="indicator">
             {count > 0 && (
-              <span className="indicator-item badge badge-primary text-white">
+              <span className="indicator-item badge badge-secondary text-white">
                 {count}
               </span>
             )}

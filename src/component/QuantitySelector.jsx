@@ -10,14 +10,14 @@ function QuantitySelector({
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <button className={`btn text-lg px-3 bg-[#F3E7BE] hover:bg-[#C8B885] ${buttonClassName}`} onClick={decrease}>-</button>
+      <button className={`btn text-lg px-3 custom-button hover:bg-[#C8B885] ${buttonClassName}`} onClick={decrease}>-</button>
       <input
         type="number"
-        className={`input input-bordered text-center text-sm text-gray-800 ${inputClassName}`}
+        className={`input input-bordered text-center text-sm custom-text-gray-800 ${inputClassName}`}
         value={value}
         readOnly
       />
-      <button className={`btn text-lg px-3 bg-[#F3E7BE] hover:bg-[#C8B885] ${buttonClassName}`} onClick={increase}>+</button>
+      <button className={`btn text-lg px-3 custom-button hover:bg-[#C8B885] ${buttonClassName}`} onClick={increase}>+</button>
     </div>
   );
 }
