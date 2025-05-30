@@ -1,3 +1,6 @@
+import { MoveRight } from "lucide-react";
+import { Link } from "react-router";
+
 const MoveInVertical = () => {
 
     const picture = [
@@ -37,9 +40,9 @@ const MoveInVertical = () => {
     const Card = ({ picture, index }) => {
         const getRotationClass = (index) => {
             const rotations = [
-                '-rotate-4',
+                '-rotate-6',
+                'rotate-4',
                 '-rotate-2',
-                'rotate-2',
                 'rotate-4',
                 '-rotate-3',
                 'rotate-3'
@@ -47,18 +50,31 @@ const MoveInVertical = () => {
             return rotations[index % rotations.length];
         };
 
+        // 新增位移效果函數
+        const getOffsetClass = (index) => {
+            const offsets = [
+                'mt-0',
+                'mt-30',
+                'mt-64',
+                'mt-20',
+                'mt-34',
+                'mt-6'
+            ];
+            return offsets[index % offsets.length];
+        };
+
         return (
             <div
-                className={`card bg-neutral border-2 border-primary w-[280px] sm:w-[320px] md:w-[300px] mx-auto shadow-xl transform ${getRotationClass(index)} transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
+                className={`rounded-xl bg-neutral border-2 border-primary w-[200px] md:w-[200px] h-[280px] shadow transform ${getRotationClass(index)} ${getOffsetClass(index)}  transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
             >
-                <figure className="py-6">
+                <figure className="w-full h-[200px] p-4">
                     <img
                         src={picture.url}
                         alt={picture.title}
-                        className="rounded-xl w-[150px] sm:w-[180px] md:w-[200px] h-auto"
+                        className="rounded-xl w-full h-auto object-contain"
                     />
                 </figure>
-                <div className="card-body items-center text-center py-4">
+                <div className="card-body items-center text-center p-4 pt-0">
                     <h2 className="text-base">{picture.title}</h2>
                 </div>
             </div>
@@ -67,10 +83,17 @@ const MoveInVertical = () => {
 
     return (
         <div className="container px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center justify-center ">
                 {picture.map((pic, index) => (
                     <Card key={pic.ID} picture={pic} index={index} />
                 ))}
+            </div>
+            <div className="flex justify-end">
+                <Link to="/comment">
+                    <button className="p-2 pr-4 pl-4 cursor-pointer bg-primary rounded-lg shadow-lg hover:bg-gray-200 transition">
+                        <MoveRight />
+                    </button>
+                </Link>
             </div>
         </div>
     );

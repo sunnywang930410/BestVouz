@@ -2,6 +2,7 @@ import Carousel from "./Carousel";
 import { useNavigate } from "react-router";
 import MoveInVertical from "./MoveInVertical";
 import { useEffect } from "react";
+import PopularItems from "./PopularItems";
 
 function Homepage({ product }) {
 
@@ -43,8 +44,8 @@ function Homepage({ product }) {
 
 
     return (
-        <div className="justify-center pt-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10">
+        <div className="justify-center pt-20 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10 pt-20">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">
                     <img
@@ -55,7 +56,7 @@ function Homepage({ product }) {
                 </div>
                 {/* 右側：客製化選項 */}
                 <div className="flex flex-col gap-4 p-8 justify-center items-center">
-                    <span className="text-lg text-center ">為您獻上最好的祝福</span>
+                    <h2 className="text-2xl text-center font-bold">為您獻上最好的祝福</h2>
                     {/* 水果按鈕 */}
                     <div className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
                         {fruitImages.map((fruit, index) => (
@@ -73,18 +74,21 @@ function Homepage({ product }) {
                     </div>
                 </div>
             </div>
-            <div className="relative py-16">
-                <h2 className={`text-2xl font-bold mb-16`}>
+            <div>
+                <PopularItems />
+            </div>
+            <div className="relative p-16 px-32">
+                <h2 className={`text-2xl font-bold mb-2`}>
                     為您生命中重要的人獻上最好的祝福
                 </h2>
                 <MoveInVertical />
             </div>
             <hr></hr>
-            <div className="pt-8">
-                <h2 className={`text-2xl`}>
+            <div className="pt-8 justify-center items-center">
+                <h2 className={`text-2xl font-bold mb-2 text-center`}>
                     選擇你想要的蛋糕
                 </h2>
-                {/* <Carousel product={product} /> */}
+                <Carousel products={product} />
             </div>
             <div className="my-14">
                 <button

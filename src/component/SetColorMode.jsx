@@ -7,6 +7,7 @@ export default function SetColorMode({ isDrawerOpen = false }) {
     const lightMode = useSelector(selectLightMode);
     const dispatch = useDispatch();
 
+
     const toggleColor = () => {
         dispatch(setColorMode(!lightMode))
         if (lightMode) {
@@ -17,7 +18,7 @@ export default function SetColorMode({ isDrawerOpen = false }) {
     }
 
     return (
-        <div className={`items-center gap-2 ${isDrawerOpen ? 'flex' : 'hidden'} md:flex`}>
+        <div className="hidden md:flex items-center gap-2">
             {isDrawerOpen ? (
                 <button
                     onClick={toggleColor}
