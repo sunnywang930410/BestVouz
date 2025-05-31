@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { selectCartItems, selectedItemsID } from "@/redux/cartSlice";
+import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartSlice";
 function CheckoutForm() {
+    const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
     const ids = useSelector(selectedItemsID) || [];
     // 過濾已勾選的商品
@@ -26,14 +27,25 @@ function CheckoutForm() {
             behavior: 'smooth'
         });
     }
+    const [showModal, setShowModal] = useState(false);
     const handleNavigateNext = () => {
+        const requiredFields = ["name", "email", "phone", "shipMethod", "payMethod"];
+        if (form.shipMethod === "home") {
+            requiredFields.push("address");
+        }
+        const emptyFields = requiredFields.filter((key) => !form[key]?.trim());
+        if (emptyFields.length > 0) {
+            setShowModal(true);
+            return; 
+        }
+        cartItems.forEach(item => dispatch(removeCartItems(item.id)));
+        // 若通過檢查，才導向下一頁
         navigate("/checkout/step3");
-        // 導航時也滾動到頂部
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: "smooth",
         });
-    }
+    };
     const labelMap = {
         size: "尺寸",
         fruit: "外層水果",
@@ -128,7 +140,6 @@ function CheckoutForm() {
                                 >
                                     <option value="">請選擇付款方式</option>
                                     <option value="credit">信用卡</option>
-                                    <option value="atm">ATM 轉帳</option>
                                     <option value="cod">貨到付款</option>
                                 </select>
                             </div>
@@ -157,6 +168,7 @@ function CheckoutForm() {
                                                     item.customSelections["size"].trim() !== "" && (
                                                         <> ({item.customSelections["size"]})</>
                                                     )}
+                                                * {item.quantities}
                                             </h4>
                                             <div className="text-base custom-text-gray-800 text-right whitespace-nowrap ml-4">
                                                 NT$ {item.totalPrice}
@@ -223,11 +235,26 @@ function CheckoutForm() {
                  transition-colors duration-200 
                  hover:bg-secondary-content
                  active:bg-secondary-content"
-                    onClick={() => { handleNavigateNext(); }}
+                    onClick={() => { handleNavigateNext();}}
                 >
                     下一步
                 </button>
             </div>
+            {showModal && (
+                <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
+                    <div className="min-h-[200px] body-bg px-3 py-3 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4 flex flex-col justify-center">
+                        <div className="text-xl">請填寫所有欄位</div>
+                        <div className="mt-4">
+                            <button
+                                className="px-10 py-2 rounded-lg custom-button body-text transition text-lg"
+                                onClick={() => setShowModal(false)}
+                            >
+                                確認
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
