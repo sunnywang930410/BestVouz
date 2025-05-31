@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router";
 import { CircleUserRound } from "lucide-react";
 import CartSummary from "./CartSummary";
 import SetColorMode from "./SetColorMode";
+import UserInfo from "./UserInfo";
+
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -57,9 +59,10 @@ const NavBar = () => {
             <div className="navbar-end">
                 <div className='flex md:flex-row space-x-4'>
                     { /* 用戶按鈕 */}
-                    <button className="md:flex w-8 h-8 items-center btn btn-ghost btn-circle">
+                    <UserInfo />
+                    {/* <button className="md:flex w-8 h-8 items-center btn btn-ghost btn-circle">
                         <CircleUserRound strokeWidth={2.5} className='w-10 h-auto' />
-                    </button>
+                    </button> */}
 
                     {/* 購物車按鈕 */}
                     {!isOpen && <CartSummary />}
