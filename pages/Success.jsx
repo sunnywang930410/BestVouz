@@ -12,6 +12,14 @@ function Success() {
             behavior: 'smooth'
         });
     }
+    const handleNavigateProfile = () => {
+        navigate("/auth/profile");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     return (
         <div className="space-y-4 pb-32 mt-36">
             <Step />
@@ -31,7 +39,9 @@ function Success() {
                     <button className="px-10 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
                  transition-colors duration-200 
                  hover:bg-secondary-content
-                 active:bg-secondary-content">
+                 active:bg-secondary-content"
+                        onClick={() => { handleNavigateProfile(); }}
+                    >
                         查看訂單
                     </button>
                 </div>

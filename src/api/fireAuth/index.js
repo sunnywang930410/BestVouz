@@ -17,6 +17,10 @@ export const register = async ({ username, email, password }) => {
     );
     const user = userCredential?.user;
 
+    await updateProfile(user, {
+        displayName: username,
+    });
+
     //建立一個新的文件
     //在users這個collection裡面新增一個文件，文件名稱是uid
     const docRef = doc(db, "users", user.uid);

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartSlice";
+import { getAuth } from "firebase/auth";
 function CheckoutForm() {
     const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
@@ -16,12 +17,26 @@ function CheckoutForm() {
         address: "",
         payMethod: "",
     });
+    useEffect(() => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            console.log("Firebase user object:", user); // ← 加這行
+            console.log(user.displayName);
+            setForm((prev) => ({
+                ...prev,
+                name: user.displayName || "",
+                email: user.email || "",
+            }));
+        }
+    }, []);
+
     const handleChange = (key) => (e) =>
         setForm((f) => ({ ...f, [key]: e.target.value }));
     const navigate = useNavigate();
     const handleNavigateBack = () => {
         navigate("/checkout/step1");
-        // 導航時也滾動到頂部
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -36,7 +51,7 @@ function CheckoutForm() {
         const emptyFields = requiredFields.filter((key) => !form[key]?.trim());
         if (emptyFields.length > 0) {
             setShowModal(true);
-            return; 
+            return;
         }
         cartItems.forEach(item => dispatch(removeCartItems(item.id)));
         // 若通過檢查，才導向下一頁
@@ -235,7 +250,7 @@ function CheckoutForm() {
                  transition-colors duration-200 
                  hover:bg-secondary-content
                  active:bg-secondary-content"
-                    onClick={() => { handleNavigateNext();}}
+                    onClick={() => { handleNavigateNext(); }}
                 >
                     下一步
                 </button>
