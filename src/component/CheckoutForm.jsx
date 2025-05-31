@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartSlice";
 import { getAuth } from "firebase/auth";
+import { CreditCard } from "lucide-react";
 function CheckoutForm() {
     const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
@@ -16,6 +17,10 @@ function CheckoutForm() {
         shipMethod: "",
         address: "",
         payMethod: "",
+        CreditCardNumber: "",
+        CreditCardTime: "",
+        CreditCardCVC: "",
+        CreditCardName: ""
     });
     useEffect(() => {
         const auth = getAuth();
@@ -47,6 +52,9 @@ function CheckoutForm() {
         const requiredFields = ["name", "email", "phone", "shipMethod", "payMethod"];
         if (form.shipMethod === "home") {
             requiredFields.push("address");
+        }
+        if (form.payMethod === "credit") {
+            requiredFields.push("CreditCardNumber","CreditCardTime","CreditCardCVC","CreditCardName");
         }
         const emptyFields = requiredFields.filter((key) => !form[key]?.trim());
         if (emptyFields.length > 0) {
@@ -135,12 +143,11 @@ function CheckoutForm() {
                             {/* 送貨地點：只有外送才輸入 */}
                             {form.shipMethod === "home" && (
                                 <div className="text-left">
-                                    <label className="label text-base p-2">送貨地址</label>
                                     <input
                                         className="input w-full"
                                         value={form.address}
                                         onChange={handleChange("address")}
-                                        placeholder="Address"
+                                        placeholder="送貨地址"
                                     />
                                 </div>
                             )}
@@ -158,6 +165,40 @@ function CheckoutForm() {
                                     <option value="cod">貨到付款</option>
                                 </select>
                             </div>
+
+                            {/* 付款方式：只有信用卡才輸入 */}
+                            {form.payMethod === "credit" && (
+                                <div className="flex flex-col space-y-2">
+                                    <div className="flex space-x-2">
+                                        <input
+                                            className="input w-1/2"
+                                            value={form.CreditCardNumber}
+                                            onChange={handleChange("CreditCardNumber")}
+                                            placeholder="信用卡卡號"
+                                        />
+                                        <input
+                                            className="input w-1/2"
+                                            value={form.CreditCardTime}
+                                            onChange={handleChange("CreditCardTime")}
+                                            placeholder="月月/年年"
+                                        />
+                                    </div>
+                                    <div className="flex space-x-2">
+                                        <input
+                                            className="input w-1/2"
+                                            value={form.CreditCardCVC}
+                                            onChange={handleChange("CreditCardCVC")}
+                                            placeholder="信用卡認證編號（CVC）"
+                                        />
+                                        <input
+                                            className="input w-1/2"
+                                            value={form.CreditCardName}
+                                            onChange={handleChange("CreditCardName")}
+                                            placeholder="持卡人姓名"
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </fieldset>
                     </section>
                 </div>
