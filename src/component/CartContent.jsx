@@ -42,7 +42,7 @@ function CartContent() {
                                 alt={item.name}
                                 className="object-cover w-full h-3/4 rounded-lg"
                             />
-                            <div className="text-left text-gray-800">
+                            <div className="text-left custom-text-gray-800">
                                 <label className="text-sm">數量</label>
                                 <select
                                     value={item.quantities}
@@ -52,10 +52,10 @@ function CartContent() {
                                             quantities: parseInt(e.target.value)
                                         }))
                                     }
-                                    className="text-sm"
+                                    className="text-sm custom-text-gray-800"
                                 >
                                     {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                                        <option key={num} value={num}>{num}</option>
+                                        <option className="custom-text-gray-500" key={num} value={num}>{num}</option>
                                     ))}
                                 </select>
                             </div>
@@ -105,7 +105,7 @@ function CartContent() {
                                 ✕
                             </button>
                             {/* 單品總金額區塊 */}
-                            <div className="text-right text-sm text-gray-800">
+                            <div className="text-right text-sm custom-text-gray-800">
                                 ${item.totalPrice}
                             </div>
                         </div>
