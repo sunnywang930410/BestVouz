@@ -15,13 +15,19 @@ const usersPersistConfig = {
     storage,
 };
 
+const colorPersistConfig = {
+    key: 'color',
+    storage,
+};
+
 const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 const persistedUsersReducer = persistReducer(usersPersistConfig, usersReducer);
+const persistedColorReducer = persistReducer(colorPersistConfig, colorReducer);
 export const store = configureStore(
     {
         reducer: {
             cart: persistedCartReducer,
-            color: colorReducer,
+            color: persistedColorReducer,
             users: persistedUsersReducer
         },
         devTools: process.env.NODE_ENV !== 'production',

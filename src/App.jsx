@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react'
-import { Provider } from "react-redux"
+import { useEffect, useState } from 'react'
+import { Provider, useSelector } from "react-redux"
 import './assets/fonts/font.css'
 import './App.css'
 import './index.css'
@@ -26,12 +26,14 @@ const queryClient = new QueryClient();
 //feedCustomize();
 
 import Success from '../pages/Success'
+import { selectLightMode } from './redux/colorSlice';
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
+            <ThemedApp />
             <div >
               <BrowserRouter>
                 <Header />
@@ -60,4 +62,11 @@ function App() {
   )
 }
 
+function ThemedApp() {
+  const lightMode = useSelector(selectLightMode);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', lightMode ? 'light' : 'dark');
+  }, [lightMode]);
+}
 export default App
