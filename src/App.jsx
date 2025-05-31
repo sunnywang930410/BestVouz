@@ -14,6 +14,10 @@ import store from "./redux/store"
 import { ModalProvider } from "./component/ModalContext";
 import Checkout from '../pages/Checkout';
 import Form from '../pages/Form';
+import { feedCustomize } from './api/FireStore';
+
+//feedCustomize();
+
 function App() {
   const [count, setCount] = useState(0)
 
