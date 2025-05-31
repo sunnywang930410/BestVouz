@@ -1,5 +1,5 @@
-import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
-import { db } from "../firebaseconfig";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebaseconfig";
 import customize from "@/json/customize.json";
 
 const customizeCollection = collection(db, "customize");
@@ -64,6 +64,7 @@ export const getUserInfo = async () => {
     //取得目前登入的使用者
     const user = auth?.currentUser || null;
     if (user) {
+        //如果有登入的話，取得使用者的文件參考
         const docRef = doc(db, "users", user.uid);
         //取得文件
         //docRef是文件的參考，docSnap是文件的快照
