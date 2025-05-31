@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItems, clearCart, selectCartItems, updateQuantity } from "@/redux/cartSlice";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../component/ModalContext";
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { auth } from "../api/firebaseconfig";
+import { onAuthStateChanged } from "firebase/auth";
 function CartContent() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const cartItems = useSelector(selectCartItems);
     const totalPrice = cartItems.reduce((total, item) => {
-        // console.log(item.totalPrice)
         return total + item.totalPrice;
     }, 0);
+    const { toggleModal } = useContext(ModalContext);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);    
     const labelMap = {
         size: "尺寸",
         fruit: "外層水果",
@@ -18,16 +22,21 @@ function CartContent() {
         candle: "蠟燭",
         decoration: "裝飾"
     };
-    const { toggleModal } = useContext(ModalContext);
-    const navigate = useNavigate();
-    const handleNavigate = () => {
-        navigate("/checkout/step1");
-        // 導航時也滾動到頂部
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsLoggedIn(!!user); // user 存在即為 true
         });
-    }
+        return () => unsubscribe(); // 避免記憶體洩漏
+    }, []);
+    const handleCheckout = () => {
+        if (!isLoggedIn) {
+            toggleModal();
+            navigate("/auth/login", { state: { redirectTo: "/checkout/step1" } });
+        } else {
+            toggleModal();
+            navigate("/checkout/step1");
+        }
+    };
     return (
         <div className="body-bg space-y-4">
             {cartItems.length === 0 ? (
@@ -130,7 +139,7 @@ function CartContent() {
                  transition-colors duration-200 
                  hover:bg-secondary-content
                  active:bg-secondary-content"
-                            onClick={() => { handleNavigate(); toggleModal(); }}
+                            onClick={handleCheckout}
                         >
                             前往結帳
                         </button>
