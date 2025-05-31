@@ -10,15 +10,16 @@ function CustomizeProduct({ product, options }) {
     const [tipPrices, setTipPrices] = useState({}); // 儲存每個選項的加價（tip）
     const [sizePriceDiff, setSizePriceDiff] = useState(0);
     const [text, setText] = useState(""); // 用來儲存文字留言的狀態
+    const hasText = text.trim().length > 0;
     useEffect(() => {
-    if (product.size === "可調整尺吋") {
-        setCustomSelections({
-            size: "6吋",
-        });
-    } else {
-        setCustomSelections({}); // 或保留其他預設值
-    }
-}, [product.size]);
+        if (product.size === "可調整尺吋") {
+            setCustomSelections({
+                size: "6吋",
+            });
+        } else {
+            setCustomSelections({}); // 或保留其他預設值
+        }
+    }, [product.size]);
     // tip計算與紀錄使用者的選項
     const handleOptionChange = (label, value, tip = 0, price = 0) => {
         // console.log("handleOptionChange called:", label, value, tip);
@@ -26,6 +27,9 @@ function CustomizeProduct({ product, options }) {
         // 如果是改尺寸，且商品不可調整尺吋，就直接 return，不改尺寸
         if (label === "size" && product.size !== "可調整尺吋") {
             return; // 不改尺寸
+        }
+        else{
+            setSizePriceDiff(price);
         }
         setCustomSelections((prev) => {
             const newSelections = {
@@ -178,7 +182,16 @@ function CustomizeProduct({ product, options }) {
                     </div>
                     <div className="flex items-center justify-between p-2 mb-12 sm:mb-16">
                         <div className="text-2xl md:text-2xl sm:text-xl custom-text-red-600 font-semibold">Total: ${totalPrice}</div>
-                        <AddToCart product={product} options={options} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} price={totalPrice / quantities} />
+                        <AddToCart
+                            product={product}
+                            options={options}
+                            quantities={quantities}
+                            totalPrice={totalPrice}
+                            text={text}
+                            hasText={hasText}
+                            customSelections={customSelections}
+                            price={totalPrice / quantities} 
+                        />
                     </div>
                 </div>
             </div>

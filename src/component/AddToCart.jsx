@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useState, useContext } from 'react';
 import { CircleCheckBig } from 'lucide-react';
 import { ModalContext } from "../component/ModalContext";
-function AddToCart({ product, quantities, totalPrice, customSelections, price }) {
+import { text } from 'framer-motion/client';
+function AddToCart({ product, quantities, totalPrice, customSelections, price, text, hasText }) {
     const dispatch = useDispatch();
     const [showToast, setShowToast] = useState(false);
     const addToCart = () => {
@@ -18,8 +19,6 @@ function AddToCart({ product, quantities, totalPrice, customSelections, price })
             ...(product.size === "可調整尺吋" ? { size: customSelections.size || "6吋" } : {}),
             ...customSelections,
         };
-        console.log("product.size =", product.size);
-        console.log("customSelections.size", customSelections.size);
         setShowToast(true);
         dispatch(addCartItems(
             {
@@ -29,7 +28,9 @@ function AddToCart({ product, quantities, totalPrice, customSelections, price })
                 totalPrice,
                 quantities,
                 customSelections: defaultSelections,
-                price
+                price,
+                text,
+                hasText
             }
         ))
     };
