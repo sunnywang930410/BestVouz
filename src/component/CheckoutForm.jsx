@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartSlice";
 import { getAuth } from "firebase/auth";
-import { CreditCard } from "lucide-react";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 function CheckoutForm() {
     const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
@@ -22,21 +22,24 @@ function CheckoutForm() {
         CreditCardCVC: "",
         CreditCardName: ""
     });
+    const auth = getAuth();
+    const db = getFirestore();
     useEffect(() => {
-        const auth = getAuth();
-        const user = auth.currentUser;
-
-        if (user) {
-            console.log("Firebase user object:", user); // ← 加這行
-            console.log(user.displayName);
-            setForm((prev) => ({
-                ...prev,
-                name: user.displayName || "",
-                email: user.email || "",
-            }));
-        }
+        const fetchUserInfo = async () => {
+            const user = auth.currentUser;
+            if (user) {
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+                const userData = docSnap.data();
+                setForm((prev) => ({
+                    ...prev,
+                    name: userData?.username || "", 
+                    email: user.email || "",
+                }));
+            }
+        };
+        fetchUserInfo();
     }, []);
-
     const handleChange = (key) => (e) =>
         setForm((f) => ({ ...f, [key]: e.target.value }));
     const navigate = useNavigate();
@@ -54,7 +57,7 @@ function CheckoutForm() {
             requiredFields.push("address");
         }
         if (form.payMethod === "credit") {
-            requiredFields.push("CreditCardNumber","CreditCardTime","CreditCardCVC","CreditCardName");
+            requiredFields.push("CreditCardNumber", "CreditCardTime", "CreditCardCVC", "CreditCardName");
         }
         const emptyFields = requiredFields.filter((key) => !form[key]?.trim());
         if (emptyFields.length > 0) {
