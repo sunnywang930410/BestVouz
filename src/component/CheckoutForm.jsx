@@ -150,22 +150,42 @@ function CheckoutForm() {
                                     />
                                     {/* 文字資訊 */}
                                     <div className="flex-1 text-left">
-                                        <h4 className="font-medium text-base">
-                                            {item.name} (
-                                            {item.customSelections.size.length < 2 ? "6吋" : item.customSelections.size})
-                                        </h4>
-                                        <div className="text-sm custom-text-gray-500">
-                                            {Object.entries(item.customSelections).map(([k, v]) =>
-                                                k === "size" || !v ? null : (
-                                                    <div key={k}>
-                                                        {(k === "fruit" || k === "cream") ? "+" : labelMap[k] + ":"}
-                                                        {v}
-                                                        {console.log("value", v)}
-                                                    </div>
-                                                )
-                                            )}
+                                        <div className="flex justify-between items-center">
+                                            <h4 className="font-semibold text-base text-left">
+                                                {item.name}
+                                                {item.customSelections["size"] &&
+                                                    item.customSelections["size"].trim() !== "" && (
+                                                        <> ({item.customSelections["size"]})</>
+                                                    )}
+                                            </h4>
+                                            <div className="text-base custom-text-gray-800 text-right whitespace-nowrap ml-4">
+                                                NT$ {item.totalPrice}
+                                            </div>
                                         </div>
-                                        <div className="text-sm custom-text-gray-800">NT$ {item.totalPrice}</div>
+
+                                        <div className="text-sm custom-text-gray-500">
+                                            {Object.entries(item.customSelections).map(([key, value]) => {
+                                                if (
+                                                    key === "size" ||
+                                                    !value ||
+                                                    value === "無" ||
+                                                    value === "none" ||
+                                                    value === "null" ||
+                                                    value === "" ||
+                                                    value.length === 0
+                                                )
+                                                    return null;
+                                                return (
+                                                    <div key={key} className="flex gap-1">
+                                                        <span className="font-medium capitalize">
+                                                            {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + ":"}
+                                                        </span>
+                                                        <span>{value}</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
                                         <div className="absolute bottom-6 right-6 w-[calc(100%-3rem)] mt-12 text-right space-y-2 custom-text-gray-800">
                                             <div className="flex justify-between text-base">
                                                 <span>小計：</span>
@@ -183,8 +203,8 @@ function CheckoutForm() {
                                                 <span>NT$ {total}</span>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             ))}
                         </fieldset>

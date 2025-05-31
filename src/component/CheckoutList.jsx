@@ -66,16 +66,19 @@ function CheckoutList() {
                         {/* 商品標題 + 客製化內容 */}
                         <div className="flex flex-col">
                             <h2 className="text-lg font-medium text-left font-semibold mb-1">
-                                {item.name}(
-                                {item.customSelections["size"].length < 2 ? "6吋" : item.customSelections["size"]}
-                                )
+                                {item.name}
+                                {item.customSelections["size"] && item.customSelections["size"].trim() !== "" && (
+                                    <> ({item.customSelections["size"]})</>
+                                )}
                             </h2>
 
                             {/* 客製化選項 */}
                             {item.customSelections && (
                                 <div className="text-sm text-gray-400">
                                     {Object.entries(item.customSelections).map(([key, value]) => {
-                                        if (key === "size" || !value || value.length === 0) return null;
+                                        // console.log("customSelections:", item.customSelections.fruit);
+                                        if (key === "size" || !value || value === "無" || value === "none" || value === "null" || value === "" || value.length === 0) return null;
+                                        // console.log(value);
                                         return (
                                             <div key={key} className="flex gap-1">
                                                 <span className="font-medium capitalize">
@@ -83,7 +86,7 @@ function CheckoutList() {
                                                 </span>
                                                 <span>{value}</span>
                                             </div>
-                                        );
+                                        )
                                     })}
                                 </div>
                             )}

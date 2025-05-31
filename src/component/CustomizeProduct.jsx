@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import QuantitySelector from "./QuantitySelector";
 import AddToCart from "./AddToCart";
 import { Info } from 'lucide-react';
+import PopularItems from './PopularItems';
 
 function CustomizeProduct({ product, options }) {
     const [customSelections, setCustomSelections] = useState({}); // 儲存每個選項的使用者選擇
@@ -180,6 +181,9 @@ function CustomizeProduct({ product, options }) {
                         <AddToCart product={product} options={options} quantities={quantities} totalPrice={totalPrice} customSelections={customSelections} price={totalPrice / quantities} />
                     </div>
                 </div>
+            </div>
+            <div className="mt-20">
+                <PopularItems />
             </div>
         </div>
 
