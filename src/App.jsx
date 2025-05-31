@@ -14,9 +14,8 @@ import store from "./redux/store"
 import { ModalProvider } from "./component/ModalContext";
 import Checkout from '../pages/Checkout';
 import Form from '../pages/Form';
+import Success from '../pages/Success'
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <ModalProvider>
       <Provider store={store}>
@@ -30,6 +29,7 @@ function App() {
                 <Route path="/product/:id" element={<Product />} />
                 <Route path='/checkout/step1' element={<Checkout />} />
                 <Route path='/checkout/step2' element={<Form />} />
+                <Route path='/checkout/step3' element={<Success />} />
               </Routes>
               <Footer />
             </main>

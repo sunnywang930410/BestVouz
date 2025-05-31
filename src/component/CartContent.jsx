@@ -63,7 +63,17 @@ function CartContent() {
                         {/* 資訊區 */}
                         <div className="flex flex-col p-2 flex-grow relative w-30 whitespace-nowrap">
                             <div>
-                                <h2 className="text-base font-semibold text-left mb-1">{item.name}({item.customSelections["size"].length < 2 ? "6吋" : item.customSelections["size"]})</h2>
+                                <h2 className="text-base font-semibold text-left mb-1">
+                                    {item.name}
+                                    {item.customSelections?.size && item.customSelections.size !== "無" && (
+                                        <> (
+                                            {item.customSelections.size.length > 1
+                                                ? item.customSelections.size
+                                                : "6吋"}
+                                            )
+                                        </>
+                                    )}
+                                </h2>
 
                                 {/* 客製化選項 */}
                                 {item.customSelections && (

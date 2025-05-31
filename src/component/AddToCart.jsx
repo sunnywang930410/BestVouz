@@ -10,14 +10,16 @@ function AddToCart({ product, quantities, totalPrice, customSelections, price })
     const addToCart = () => {
         // 設定預設值
         const defaultSelections = {
-            size: "6吋",
             fruit: "無",
             cream: "無",
             "text-jam": "無",
-            candle: "?",
+            candle: "無",
             decoration: "無",
+            ...(product.size === "可調整尺吋" ? { size: customSelections.size || "6吋" } : {}),
             ...customSelections,
         };
+        console.log("product.size =", product.size);
+        console.log("customSelections.size", customSelections.size);
         setShowToast(true);
         dispatch(addCartItems(
             {

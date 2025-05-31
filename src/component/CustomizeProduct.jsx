@@ -10,14 +10,22 @@ function CustomizeProduct({ product, options }) {
     const [sizePriceDiff, setSizePriceDiff] = useState(0);
     const [text, setText] = useState(""); // 用來儲存文字留言的狀態
     useEffect(() => {
+    if (product.size === "可調整尺吋") {
         setCustomSelections({
             size: "6吋",
         });
-    }, [])
+    } else {
+        setCustomSelections({}); // 或保留其他預設值
+    }
+}, [product.size]);
     // tip計算與紀錄使用者的選項
     const handleOptionChange = (label, value, tip = 0, price = 0) => {
         // console.log("handleOptionChange called:", label, value, tip);
         tip = (!isNaN(tip)) ? tip : 0;
+        // 如果是改尺寸，且商品不可調整尺吋，就直接 return，不改尺寸
+        if (label === "size" && product.size !== "可調整尺吋") {
+            return; // 不改尺寸
+        }
         setCustomSelections((prev) => {
             const newSelections = {
                 ...prev,
@@ -25,14 +33,6 @@ function CustomizeProduct({ product, options }) {
             };
             return newSelections;
         });
-
-        if (label === "size") {
-            // 尺寸：只存加價差額，不進 tip
-            setSizePriceDiff(price);
-        } else {
-            // 其餘選項維持原本 tip 邏輯
-            setTipPrices((prev) => ({ ...prev, [label]: tip }));
-        }
     };
     const [quantities, setQuantity] = useState(1);
     const handleQuantityChange = (val) => {
@@ -78,15 +78,17 @@ function CustomizeProduct({ product, options }) {
                     </div>
                     <span className="text-left text-3xl md:text-2xl sm:text-xl">${sizePrice}</span>
                     {/* 尺寸 */}
-                    <CustomizationOption
-                        type="button"
-                        product={product} // 哪種商品
-                        options={options}
-                        label="size"
-                        title="尺寸"
-                        onOptionChange={handleOptionChange}
-                        customSelections={customSelections}
-                    />
+                    {product.size === "可調整尺吋" && (
+                        <CustomizationOption
+                            type="button"
+                            product={product} // 哪種商品
+                            options={options}
+                            label="size"
+                            title="尺寸"
+                            onOptionChange={handleOptionChange}
+                            customSelections={customSelections}
+                        />
+                    )}
                     {/* 數量 */}
                     <div className="mb-4 sm:mb-6 flex items-center justify-between">
                         <QuantitySelector
@@ -95,56 +97,57 @@ function CustomizeProduct({ product, options }) {
                         />
                     </div>
                     {/* 蛋糕內容 */}
-                    {product.category === "客製化蛋糕" && (<div className="border-[3px] border-primary rounded-xl p-6 sm:p-8 mb-8 sm:mb-6 mt-8 sm:mt-6">
-                        {/* 外層水果 */}
-                        <CustomizationOption
-                            type="image"
-                            product={product} // 哪種商品
-                            options={options}
-                            label="fruit"
-                            title="外層水果"
-                            tip={20}
-                            onOptionChange={handleOptionChange}
-                        />
-                        {/* 鮮奶油 */}
-                        <CustomizationOption
-                            type="checkbox"
-                            product={product} // 哪種商品
-                            options={options}
-                            label="cream"
-                            title="鮮奶油"
-                            tip={10}
-                            onOptionChange={handleOptionChange}
-                        />
-                        {/* 文字留言 */}
-                        <div className="mb-4">
-                            <div className="flex items-center gap-2 mb-2 text-left">
-                                {/* 左側標題 */}
-                                <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">文字留言</h4>
+                    {product.category === "客製化蛋糕" && (
+                        <div className="border-[3px] border-primary rounded-xl p-6 sm:p-8 mb-8 sm:mb-6 mt-8 sm:mt-6">
+                            {/* 外層水果 */}
+                            <CustomizationOption
+                                type="image"
+                                product={product} // 哪種商品
+                                options={options}
+                                label="fruit"
+                                title="外層水果"
+                                tip={20}
+                                onOptionChange={handleOptionChange}
+                            />
+                            {/* 鮮奶油 */}
+                            <CustomizationOption
+                                type="checkbox"
+                                product={product} // 哪種商品
+                                options={options}
+                                label="cream"
+                                title="鮮奶油"
+                                tip={10}
+                                onOptionChange={handleOptionChange}
+                            />
+                            {/* 文字留言 */}
+                            <div className="mb-4">
+                                <div className="flex items-center gap-2 mb-2 text-left">
+                                    {/* 左側標題 */}
+                                    <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">文字留言</h4>
+                                </div>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={text}
+                                        onChange={handleTextChange}
+                                        maxLength={30}
+                                        placeholder="為壽星寫下祝福吧！（最多30字）"
+                                        className="input w-full pr-12"
+                                    />
+                                    {/* 字數計數器 */}
+                                    <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm">{text.length}/30</span>
+                                </div>
                             </div>
-                            <div className="relative">
-                                <input
-                                    type="text"
-                                    value={text}
-                                    onChange={handleTextChange}
-                                    maxLength={30}
-                                    placeholder="為壽星寫下祝福吧！（最多30字）"
-                                    className="input w-full pr-12"
-                                />
-                                {/* 字數計數器 */}
-                                <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm">{text.length}/30</span>
-                            </div>
+                            {/* 選擇文字醬料 */}
+                            <CustomizationOption
+                                type="text"
+                                product={product} // 哪種商品
+                                options={options}
+                                label="text-jam"
+                                title="選擇文字醬料"
+                                onOptionChange={handleOptionChange}
+                            />
                         </div>
-                        {/* 選擇文字醬料 */}
-                        <CustomizationOption
-                            type="text"
-                            product={product} // 哪種商品
-                            options={options}
-                            label="text-jam"
-                            title="選擇文字醬料"
-                            onOptionChange={handleOptionChange}
-                        />
-                    </div>
                     )}
                     {/* 配件選擇 */}
                     <div className="border-[3px] border-primary rounded-xl p-6 sm:p-8">
