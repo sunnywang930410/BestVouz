@@ -17,7 +17,7 @@ const MoveInVertical = () => {
         },
         {
             ID: 3,
-            url: "/img/chiffon-cake.png",
+            url: "/img/birthday.png",
             title: "我超喜歡這個蛋糕的",
         },
         {
