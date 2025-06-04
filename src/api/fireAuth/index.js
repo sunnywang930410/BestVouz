@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { query, where, orderBy, doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { query, where, orderBy, doc, getDoc, getDocs, setDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebaseconfig";
 
 

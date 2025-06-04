@@ -27,9 +27,9 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
   const [selectedcandles, setSelectedcandles] = useState("");
   const handlecandleChange = (e) => {
     const value = e.target.value;
-    setSelectedcandles(value); // 2️⃣ 更新狀態
+    setSelectedcandles(value);
     if (onOptionChange) {
-      onOptionChange(label, value, 0); // 3️⃣ 回傳給父層
+      onOptionChange(label, value, 0); 
     }
   };
 
