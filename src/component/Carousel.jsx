@@ -35,7 +35,7 @@ const Carousel = ({ products = [] }) => {
             </button>
 
             {/* 卡片群組（有動畫） */}
-            <div className="w-[935px] h-[420px] relative overflow-hidden">
+            <div className="w-[935px] h-[400px] relative overflow-hidden">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={startIndex} // 每次切換讓整排重繪
@@ -60,8 +60,8 @@ const Carousel = ({ products = [] }) => {
                                             className="h-auto w-full rounded-lg"
                                         />
                                     </figure>
-                                    <div className="card-body justify-center">
-                                        <h2 className="card-title justify-center">{item.name}</h2>
+                                    <div className=" justify-center">
+                                        <h2 className=" justify-center">{item.name}</h2>
                                         <h2 className="text-center">${item.price}</h2>
                                         {/* <div className="card-actions justify-center">
                                         <div className="badge badge-outline">Fashion</div>

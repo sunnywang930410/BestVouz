@@ -1,48 +1,83 @@
+import { Search, ShoppingCart } from "lucide-react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 
 const ProductItem = ({ product }) => {
+    const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate();
+    const dialogRef = useRef(null);
+    // const navigate = useNavigate();
 
-    const handleNavigateTocake = () => {
-        navigate("/menu");
-        // 導航時也滾動到頂部
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
+    // const handleNavigateTocake = () => {
+    //     navigate("/menu");
+    //     // 導航時也滾動到頂部
+    //     window.scrollTo({
+    //         top: 0,
+    //         behavior: 'smooth'
+    //     });
+    // }
 
-    
+    const handleOpenModal = (product) => {
+        setSelectedItem(product);
+        if (dialogRef.current) dialogRef.current.showModal();
+    };
+
+
     return (
-        <div className="card card-side body-bg flex-col sm:flex-row !rounded-lg border-2 border-primary bg-base-100 items-center space-y-2 sm:space-y-4 sm:space-x-10 p-2 sm:p-4">
+        <div className="w-[250px] body-bg flex-col justify-center items-center">
             {/* 圖片區塊 */}
-            <div className="w-[200px] sm:w-1/4 aspect-square">
-                <figure className="w-full h-full">
-                    <img
-                        className="w-full h-full object-cover rounded-lg"
-                        src={product.cover}
-                        alt={product.name}
-                    />
-                </figure>
+            <div key={product.id} className="justify-center items-center rounded-xl overflow-hidden relative group">
+                <img
+                    className="w-full h-full  justify-center items-center"
+                    src={product.cover}
+                    alt={product.name}
+                />
+                <div className="absolute inset-0 flex items-center justify-center gap-4 
+                bg-black/40 opacity-0 translate-y-full 
+                group-hover:translate-y-0 group-hover:opacity-100 
+                transition-all duration-500 ease-in-out">
+                    <button
+                        onClick={() => {
+                            // console.log("購買商品");
+                            navigate(`/product/${product.id}`);
+                        }}
+                        className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                    >
+                        <ShoppingCart className="w-8 h-auto text-secondary" />
+
+                    </button>
+
+                    <button
+                        onClick={() => handleOpenModal(product)}
+                        className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                    >
+                        <Search className="w-8 h-auto text-secondary" />
+                    </button>
+                </div>
             </div>
 
             {/* 內容區塊 */}
-            <div className="flex flex-col card-body w-full sm:w-3/4 py-1 sm:py-5 px-1 sm:px-5">
-                <div className="text-left space-y-2 sm:space-y-4">
-                    <h4 className="card-title text-lg sm:text-xl md:text-2xl text-left">{product.name}</h4>
-                    <span className="text-xs sm:text-sm md:text-base block text-left">{product.description}</span>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-2 sm:gap-4 pt-2 sm:pt-8">
-                    <span className="text-base sm:text-lg md:text-xl text-center sm:text-left">${product.price}</span>
-                    <Link to={`/product/${product.id}`}>
-                        <button className="btn btn-secondary w-full sm:w-auto active:bg-secondary-content text-info font-normal py-1 sm:py-2 px-4 sm:px-6 md:px-10 text-sm sm:text-base"
-                        onClick={handleNavigateTocake}>
-                            購買蛋糕
-                        </button>
-                    </Link>
-                </div>
+            <div className="flex flex-col justify-center items-center">
+                <h4 className="text-lg">{product.name}</h4>
+                <h5 className="">${product.price}</h5>
             </div>
+
+            {/* Modal 彈窗 */}
+            <dialog ref={dialogRef} className="modal">
+                <div className="modal-box">
+                    {selectedItem && (
+                        <div className="flex flex-col items-center">
+                            <h3 className="text-xl mb-2">{selectedItem.name}</h3>
+                            <img src={selectedItem.cover} alt={selectedItem.name} className="w-80 h-auto mb-4 rounded-xl" />
+                            <h5 className="text-gray-700">{selectedItem.description}</h5>
+                            <h4 className="mt-2 font-semibold">價格: ${selectedItem.price}</h4>
+                        </div>
+                    )}
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>關閉</button>
+                </form>
+            </dialog>
         </div>
     )
 }

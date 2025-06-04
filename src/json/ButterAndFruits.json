@@ -1,0 +1,27 @@
+    [
+        {
+            "name": "奶油",
+            "id": "butter",
+            "cover": "/img/butter.PNG"
+        },
+        {
+            "name": "草莓裝飾",
+            "id": "decoration-strawberry",
+            "cover": "/img/decoration-strawberry.PNG"
+        },
+        {
+            "name": "藍莓裝飾",
+            "id": "decoration-bluebarry",
+            "cover": "/img/decoration-bluebarry.PNG"
+        },
+        {
+            "name": "奇異果裝飾",
+            "id": "decoration-kiwi",
+            "cover": "/img/decoration-kiwi.PNG"
+        },
+        {
+            "name": "葡萄裝飾",
+            "id": "decoration-grape",
+            "cover": "/img/decoration-grape.PNG"
+        }
+    ]

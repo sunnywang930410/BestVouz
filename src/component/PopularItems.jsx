@@ -2,7 +2,7 @@ import { Search, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const PopularItems = () => {
+const PopularItems = ({ isInMenu = false }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate();
     const popularItems = [
@@ -45,45 +45,89 @@ const PopularItems = () => {
     return (
         <div className="mt-4 mb-8">
             <h2 className="text-2xl font-bold m-6">人氣商品</h2>
-            <div className="flex flex-row justify-center items-center gap-4 overflow-x-auto">
-                {popularItems.map((item) => (
-                    <div key={item.id} className="flex flex-col items-center mb-4 mt-4">
-                        <div className="relative group w-60 h-60 rounded-xl overflow-hidden">
-                            <img
-                                src={item.url}
-                                alt={item.name}
-                                className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
-                            />
-                            <div className="absolute inset-0 flex items-center justify-center gap-4 
+            {isInMenu ? (
+                // ✅ 三欄網格版本
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+                    {popularItems.map((item) => (
+                        <div key={item.id} className="flex flex-col items-center mb-4 mt-4">
+                            <div className="relative group w-full h-60 rounded-xl overflow-hidden">
+                                <img
+                                    src={item.url}
+                                    alt={item.name}
+                                    className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center gap-4 
+                                    bg-black/40 opacity-0 translate-y-full 
+                                    group-hover:translate-y-0 group-hover:opacity-100 
+                                    transition-all duration-500 ease-in-out">
+                                    <button
+                                        onClick={() => navigate(`/product/${item.id}`)}
+                                        className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                    >
+                                        <ShoppingCart className="w-8 h-auto text-secondary" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleOpenModal(item)}
+                                        className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                    >
+                                        <Search className="w-8 h-auto text-secondary" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mt-2 text-center">
+                                <h4 className="text-lg">{item.name}</h4>
+                                <h5 className="text-color-base-content">${item.price}</h5>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                // 原本的橫向滑動版本
+                <div className="flex flex-row justify-center items-center gap-4 overflow-x-auto">
+                    {popularItems.map((item) => (
+                        <div key={item.id} className="flex-shrink-0 w-60 flex flex-col items-center mb-4 mt-4">
+
+                            <div className="relative group w-60 h-60 rounded-xl overflow-hidden">
+                                <img
+                                    src={item.url}
+                                    alt={item.name}
+                                    className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center gap-4 
                 bg-black/40 opacity-0 translate-y-full 
                 group-hover:translate-y-0 group-hover:opacity-100 
                 transition-all duration-500 ease-in-out">
-                                <button
-                                    onClick={() => {
-                                        console.log("購買商品");
-                                        navigate(`/product/${item.id}`);
-                                    }}
-                                    className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
-                                >
-                                    <ShoppingCart className="w-8 h-auto text-secondary" />
+                                    <button
+                                        onClick={() => {
+                                            console.log("購買商品");
+                                            navigate(`/product/${item.id}`);
+                                        }}
+                                        className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                    >
+                                        <ShoppingCart className="w-8 h-auto text-secondary" />
 
-                                </button>
+                                    </button>
 
-                                <button
-                                    onClick={() => handleOpenModal(item)}
-                                    className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
-                                >
-                                    <Search className="w-8 h-auto text-secondary" />
-                                </button>
+                                    <button
+                                        onClick={() => handleOpenModal(item)}
+                                        className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                    >
+                                        <Search className="w-8 h-auto text-secondary" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mt-2 text-center">
+                                <h4 className="text-lg">{item.name}</h4>
+                                <h5 className="text-color-base-content">${item.price}</h5>
                             </div>
                         </div>
-                        <div className="mt-2 text-center">
-                            <h4 className="text-lg">{item.name}</h4>
-                            <h5 className="text-color-base-content">價格: ${item.price}</h5>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
+
+
+
+
 
             {/* Modal 彈窗 */}
             <dialog id="item_modal" className="modal">

@@ -90,7 +90,7 @@ function Homepage({ product }) {
                 </h2>
                 <Carousel products={product} />
             </div>
-            <div className="my-14">
+            <div className="mb-14">
                 <button
                     className="btn bg-secondary font-normal text-lg  active:bg-secondary-content py-6 px-12 text-info mt-4 mb-4"
                     onClick={handleNavigateToMenu}

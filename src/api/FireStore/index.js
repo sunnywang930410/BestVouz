@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebaseconfig";
 import customize from "@/json/customize.json";
 
@@ -94,27 +94,27 @@ export const updateUserInfo = async ({ username, adrs, tel, uid }) => {
 }
 
 export const submitOrder = async (orderItems, totalAmount, buyerInfo) => {
-  const user = auth.currentUser;
+    const user = auth.currentUser;
 
-  if (!user) {
-    throw new Error("使用者尚未登入");
-  }
+    if (!user) {
+        throw new Error("使用者尚未登入");
+    }
 
-  const orderData = {
-    userId: user.uid,
-    createdAt: serverTimestamp(),
-    buyerInfo,
-    items: orderItems, 
-    totalAmount,
-  };
+    const orderData = {
+        userId: user.uid,
+        createdAt: serverTimestamp(),
+        buyerInfo,
+        items: orderItems,
+        totalAmount,
+    };
 
-  try {
-    await addDoc(collection(db, "orders"), orderData);
-    console.log("訂單已成功送出");
-  } catch (error) {
-    console.error("送出訂單失敗：", error);
-    throw error;
-  }
+    try {
+        await addDoc(collection(db, "orders"), orderData);
+        console.log("訂單已成功送出");
+    } catch (error) {
+        console.error("送出訂單失敗：", error);
+        throw error;
+    }
 };
 
 
