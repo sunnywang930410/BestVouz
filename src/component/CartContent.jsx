@@ -13,7 +13,7 @@ function CartContent() {
         return total + item.totalPrice;
     }, 0);
     const { toggleModal } = useContext(ModalContext);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const labelMap = {
         size: "尺寸",
         fruit: "外層水果",
@@ -32,9 +32,11 @@ function CartContent() {
         if (!isLoggedIn) {
             toggleModal();
             navigate("/auth/login", { state: { redirectTo: "/checkout/step1" } });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
             toggleModal();
             navigate("/checkout/step1");
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
     return (
@@ -51,7 +53,7 @@ function CartContent() {
                                 alt={item.name}
                                 className="object-cover w-full h-3/4 rounded-lg"
                             />
-                            <div className="text-left custom-text-gray-800">
+                            <div className="text-lefilteredDataft custom-text-gray-800">
                                 <label className="text-sm">數量</label>
                                 <select
                                     value={item.quantities}

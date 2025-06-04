@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { query, where, orderBy, doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebaseconfig";
 
 
@@ -54,3 +54,20 @@ export const getUserInfo = async () => {
 export const logout = async () => {
     auth.signOut();
 }
+
+export const getMyOrders = async () => {
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const q = query(
+    collection(db, "orders"),
+    where("userId", "==", user.uid),
+    orderBy("createdAt", "desc")
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({
+    id: d.id,
+    ...d.data(),
+  }));
+};

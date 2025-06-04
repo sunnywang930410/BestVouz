@@ -92,3 +92,29 @@ export const updateUserInfo = async ({ username, adrs, tel, uid }) => {
     const user = auth.currentUser;
     localStorage.setItem("user", JSON.stringify(user));
 }
+
+export const submitOrder = async (orderItems, totalAmount, buyerInfo) => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error("使用者尚未登入");
+  }
+
+  const orderData = {
+    userId: user.uid,
+    createdAt: serverTimestamp(),
+    buyerInfo,
+    items: orderItems, 
+    totalAmount,
+  };
+
+  try {
+    await addDoc(collection(db, "orders"), orderData);
+    console.log("訂單已成功送出");
+  } catch (error) {
+    console.error("送出訂單失敗：", error);
+    throw error;
+  }
+};
+
+

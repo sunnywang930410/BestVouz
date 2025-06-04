@@ -13,7 +13,7 @@ function Step() {
             <ul className="steps steps-horizontal custom-text-gray-800">
                 <li className={`step ${step >= 1 ? 'step-warning ' : ''}`}>勾選結帳商品</li>
                 <li className={`step ${step >= 2 ? 'step-warning ' : ''}`}>填寫資料</li>
-                <li className={`step ${step >= 3 ? 'step-warning ' : ''}`}>結帳</li>
+                <li className={`step ${step >= 3 ? 'step-warning ' : ''}`}>訂單確認</li>
             </ul>
         </div>
     );

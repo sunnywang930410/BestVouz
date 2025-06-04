@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartSlice";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 function CheckoutForm() {
     const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
@@ -33,7 +34,7 @@ function CheckoutForm() {
                 const userData = docSnap.data();
                 setForm((prev) => ({
                     ...prev,
-                    name: userData?.username || "", 
+                    name: userData?.username || "",
                     email: user.email || "",
                 }));
             }
@@ -51,7 +52,7 @@ function CheckoutForm() {
         });
     }
     const [showModal, setShowModal] = useState(false);
-    const handleNavigateNext = () => {
+    const handleNavigateNext = async () => {
         const requiredFields = ["name", "email", "phone", "shipMethod", "payMethod"];
         if (form.shipMethod === "home") {
             requiredFields.push("address");
@@ -64,13 +65,53 @@ function CheckoutForm() {
             setShowModal(true);
             return;
         }
-        cartItems.forEach(item => dispatch(removeCartItems(item.id)));
+        const user = auth.currentUser;
+        if (!user) return;
+
+        try {
+            // 儲存訂單資料
+            await addDoc(collection(db, "orders"), {
+                userId: user.uid,
+                createdAt: Timestamp.now(),
+                buyerInfo: {
+                    name: form.name,
+                    email: form.email,
+                    phone: form.phone,
+                    shipMethod: form.shipMethod,
+                    address: form.address,
+                    payMethod: form.payMethod,
+                    CreditCardName: form.CreditCardName,
+                },
+                items: cartItems.map((item) => ({
+                    id: item.id,
+                    name: item.name,
+                    quantities: item.quantities,
+                    totalPrice: item.totalPrice,
+                    customSelections: item.customSelections,
+                    text: item.text
+                })),
+                totalAmount: total,
+            });
+
+            // 清除購物車
+            cartItems.forEach((item) => dispatch(removeCartItems(item.id)));
+
+            // 導向下一步
+            navigate("/checkout/step3");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+        } catch (error) {
+            console.error("訂單儲存失敗：", error);
+        }
+
+
+        // cartItems.forEach(item => dispatch(removeCartItems(item.id)));
         // 若通過檢查，才導向下一頁
-        navigate("/checkout/step3");
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+        // navigate("/checkout/step3");
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: "smooth",
+        // });
     };
     const labelMap = {
         size: "尺寸",
@@ -165,7 +206,7 @@ function CheckoutForm() {
                                 >
                                     <option value="">請選擇付款方式</option>
                                     <option value="credit">信用卡</option>
-                                    <option value="cod">貨到付款</option>
+                                    <option value="cash on delivery">貨到付款</option>
                                 </select>
                             </div>
 
@@ -255,6 +296,7 @@ function CheckoutForm() {
                                                     </div>
                                                 );
                                             })}
+                                             {item.hasText && <span className="flex font-medium text-left">文字留言: {item.text}</span>}
                                         </div>
 
                                         <div className="absolute bottom-6 right-6 w-[calc(100%-3rem)] mt-12 text-right space-y-2 custom-text-gray-800">
@@ -296,7 +338,7 @@ function CheckoutForm() {
                  active:bg-secondary-content"
                     onClick={() => { handleNavigateNext(); }}
                 >
-                    下一步
+                    確認送出
                 </button>
             </div>
             {showModal && (
