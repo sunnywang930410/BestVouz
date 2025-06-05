@@ -82,11 +82,12 @@ export const getUserInfo = async () => {
     }
 }
 
-export const updateUserInfo = async ({ username, adrs, tel, uid }) => {
+export const updateUserInfo = async ({ username, email, tel, uid }) => {
     const docRef = doc(db, "users", uid);
     await updateDoc(docRef, {
         username,
-        adrs,
+        email,
+        // adrs,
         tel,
     });
     const user = auth.currentUser;

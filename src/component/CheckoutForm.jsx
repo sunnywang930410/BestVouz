@@ -36,6 +36,7 @@ function CheckoutForm() {
                     ...prev,
                     name: userData?.username || "",
                     email: user.email || "",
+                    phone: userData?.tel || ""
                 }));
             }
         };
@@ -88,7 +89,8 @@ function CheckoutForm() {
                     quantities: item.quantities,
                     totalPrice: item.totalPrice,
                     customSelections: item.customSelections,
-                    text: item.text
+                    text: item.text,
+                    hasText: item.hasText
                 })),
                 totalAmount: total,
             });
@@ -103,15 +105,6 @@ function CheckoutForm() {
         } catch (error) {
             console.error("訂單儲存失敗：", error);
         }
-
-
-        // cartItems.forEach(item => dispatch(removeCartItems(item.id)));
-        // 若通過檢查，才導向下一頁
-        // navigate("/checkout/step3");
-        // window.scrollTo({
-        //     top: 0,
-        //     behavior: "smooth",
-        // });
     };
     const labelMap = {
         size: "尺寸",
@@ -276,7 +269,11 @@ function CheckoutForm() {
                                         </div>
 
                                         <div className="text-sm custom-text-gray-500">
-                                            {Object.entries(item.customSelections).map(([key, value]) => {
+                                            {Object.entries(item.customSelections).sort(([keyA], [keyB]) => {
+                                                if (keyA === "text-jam") return 1;
+                                                if (keyB === "text-jam") return -1;
+                                                return 0;
+                                            }).map(([key, value]) => {
                                                 if (
                                                     key === "size" ||
                                                     !value ||
@@ -290,13 +287,13 @@ function CheckoutForm() {
                                                 return (
                                                     <div key={key} className="flex gap-1">
                                                         <span className="font-medium capitalize">
-                                                            {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + ":"}
+                                                            {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + "："}
                                                         </span>
                                                         <span>{value}</span>
                                                     </div>
                                                 );
                                             })}
-                                             {item.hasText && <span className="flex font-medium text-left">文字留言: {item.text}</span>}
+                                            {item.hasText && <span className="flex font-medium text-left">文字留言：{item.text}</span>}
                                         </div>
 
                                         <div className="absolute bottom-6 right-6 w-[calc(100%-3rem)] mt-12 text-right space-y-2 custom-text-gray-800">

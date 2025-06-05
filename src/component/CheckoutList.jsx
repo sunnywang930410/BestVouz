@@ -75,18 +75,22 @@ function CheckoutList() {
                             {/* 客製化選項 */}
                             {item.customSelections && (
                                 <div className="text-sm text-gray-400">
-                                    {Object.entries(item.customSelections).map(([key, value]) => {
+                                    {Object.entries(item.customSelections).sort(([keyA], [keyB]) => {
+                                        if (keyA === "text-jam") return 1;
+                                        if (keyB === "text-jam") return -1;
+                                        return 0;
+                                    }).map(([key, value]) => {
                                         if (key === "size" || !value || value === "無" || value === "none" || value === "null" || value === "" || value.length === 0) return null;
                                         return (
                                             <div key={key} className="flex gap-1">
                                                 <span className="font-medium capitalize">
-                                                    {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + ":"}
+                                                    {(key === "fruit" || key === "cream") ? "+" : labelMap[key] + "："}
                                                 </span>
                                                 <span>{value}</span>
                                             </div>
                                         )
                                     })}
-                                    {item.hasText && <span className="flex font-medium text-left">文字留言: {item.text}</span>}
+                                    {item.hasText && <span className="flex font-medium text-left">文字留言：{item.text}</span>}
                                 </div>
                             )}
                         </div>

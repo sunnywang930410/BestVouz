@@ -38,6 +38,10 @@ function CustomizeProduct({ product, options }) {
             };
             return newSelections;
         });
+        setTipPrices((prev) => ({
+        ...prev,
+        [label]: tip,
+    }));
     };
     const [quantities, setQuantity] = useState(1);
     const handleQuantityChange = (val) => {
