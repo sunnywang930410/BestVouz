@@ -5,7 +5,9 @@ import { removeCartItems, selectCartItems, selectedItemsID } from "@/redux/cartS
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 function CheckoutForm() {
+    
     const dispatch = useDispatch();
     const items = useSelector(selectCartItems) || [];
     const ids = useSelector(selectedItemsID) || [];
@@ -66,12 +68,18 @@ function CheckoutForm() {
         const emptyFields = requiredFields.filter((key) => !form[key]?.trim());
         if (emptyFields.length > 0) {
             setShowModal(true);
+            setLoading(false);
             return;
         }
         const user = auth.currentUser;
         if (!user) return;
 
         try {
+            const userDocRef = doc(db, "users", user.uid);
+            await updateDoc(userDocRef, {
+                tel: form.phone,
+                username: form.name,
+            });
             // 儲存訂單資料
             await addDoc(collection(db, "orders"), {
                 userId: user.uid,
@@ -130,8 +138,8 @@ function CheckoutForm() {
                     {/* 會員資料 */}
                     <section>
                         <h3 className="text-xl mb-2 text-left">會員資料</h3>
-                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
-                            <div className="text-left">
+                        <form className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
+                            <div className="text-left" >
                                 <label className="label text-base p-2">姓名</label>
                                 <input
                                     className="input w-full"
@@ -158,7 +166,7 @@ function CheckoutForm() {
                                     placeholder="Phone"
                                 />
                             </div>
-                        </fieldset>
+                        </form>
                     </section>
 
                     {/* 送貨／付款 */}
