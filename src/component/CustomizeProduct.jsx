@@ -60,8 +60,8 @@ function CustomizeProduct({ product, options }) {
     };
 
     return (
-        <div className="mt-36">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="mt-4 sm:mt-24 md:mt-40 lg:mt-46">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {/* 左側：蛋糕圖片 */}
                 <div className="flex flex-col items-center gap-0 px-6 sm:px-10 md:px-6">
                     <img
@@ -71,21 +71,21 @@ function CustomizeProduct({ product, options }) {
                     />
                 </div>
                 {/* 右側：客製化選項 */}
-                <div className="flex flex-col gap-4 px-6 sm:px-10 md:px-6">
-                    <span className="text-left text-3xl md:text-2xl sm:text-xl font-semibold">{product.name}</span>
-                    <span className="text-left text-lg md:text-base sm:text-sm custom-text-gray-500 leading-loose">{product.description}</span>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300">
+                <div className="flex flex-col gap-2 sm:gap-4 md:gap-6 lg:gap-8 px-6 sm:px-10 md:px-6 lg:px-8">
+                    <span className="text-center md:text-left lg:text-left text-2xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold mb-2">{product.name}</span>
+                    <span className="text-left text-base sm:text-base md:text-base lg:text-lg custom-text-gray-500 leading-relaxed sm:leading-relaxed md:leading-loose lg:leading-loose">{product.description}</span>
+                    <div className="collapse collapse-arrow bg-base-100 border-0 border-transparent bg-base-100 shadow-none focus:outline-none focus:ring-0 focus:border-0">
                         <input type="checkbox" />
-                        <div className="collapse-title font-semibold flex gap-4 text-left text-lg md:text-base sm:text-sm custom-text-gray-500 body-bg">
+                        <div className="collapse-title font-semibold flex gap-4 text-left text-base sm:text-base md:text-base lg:text-lg custom-text-gray-500 body-bg">
                             <Info />
                             <span>保存期限與方法</span>
                         </div>
-                        <div className="collapse-content flex flex-col text-sm text-left text-lg md:text-base sm:text-sm custom-text-gray-500 body-bg">
+                        <div className="collapse-content flex flex-col text-left text-sm sm:text-base md:text-base lg:text-lg custom-text-gray-500 body-bg">
                             <span>保存期限：{product.shelfLife}</span>
                             <span>保存方法：{product.storageMethod}</span>
                         </div>
                     </div>
-                    <span className="text-left text-3xl md:text-2xl sm:text-xl">${sizePrice}</span>
+                    <span className="mb-2 md:mb-0 text-right md:text-left text-2xl sm:text-2xl md:text-2xl lg:text-3xl">${sizePrice}</span>
                     {/* 尺寸 */}
                     {product.size === "可調整尺吋" && (
                         <CustomizationOption
@@ -99,7 +99,7 @@ function CustomizeProduct({ product, options }) {
                         />
                     )}
                     {/* 數量 */}
-                    <div className="mb-4 sm:mb-6 flex items-center justify-between">
+                    <div className="mb-4 sm:mb-6 flex items-center justify-center md:justify-between">
                         <QuantitySelector
                             value={quantities}
                             onChange={handleQuantityChange}
@@ -132,7 +132,7 @@ function CustomizeProduct({ product, options }) {
                             <div className="mb-4">
                                 <div className="flex items-center gap-2 mb-2 text-left">
                                     {/* 左側標題 */}
-                                    <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">文字留言</h4>
+                                    <h4 className="text-base sm:text-base md:text-lg lg:text-lg custom-text-gray-800">文字留言</h4>
                                 </div>
                                 <div className="relative">
                                     <input
@@ -166,7 +166,7 @@ function CustomizeProduct({ product, options }) {
                             product={product} // 哪種商品
                             options={options}
                             label="candle"
-                            title="蠟燭歲數"
+                            title="蠟燭"
                             onOptionChange={handleOptionChange}
                         />
                         {/* 裝飾 */}
@@ -180,12 +180,12 @@ function CustomizeProduct({ product, options }) {
                             onOptionChange={handleOptionChange}
                         />
                     </div>
-                    <div className="flex flex-col justify-start text-lg sm:text-base p-2 custom-text-gray-800">
+                    <div className="flex flex-col justify-start text-lg p-2 custom-text-gray-800">
                         <span className="text-left mb-2">加價小計：${totalTip} </span>
                         <span className="text-left">數量： {quantities}</span>
                     </div>
                     <div className="flex items-center justify-between p-2 mb-12 sm:mb-16">
-                        <div className="text-2xl md:text-2xl sm:text-xl custom-text-red-600 font-semibold">Total: ${totalPrice}</div>
+                        <div className="text-xl sm:text-2xl md:text-2xl custom-text-red-600 font-semibold">Total: ${totalPrice}</div>
                         <AddToCart
                             product={product}
                             options={options}
@@ -199,7 +199,7 @@ function CustomizeProduct({ product, options }) {
                     </div>
                 </div>
             </div>
-            <div className="mt-20">
+            <div className="mt-6 sm:mt-8 md:mt-12 lg:mt-20">
                 <PopularItems />
             </div>
         </div>

@@ -9,11 +9,11 @@ function Step() {
   };
   const step = getStep();
     return (
-        <div className="mb-12 mt-12">
+        <div className="mt-6 mb-8 md:mb-12 md:mt-12">
             <ul className="steps steps-horizontal custom-text-gray-800">
-                <li className={`step ${step >= 1 ? 'step-warning ' : ''}`}>勾選結帳商品</li>
-                <li className={`step ${step >= 2 ? 'step-warning ' : ''}`}>填寫資料</li>
-                <li className={`step ${step >= 3 ? 'step-warning ' : ''}`}>訂單確認</li>
+                <li className={`step ${step >= 1 ? 'step-warning ' : ''} text-sm md:text-base`}>勾選結帳商品</li>
+                <li className={`step ${step >= 2 ? 'step-warning ' : ''} text-sm md:text-base`}>填寫資料</li>
+                <li className={`step ${step >= 3 ? 'step-warning ' : ''} text-sm md:text-base`}>訂單確認</li>
             </ul>
         </div>
     );

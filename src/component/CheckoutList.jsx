@@ -42,9 +42,9 @@ function CheckoutList() {
         dispatch(updateQuantity({ id, quantities: newQty }));
     };
     return (
-        <div>
+        <div className="p-6">
             {cartItems.map((item) => (
-                <div key={item.id} className="card card-side body-bg flex-col sm:flex-row items-center !rounded-lg border-2 border-primary bg-base-100 space-y-2 sm:space-y-0 sm:space-x-6 p-4 mb-6">
+                <div key={item.id} className="relative card card-side w-full max-w-full flex flex-wrap flex-row sm:flex-nowrap justify-center body-bg items-center !rounded-lg border-2 border-primary bg-base-100 space-y-0 sm:space-y-2 space-x-0 sm:space-x-6 p-0 md:p-4 mb-6">
                     {/* checkbox */}
                     <div className="flex-shrink-0 pr-2">
                         <input
@@ -55,17 +55,17 @@ function CheckoutList() {
                         />
                     </div>
                     {/* 圖片區 */}
-                    <div className="w-40 flex items-center justify-center ml-16">
+                    <div className="w-24 sm:w-28 md:w-32 flex items-center justify-center md:ml-10">
                         <img
                             src={item.cover}
                             alt={item.name}
                             className="object-cover w-full h-full rounded-lg"
                         />
                     </div>
-                    <div className="flex justify-between items-center w-2/3 relative">
+                    <div className="flex justify-between items-center sm:w-1/2 relative">
                         {/* 商品標題 + 客製化內容 */}
                         <div className="flex flex-col">
-                            <h2 className="text-lg font-medium text-left font-semibold mb-1">
+                            <h2 className="text-base lg:text-lg font-medium text-left font-semibold mb-1">
                                 {item.name}
                                 {item.customSelections["size"] && item.customSelections["size"].trim() !== "" && (
                                     <> ({item.customSelections["size"]})</>
@@ -96,7 +96,7 @@ function CheckoutList() {
                         </div>
                     </div>
                     {/* 右側：數量、價格、移除 */}
-                    <div className="flex items-center gap-4 sm:gap-6 w-1/3 custom-text-gray-800">
+                    <div className="flex items-center gap-4 sm:gap-6 sm:w-1/3 custom-text-gray-800">
                         <QuantitySelector
                             value={item.quantities}
                             onChange={(newQty) => handleChange(item.id, newQty)}
@@ -104,8 +104,17 @@ function CheckoutList() {
                         <div className="text-lg w-20 text-right whitespace-nowrap font-medium custom-text-gray-800">
                             ${item.totalPrice}
                         </div>
+                        {/* 手機固定右上角 */}
                         <button
-                            className="btn btn-xs btn-circle body-bg hover:bg-[#F3E7BE]"
+                            className="absolute top-2 right-2 btn btn-xs btn-circle body-bg hover:bg-[#F3E7BE] block md:hidden"
+                            onClick={() => dispatch(removeCartItems(item.id))}
+                        >
+                            ✕
+                        </button>
+
+                        {/* 平板與桌機正常位置顯示 */}
+                        <button
+                            className="btn btn-xs btn-circle body-bg hover:bg-[#F3E7BE] hidden md:block"
                             onClick={() => dispatch(removeCartItems(item.id))}
                         >
                             ✕
@@ -113,23 +122,23 @@ function CheckoutList() {
                     </div>
                 </div>
             ))}
-            <div className="mt-12">
+            <div className="mt-4 md:mt-12">
                 {/* 計算勾選商品數 */}
                 <div>
                     {selectedCount >= 0 && (
-                        <div className="text-right text-base mt-12 font-semibold custom-text-gray-800">
+                        <div className="text-right text-base md:text-lg mt-6 font-semibold custom-text-gray-800">
                             已勾擇 <span className="custom-text-gray-800">{selectedCount}</span> 筆商品（共{selectedQuantity}件）
                         </div>
                     )}
                     {/* 價格總計 */}
-                    <div className="text-right text-xl mt-8 font-semibold custom-text-red-600">
+                    <div className="text-right text-xl sm:text-2xl md:text-2xl mt-4 md:mt-6 font-semibold custom-text-red-600">
                         總計：${selectedTotal}
                     </div>
                 </div>
                 {/* 下一步按鈕 */}
                 <div className="flex justify-end mt-12">
                     <button
-                        className="px-10 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
+                        className="text-base px-6 sm:px-10 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
                  transition-colors duration-200 
                  hover:bg-secondary-content
                  active:bg-secondary-content"
@@ -142,10 +151,10 @@ function CheckoutList() {
             {showModal && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
                     <div className="min-h-[220px] body-bg px-6 py-5 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4 flex flex-col justify-center">
-                        <div className="text-xl">您尚未勾選任何商品，請選擇後再繼續！</div>
+                        <div className="text-base md:text-lg">您尚未勾選任何商品，請選擇後再繼續！</div>
                         <div className="mt-4">
                             <button
-                                className="px-10 py-2 rounded-lg custom-button body-text transition text-lg"
+                                className="px-10 py-2 rounded-lg custom-button body-text transition text-base lg:text-lg"
                                 onClick={() => setShowModal(false)}
                             >
                                 確認

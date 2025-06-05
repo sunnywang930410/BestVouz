@@ -35,7 +35,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
 
   const LabelTip = () => (
     <div className="flex justify-between items-center mb-2">
-      <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">{title}</h4>
+      <h4 className="text-base sm:text-base md:text-lg lg:text-lg custom-text-gray-800">{title}</h4>
       {tip && <span className="text-sm">+{tip}$</span>}
     </div>
   );
@@ -43,7 +43,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
   switch (type) {
     case "button":
       return (
-        <div className="flex items-center gap-4 mb-6 flex-wrap mt-2">
+        <div className="flex items-center justify-center md:justify-start gap-4 mb-6 flex-wrap mt-2">
           <div className="mt-2">
             <LabelTip />
           </div>
@@ -80,7 +80,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
                 <button
                   key={index}
                   onClick={() => toggleSelection(name)}
-                  className={`flex flex-col items-center text-center custom-text-gray-500 p-2 rounded-md border transition 
+                  className={`flex flex-col items-center text-center custom-text-gray-500 p-0 lg:p-2 md:rounded-md border transition 
                 ${isSelected ? "border-[#FFE0E4] bg-[#FFDBDB]" : "border-gray-200"} 
                 image-hover`}
                 >
@@ -105,7 +105,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
           <div className="flex items-center justify-between">
             {/* 左側標題與 checkbox 區塊 */}
             <div className="flex items-center gap-18.5">
-              <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">{title}</h4>
+              <h4 className="text-base sm:text-base md:text-lg lg:text-lg custom-text-gray-800">{title}</h4>
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -148,7 +148,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
         <div className="mb-12">
           <div className="flex items-start justify-between flex-wrap gap-y-2">
             {/* 左側標題 */}
-            <h4 className="text-lg md:text-base sm:text-md whitespace-nowrap mr-4 custom-text-gray-500">{title}</h4>
+            <h4 className="text-sm sm:text-sm md:text-base whitespace-nowrap mr-4 custom-text-gray-500">{title}</h4>
             {/* 中間選項*/}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between flex-1 gap-2 sm:gap-6 custom-text-gray-500">
               {/* 選項區塊 */}
@@ -156,7 +156,7 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
                 {names.map((name, index) => (
                   <label
                     key={index}
-                    className="flex items-center gap-2 text-xs sm:text-sm whitespace-nowrap"
+                    className="flex items-center gap-2 text-sm sm:text-sm md:text-base whitespace-nowrap"
                   >
                     <input
                       type="radio"
@@ -182,8 +182,8 @@ const CustomizationOption = ({ type, product, options, label, title, tip, onOpti
 
     case 'selector':
       return (
-        <div className="flex justify-between items-center mb-6">
-          <h4 className="text-lg md:text-base sm:text-md custom-text-gray-800">{title}</h4>
+        <div className="flex justify-between gap-4 items-center mb-6">
+          <h4 className="text-base sm:text-base md:text-lg lg:text-lg custom-text-gray-800 whitespace-nowrap">{title}</h4>
           <select
             className="select custom-text-gray-500"
             value={selectedcandles}

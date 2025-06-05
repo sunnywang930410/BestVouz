@@ -132,35 +132,35 @@ function CheckoutForm() {
     const total = subtotal + shippingFee;
     return (
         <>
-            <div className="flex flex-col md:flex-row gap-12 items-stretch">
+            <div className="flex flex-col md:flex-row gap-0 md:gap-12 items-stretch p-6">
                 {/* 左半 */}
                 <div className="flex flex-col w-full h-full md:w-1/2 gap-8">
                     {/* 會員資料 */}
                     <section>
-                        <h3 className="text-xl mb-2 text-left">會員資料</h3>
-                        <form className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
-                            <div className="text-left" >
-                                <label className="label text-base p-2">姓名</label>
+                        <h3 className="text-center md:text-left lg:text-left text-lg lg:text-xl mb-2">會員資料</h3>
+                        <form className="fieldset border-[3px] border-primary rounded-xl p-4 lg:p-6 custom-text-gray-800 space-y-0 lg:space-y-4">
+                            <div className="text-center sm:text-left mb-0 lg:mb-2" >
+                                <label className="label text-base lg:text-lg p-1 md:p-2">姓名</label>
                                 <input
-                                    className="input w-full"
+                                    className="input w-full text-sm lg:text-base"
                                     value={form.name}
                                     onChange={handleChange("name")}
                                     placeholder="Name"
                                 />
                             </div>
-                            <div className="text-left">
-                                <label className="label text-base p-2">電子信箱</label>
+                            <div className="text-center sm:text-left mb-0 lg:mb-2">
+                                <label className="label text-base lg:text-lg p-1 md:p-2">電子信箱</label>
                                 <input
-                                    className="input w-full"
+                                    className="input w-full text-sm lg:text-base"
                                     value={form.email}
                                     onChange={handleChange("email")}
                                     placeholder="Email"
                                 />
                             </div>
-                            <div className="text-left">
-                                <label className="label text-base p-2">電話</label>
+                            <div className="text-center sm:text-left mb-0 lg:mb-2">
+                                <label className="label text-base lg:text-lg p-1 md:p-2">電話</label>
                                 <input
-                                    className="input w-full"
+                                    className="input w-full text-sm lg:text-base"
                                     value={form.phone}
                                     onChange={handleChange("phone")}
                                     placeholder="Phone"
@@ -171,13 +171,13 @@ function CheckoutForm() {
 
                     {/* 送貨／付款 */}
                     <section className="mb-24">
-                        <h3 className="text-xl mb-2 text-left">選擇送貨與付款方式</h3>
-                        <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 custom-text-gray-800 space-y-4">
+                        <h3 className="text-center md:text-left lg:text-left text-lg lg:text-xl mb-2">選擇送貨與付款方式</h3>
+                        <fieldset className="ieldset border-[3px] border-primary rounded-xl p-4 lg:p-6 custom-text-gray-800 space-y-0 lg:space-y-4">
                             {/* 送貨方式 */}
-                            <div className="text-left">
-                                <label className="label text-base p-2">送貨方式</label>
+                            <div className="text-center sm:text-left">
+                                <label className="label text-base lg:text-lg p-1 md:p-2">送貨方式</label>
                                 <select
-                                    className="select w-full"
+                                    className="select w-full mb-2 text-sm lg:text-base"
                                     value={form.shipMethod}
                                     onChange={handleChange("shipMethod")}
                                 >
@@ -191,7 +191,7 @@ function CheckoutForm() {
                             {form.shipMethod === "home" && (
                                 <div className="text-left">
                                     <input
-                                        className="input w-full"
+                                        className="input w-full text-sm lg:text-base"
                                         value={form.address}
                                         onChange={handleChange("address")}
                                         placeholder="送貨地址"
@@ -200,10 +200,10 @@ function CheckoutForm() {
                             )}
 
                             {/* 付款方式 */}
-                            <div className="text-left">
-                                <label className="label text-base p-2">付款方式</label>
+                            <div className="text-center sm:text-left">
+                                <label className="label text-base lg:text-lg p-1 md:p-2">付款方式</label>
                                 <select
-                                    className="select w-full"
+                                    className="select w-full text-sm lg:text-base"
                                     value={form.payMethod}
                                     onChange={handleChange("payMethod")}
                                 >
@@ -251,21 +251,21 @@ function CheckoutForm() {
                 </div>
                 {/* 右半：結帳明細 */}
                 <div className="flex flex-col relative w-full h-full md:w-1/2">
-                    <h3 className="text-xl mb-2 text-left">結帳明細</h3>
-                    <div className="flex-1 flex">
+                    <h3 className="text-center md:text-left lg:text-left text-lg lg:text-xl mb-2">結帳明細</h3>
+                    <div className="flex-1 flex ">
                         <fieldset className="fieldset border-[3px] border-primary rounded-xl p-6 w-full pb-32">
                             {cartItems.map((item) => (
-                                <div key={item.id} className="flex gap-4 mb-4">
+                                <div key={item.id} className="flex flex-wrap justify-center md:flex-nowrap gap-4 mb-4">
                                     {/* 圖片 */}
                                     <img
                                         src={item.cover}
                                         alt={item.name}
-                                        className="w-1/4 h-30 object-cover rounded-lg"
+                                        className="w-40 md:w-30 h-30 object-cover rounded-lg"
                                     />
                                     {/* 文字資訊 */}
                                     <div className="flex-1 text-left">
                                         <div className="flex justify-between items-center">
-                                            <h4 className="font-semibold text-base text-left">
+                                            <h4 className="font-semibold text-sm sm:text-base text-left">
                                                 {item.name}
                                                 {item.customSelections["size"] &&
                                                     item.customSelections["size"].trim() !== "" && (
@@ -331,17 +331,17 @@ function CheckoutForm() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between mb-12">
+            <div className="flex justify-between mb-12 p-6">
                 <button
-                    className="px-10 py-2 rounded-lg custom-text-gray-800 border border-2 border-secondary hover:bg-secondary-content/25"
+                    className="px-6 sm:px-10 py-2 rounded-lg custom-text-gray-800 border border-2 border-secondary hover:bg-secondary-content/25"
                     onClick={() => { handleNavigateBack(); }}
                 >
                     上一步
                 </button>
                 <button
-                    className={`btn px-10 py-2 rounded-lg border-2 text-white transition-colors duration-200
+                    className={`btn px-6 sm:px-10 py-5 rounded-lg border-2 text-white text-base transition-colors duration-200
                     ${loading ? "body-bg border-secondary custom-text-gray-800 cursor-not-allowed"
-                            : "bg-secondary border-transparent hover:bg-secondary-content active:bg-secondary-content"
+                            : "px-8 sm:px-10 bg-secondary border-transparent hover:bg-secondary-content active:bg-secondary-content"
                         }`}
                     onClick={() => { handleNavigateNext(); }}
                     disabled={loading}
@@ -353,10 +353,10 @@ function CheckoutForm() {
             {showModal && (
                 <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[rgba(0,0,0,0.5)]">
                     <div className="min-h-[200px] body-bg px-3 py-3 rounded-xl shadow-xl border border-gray-200 w-[90%] max-w-md text-center space-y-4 flex flex-col justify-center">
-                        <div className="text-xl">請填寫所有欄位</div>
+                        <div className="text-base md:text-lg">請填寫所有欄位</div>
                         <div className="mt-4">
                             <button
-                                className="px-10 py-2 rounded-lg custom-button body-text transition text-lg"
+                                className="px-10 py-2 rounded-lg custom-button body-text transition text-base lg:text-lg"
                                 onClick={() => setShowModal(false)}
                             >
                                 確認
