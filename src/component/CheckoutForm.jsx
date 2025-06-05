@@ -53,7 +53,9 @@ function CheckoutForm() {
         });
     }
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleNavigateNext = async () => {
+        setLoading(true);
         const requiredFields = ["name", "email", "phone", "shipMethod", "payMethod"];
         if (form.shipMethod === "home") {
             requiredFields.push("address");
@@ -329,13 +331,15 @@ function CheckoutForm() {
                     上一步
                 </button>
                 <button
-                    className="px-10 py-2 rounded-lg bg-secondary border-2 border-transparent text-white
-                 transition-colors duration-200 
-                 hover:bg-secondary-content
-                 active:bg-secondary-content"
+                    className={`btn px-10 py-2 rounded-lg border-2 text-white transition-colors duration-200
+                    ${loading ? "body-bg border-secondary custom-text-gray-800 cursor-not-allowed"
+                            : "bg-secondary border-transparent hover:bg-secondary-content active:bg-secondary-content"
+                        }`}
                     onClick={() => { handleNavigateNext(); }}
+                    disabled={loading}
                 >
-                    確認送出
+                    {loading && <span className="loading loading-spinner mr-2"></span>}
+                    {loading ? "處理中..." : "確認送出"}
                 </button>
             </div>
             {showModal && (

@@ -148,7 +148,7 @@ const ProfileCard = () => {
                     {/* 訂單紀錄 */}
                     <section className="space-y-5">
                         <h3 className="text-xl text-left">我的訂單</h3>
-                        {loading ? ( <p className="text-center text-gray-500">載入中…</p>)
+                        {loading ? (<span className="loading loading-dots loading-sm"></span>)
                         : orders.length === 0 ? ( <span className="text-center text-gray-500 text-sm">目前沒有任何訂單</span> )
                         : (orders.map((order) => (
                                 <div key={order.id} className="collapse collapse-arrow text-gray-800 bg-white rounded-xl shadow p-2 space-y-2">
