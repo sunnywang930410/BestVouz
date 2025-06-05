@@ -52,7 +52,7 @@ const Carousel = ({ products = [] }) => {
                                 className="card w-75 h-auto bg-primary shadow-xl"
                                 layout
                             >
-                                <Link to={`/product/${item.id}`} className="w-full h-full">
+                                <Link to={`/product/${item.id}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="w-full h-full">
                                     <figure>
                                         <img
                                             src={item.cover}

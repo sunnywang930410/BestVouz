@@ -36,6 +36,15 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
         },
     ];
 
+    const handleNavigateTocake = () => {
+        navigate("/menu");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     const handleOpenModal = (item) => {
         setSelectedItem(item);
         const dialog = document.getElementById("item_modal");
@@ -69,7 +78,7 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                                     group-hover:translate-y-0 group-hover:opacity-100 
                                     transition-all duration-500 ease-in-out">
                                     <button
-                                        onClick={() => navigate(`/product/${item.id}`)}
+                                        onClick={() => navigate(`/product/${item.id}`, handleNavigateTocake())}
                                         className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
                                     >
                                         <ShoppingCart className="w-8 h-auto text-secondary" />
@@ -109,6 +118,7 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                 transition-all duration-500 ease-in-out">
                                         <button
                                             onClick={() => {
+                                                handleNavigateTocake();
                                                 console.log("購買商品");
                                                 navigate(`/product/${item.id}`);
                                             }}
@@ -127,7 +137,7 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                                     </div>
                                 </div>
                                 <div className="mt-2 text-center">
-                                    <h4 className="text-lg">{item.name}</h4>
+                                    <h4 className="font-bold text-lg">{item.name}</h4>
                                     <h5 className="text-color-base-content">${item.price}</h5>
                                 </div>
                             </div>
@@ -140,22 +150,46 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
 
 
 
-            {/* Modal 彈窗 */}
             <dialog id="item_modal" className="modal">
-                <div className="modal-box">
+                <div className="modal-box max-w-3xl body-bg">
                     {selectedItem && (
-                        <div className="flex flex-col items-center">
-                            <h3 className="text-xl mb-2">{selectedItem.name}</h3>
-                            <img src={selectedItem.url} alt={selectedItem.name} className="w-80 h-auto mb-4 rounded-xl" />
-                            <h5 className="text-gray-700">{selectedItem.description}</h5>
-                            <h4 className="mt-2 font-semibold">價格: ${selectedItem.price}</h4>
+                        <div className="flex flex-row items-start">
+                            {/* 圖片區 */}
+                            <div className="w-1/3">
+                                <img
+                                    src={selectedItem.url}
+                                    alt={selectedItem.name}
+                                    className="w-full h-auto rounded-xl"
+                                />
+                            </div>
+
+                            {/* 文字區 */}
+                            <div className="w-2/3 flex flex-col text-left ml-2">
+                                <h4 className="text-lg font-bold mb-2">{selectedItem.name}</h4>
+                                <h5 className="mb-4">{selectedItem.description}</h5>
+                                <h4 className="mb-4">${selectedItem.price}</h4>
+
+                                <button
+                                    onClick={() => {
+                                        const dialog = document.getElementById("item_modal");
+                                        if (dialog) dialog.close();
+                                        navigate(`/product/${selectedItem.id}`);
+                                    }}
+                                    className="mt-auto  px-4 py-2 bg-secondary text-white rounded-md hover:bg-secondary/90 transition"
+                                >
+                                    前往購買
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
+
+                {/* 關閉背景遮罩 */}
                 <form method="dialog" className="modal-backdrop">
                     <button>關閉</button>
                 </form>
             </dialog>
+
         </div>
     );
 };

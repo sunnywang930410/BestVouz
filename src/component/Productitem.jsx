@@ -8,14 +8,14 @@ const ProductItem = ({ product }) => {
     const dialogRef = useRef(null);
     // const navigate = useNavigate();
 
-    // const handleNavigateTocake = () => {
-    //     navigate("/menu");
-    //     // 導航時也滾動到頂部
-    //     window.scrollTo({
-    //         top: 0,
-    //         behavior: 'smooth'
-    //     });
-    // }
+    const handleNavigateTocake = () => {
+        navigate("/menu");
+        // 導航時也滾動到頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
 
     const handleOpenModal = (product) => {
         setSelectedItem(product);
@@ -38,7 +38,7 @@ const ProductItem = ({ product }) => {
                 transition-all duration-500 ease-in-out">
                     <button
                         onClick={() => {
-                            // console.log("購買商品");
+                            handleNavigateTocake();
                             navigate(`/product/${product.id}`);
                         }}
                         className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
@@ -62,15 +62,32 @@ const ProductItem = ({ product }) => {
                 <h5 className="">${product.price}</h5>
             </div>
 
+
+
             {/* Modal 彈窗 */}
             <dialog ref={dialogRef} className="modal">
-                <div className="modal-box">
+                <div className="modal-box max-w-3xl body-bg">
                     {selectedItem && (
-                        <div className="flex flex-col items-center">
-                            <h3 className="text-xl mb-2">{selectedItem.name}</h3>
-                            <img src={selectedItem.cover} alt={selectedItem.name} className="w-80 h-auto mb-4 rounded-xl" />
-                            <h5 className="text-gray-700">{selectedItem.description}</h5>
-                            <h4 className="mt-2 font-semibold">價格: ${selectedItem.price}</h4>
+                        <div className="flex flex-row items-start">
+                            <div className="w-1/3">
+                                <img src={selectedItem.cover} alt={selectedItem.name} className="w-full h-auto rounded-xl" />
+                            </div>
+                            <div className="w-2/3 flex flex-col text-left ml-2">
+                                <h4 className="text-lg font-bold mb-2">{selectedItem.name}</h4>
+                                <h5 className="mb-4">{selectedItem.description}</h5>
+                                <h4 className="mb-4">${selectedItem.price}</h4>
+                                <button
+                                    onClick={() => {
+                                        const dialog = document.getElementById("item_modal");
+                                        if (dialog) dialog.close();
+                                        navigate(`/product/${selectedItem.id}`);
+                                    }}
+                                    className="mt-auto  px-4 py-2 bg-secondary text-white rounded-md hover:bg-secondary/90 transition"
+                                >
+                                    前往購買
+                                </button>
+                            </div>
+
                         </div>
                     )}
                 </div>
