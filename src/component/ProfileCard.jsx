@@ -18,6 +18,7 @@ const ProfileCard = () => {
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [expandedOrderId, setExpandedOrderId] = useState(null);
     const handleLogout = () => {
         logout.mutate();
     }
@@ -29,7 +30,6 @@ const ProfileCard = () => {
             [name]: type === "checkbox" ? checked : value,
         }));
     };
-    // const { mutate: updateProfile } = useUpdateProfile();
     const handleFinish = (e) => {
         e.preventDefault();
         setShowModal(true);
@@ -56,6 +56,9 @@ const ProfileCard = () => {
             try {
                 const data = await getMyOrders();
                 setOrders(data);
+                if (data.length > 0) {
+                setExpandedOrderId(data[0].id); 
+            }
             } finally {
                 setLoading(false);
             }
@@ -148,78 +151,86 @@ const ProfileCard = () => {
                     {/* 訂單紀錄 */}
                     <section className="space-y-5">
                         <h3 className="text-xl text-left">我的訂單</h3>
-                        {loading ? (<span className="loading loading-dots loading-sm"></span>)
-                        : orders.length === 0 ? ( <span className="text-center text-gray-500 text-sm">目前沒有任何訂單</span> )
-                        : (orders.map((order) => (
-                                <div key={order.id} className="collapse collapse-arrow text-gray-800 bg-white rounded-xl shadow p-2 space-y-2">
-                                    {/* 訂單基本資訊 */}
-                                    <input type="checkbox" />
-                                    <div className="collapse-title font-semibold flex justify-between items-center">
-                                        <span className="font-medium text-gray-800">訂單編號：{order.id.slice(-8).toUpperCase()}</span>
-                                        <span className="text-sm text-gray-500">
-                                            {format(order.createdAt.toDate?.() ?? order.createdAt, "yyyy/MM/dd HH:mm")}
-                                        </span>
-                                    </div>
-
-                                    {/* 商品清單 */}
-                                    <div className="collapse-content text-sm">
-                                        {order.items.map((it) => (
-                                            <div key={it.id} className="pb-2">
-                                                <div className="flex justify-between font-medium">
-                                                    <span className="body-text">
-                                                        商品名稱：{it.name}{it.customSelections["size"] &&
-                                                            it.customSelections["size"].trim() !== "" && (
-                                                                <> ({it.customSelections["size"]})</>
-                                                            )}
-                                                    </span>
-                                                    <span className="text-right">NT$ {it.totalPrice}</span>
-                                                </div>
-                                                {it.customSelections && (
-                                                    <div className="text-gray-500">
-                                                        {Object.entries(it.customSelections).sort(([keyA], [keyB]) => {
-                                                            if (keyA === "text-jam") return 1;
-                                                            if (keyB === "text-jam") return -1;
-                                                            return 0;
-                                                        }).map(([k, v]) => {
-                                                            if (
-                                                                k === "size" ||
-                                                                !v ||
-                                                                v === "無" ||
-                                                                v === "none" ||
-                                                                v === "null" ||
-                                                                v === "" ||
-                                                                v.length === 0
-                                                            ) return null;
-                                                            return (
-                                                                v ? (
-                                                                    <div className="text-left" key={k}>
-                                                                        <span className="font-medium capitalize">
-                                                                            {(k === "fruit" || k === "cream") ? "+" : labelMap[k] + "："}
-                                                                        </span>
-                                                                        <span>{v}</span>
-                                                                    </div>
-                                                                ) : null
-                                                            )
-                                                        })}
-                                                        {it.hasText && <span className="flex font-medium text-left">文字留言：{it.text}</span>}
-                                                        <span className="flex text-left">商品數量：{it.quantities}</span>
-                                                    </div>
-                                                )}
-                                                {/* 金額與出貨方式 */}
-                                                <div className="text-gray-500 text-left flex flex-col mt-4">
-                                                    <span>
-                                                        取貨方式：{order.buyerInfo.shipMethod === "home" ? "外送" : "現場取貨"}
-                                                    </span>
-                                                    <span>
-                                                        付費方式：{order.buyerInfo.payMethod === "credit" ? "信用卡" : "貨到付款"}
-                                                    </span>
-                                                </div>
+                        <div className=" max-h-[500px] overflow-y-scroll pr-2 space-y-5">
+                            {loading ? (<span className="loading oading-dots loading-sm"></span>)
+                                : orders.length === 0 ? (<span className="text-center text-gray-500 text-sm">目前沒有任何訂單</span>)
+                                    : (orders.map((order) => (
+                                        <div key={order.id} className="collapse collapse-arrow text-gray-800 bg-white rounded-xl shadow p-2 space-y-2">
+                                            {/* 訂單基本資訊 */}
+                                            <input
+                                                type="checkbox"
+                                                checked={expandedOrderId === order.id}
+                                                onChange={() =>
+                                                    setExpandedOrderId(expandedOrderId === order.id ? null : order.id)
+                                                }
+                                            />
+                                            <div className="collapse-title font-semibold flex justify-between items-center">
+                                                <span className="font-medium text-gray-800">訂單編號：{order.id.slice(-8).toUpperCase()}</span>
+                                                <span className="text-sm text-gray-500">
+                                                    {format(order.createdAt.toDate?.() ?? order.createdAt, "yyyy/MM/dd HH:mm")}
+                                                </span>
                                             </div>
-                                        ))}
-                                    </div>
-                                    <span className="text-right custom-text-red-600 font-bold p-2">總計 NT$ {order.totalAmount}</span>
-                                </div>
-                            )))}
+
+                                            {/* 商品清單 */}
+                                            <div className="collapse-content text-sm">
+                                                {order.items.map((it) => (
+                                                    <div key={it.id} className="pb-2">
+                                                        <div className="flex justify-between font-medium">
+                                                            <span className="body-text">
+                                                                商品名稱：{it.name}{it.customSelections["size"] &&
+                                                                    it.customSelections["size"].trim() !== "" && (
+                                                                        <> ({it.customSelections["size"]})</>
+                                                                    )}
+                                                            </span>
+                                                            <span className="text-right">NT$ {it.totalPrice}</span>
+                                                        </div>
+                                                        {it.customSelections && (
+                                                            <div className="text-gray-500">
+                                                                {Object.entries(it.customSelections).sort(([keyA], [keyB]) => {
+                                                                    if (keyA === "text-jam") return 1;
+                                                                    if (keyB === "text-jam") return -1;
+                                                                    return 0;
+                                                                }).map(([k, v]) => {
+                                                                    if (
+                                                                        k === "size" ||
+                                                                        !v ||
+                                                                        v === "無" ||
+                                                                        v === "none" ||
+                                                                        v === "null" ||
+                                                                        v === "" ||
+                                                                        v.length === 0
+                                                                    ) return null;
+                                                                    return (
+                                                                        v ? (
+                                                                            <div className="text-left" key={k}>
+                                                                                <span className="font-medium capitalize">
+                                                                                    {(k === "fruit" || k === "cream") ? "+" : labelMap[k] + "："}
+                                                                                </span>
+                                                                                <span>{v}</span>
+                                                                            </div>
+                                                                        ) : null
+                                                                    )
+                                                                })}
+                                                                {it.hasText && <span className="flex font-medium text-left">文字留言：{it.text}</span>}
+                                                                <span className="flex text-left">商品數量：{it.quantities}</span>
+                                                            </div>
+                                                        )}
+                                                        {/* 金額與出貨方式 */}
+                                                        <div className="text-gray-500 text-left flex flex-col mt-4">
+                                                            <span>
+                                                                取貨方式：{order.buyerInfo.shipMethod === "home" ? "外送" : "現場取貨"}
+                                                            </span>
+                                                            <span>
+                                                                付費方式：{order.buyerInfo.payMethod === "credit" ? "信用卡" : "貨到付款"}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <span className="text-right custom-text-red-600 font-bold p-2">總計 NT$ {order.totalAmount}</span>
+                                        </div>
+                                    )))}
+                        </div>
                     </section>
                 </div>
             </div>
