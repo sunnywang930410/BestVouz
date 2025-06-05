@@ -24,7 +24,7 @@ const ProductItem = ({ product }) => {
 
 
     return (
-        <div className="w-[250px] body-bg flex-col justify-center items-center">
+        <div className="w-[270px] body-bg flex-col justify-center items-center">
             {/* 圖片區塊 */}
             <div key={product.id} className="justify-center items-center rounded-xl overflow-hidden relative group">
                 <img
@@ -58,7 +58,7 @@ const ProductItem = ({ product }) => {
 
             {/* 內容區塊 */}
             <div className="flex flex-col justify-center items-center">
-                <h4 className="text-lg">{product.name}</h4>
+                <h4 className="text-lg font-bold">{product.name}</h4>
                 <h5 className="">${product.price}</h5>
             </div>
 

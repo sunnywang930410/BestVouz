@@ -2,20 +2,20 @@ import { Search, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const PopularItems = ({ isInMenu = false }) => {
+const PopularItems = ({ isInMenu = false, priceSort }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate();
     const popularItems = [
         {
             id: "chiffon-cake",
-            name: '客製化戚風蛋糕',
+            name: '戚風蛋糕',
             url: '/img/chiffon-cake.png',
             price: 550,
             description: "戚風蛋糕以其蓬鬆輕盈的口感和濕潤細緻的質地深受喜愛。選用新鮮雞蛋、低筋麵粉與天然食材，搭配獨特的打發技術，使蛋糕既柔軟又帶有彈性，入口即化但不失嚼感。無負擔的輕盈口感，使其成為日常點心或慶祝場合的理想選擇。現在就打造屬於你的專屬戚風蛋糕，為每一刻增添溫暖與甜蜜！",
         },
         {
             id: "sponge-cake",
-            name: '客製化海綿蛋糕',
+            name: '海綿蛋糕',
             url: '/img/sponge-cake.png',
             price: 450,
             description: "海綿蛋糕，像是一場簡單卻無可取代的溫柔。輕盈、鬆軟，入口即化，每一層都是細心打發的時光。沒有華麗的裝飾，卻有著讓人安心的香氣和口感，就像老朋友一樣熟悉又真誠。在浮躁的世界裡，它安靜地提醒著我們：簡單，才是最不簡單的美好。",
@@ -42,15 +42,23 @@ const PopularItems = ({ isInMenu = false }) => {
         if (dialog) dialog.showModal();
     };
 
+    // 假設 popularProducts 是你載入的資料
+    let sortedPopularProducts = [...popularItems];
+
+    if (priceSort === "lowToHigh") {
+        sortedPopularProducts.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+    } else if (priceSort === "highToLow") {
+        sortedPopularProducts.sort((a, b) => parseInt(b.price) - parseInt(a.price));
+    }
+
     return (
         <div className="mt-4 mb-8">
-            <h2 className="text-2xl font-bold m-6">人氣商品</h2>
             {isInMenu ? (
                 // ✅ 三欄網格版本
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-                    {popularItems.map((item) => (
-                        <div key={item.id} className="flex flex-col items-center mb-4 mt-4">
-                            <div className="relative group w-full h-60 rounded-xl overflow-hidden">
+                <div className="grid md:grid-cols-3 px-4 justify-center items-center">
+                    {sortedPopularProducts.map((item) => (
+                        <div key={item.id} className="w-[270px] justify-center items-center rounded-xl overflow-hidden relative group">
+                            <div className="relative group w-full h-auto rounded-xl overflow-hidden">
                                 <img
                                     src={item.url}
                                     alt={item.name}
@@ -74,8 +82,8 @@ const PopularItems = ({ isInMenu = false }) => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="mt-2 text-center">
-                                <h4 className="text-lg">{item.name}</h4>
+                            <div className="text-center">
+                                <h4 className="text-lg font-bold">{item.name}</h4>
                                 <h5 className="text-color-base-content">${item.price}</h5>
                             </div>
                         </div>
@@ -83,45 +91,48 @@ const PopularItems = ({ isInMenu = false }) => {
                 </div>
             ) : (
                 // 原本的橫向滑動版本
-                <div className="flex flex-row justify-center items-center gap-4 overflow-x-auto">
-                    {popularItems.map((item) => (
-                        <div key={item.id} className="flex-shrink-0 w-60 flex flex-col items-center mb-4 mt-4">
+                <div className="flex flex-col items-center mb-4 mt-4">
+                    <h2 className="text-2xl font-bold m-6">人氣商品</h2>
+                    <div className="flex flex-row justify-center items-center overflow-x-auto">
+                        {popularItems.map((item) => (
+                            <div key={item.id} className="flex-shrink-0 w-60 flex flex-col items-center mb-4 mt-4">
 
-                            <div className="relative group w-60 h-60 rounded-xl overflow-hidden">
-                                <img
-                                    src={item.url}
-                                    alt={item.name}
-                                    className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center gap-4 
+                                <div className="relative group w-60 h-60 rounded-xl overflow-hidden">
+                                    <img
+                                        src={item.url}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center gap-4 
                 bg-black/40 opacity-0 translate-y-full 
                 group-hover:translate-y-0 group-hover:opacity-100 
                 transition-all duration-500 ease-in-out">
-                                    <button
-                                        onClick={() => {
-                                            console.log("購買商品");
-                                            navigate(`/product/${item.id}`);
-                                        }}
-                                        className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
-                                    >
-                                        <ShoppingCart className="w-8 h-auto text-secondary" />
+                                        <button
+                                            onClick={() => {
+                                                console.log("購買商品");
+                                                navigate(`/product/${item.id}`);
+                                            }}
+                                            className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                        >
+                                            <ShoppingCart className="w-8 h-auto text-secondary" />
 
-                                    </button>
+                                        </button>
 
-                                    <button
-                                        onClick={() => handleOpenModal(item)}
-                                        className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
-                                    >
-                                        <Search className="w-8 h-auto text-secondary" />
-                                    </button>
+                                        <button
+                                            onClick={() => handleOpenModal(item)}
+                                            className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
+                                        >
+                                            <Search className="w-8 h-auto text-secondary" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="mt-2 text-center">
+                                    <h4 className="text-lg">{item.name}</h4>
+                                    <h5 className="text-color-base-content">${item.price}</h5>
                                 </div>
                             </div>
-                            <div className="mt-2 text-center">
-                                <h4 className="text-lg">{item.name}</h4>
-                                <h5 className="text-color-base-content">${item.price}</h5>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             )}
 
