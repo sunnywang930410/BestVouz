@@ -8,6 +8,7 @@ import UserInfo from "./UserInfo";
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const navBarContent = [
         { to: "/", label: "首頁" },
@@ -18,46 +19,54 @@ const NavBar = () => {
     ]
 
     const NavBarContent = () => (
-        <div className="w-full navbar md:justify-between items-center">
+        <div className=" navbar  md:justify-between items-center">
             <div className="navbar-start">
-                <div className="md:hidden dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
+                <div className="md:hidden">
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="btn btn-ghost btn-circle"
+                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
                     </div>
-                    <div>
-                        <ul
-                            tabIndex={0}
-                            className="dropdown-content absolute top-19 left-[-50px] w-screen h-screen menu z-50  shadow-sm justify-content items-center drawer-bg"
-                        >
-                            {navBarContent.map(({ to, label }) => (
-                                <li key={to}>
-                                    <NavLink
-                                        to={to}
-                                        onClick={() => setIsOpen(false)}
-                                        className={({ isActive }) =>
-                                            `text-base transition-all duration-300 ease-in-out ${isActive ? "opacity-100" : "opacity-60"
-                                            } hover:opacity-80`
-                                        }
-                                    >
-                                        {label}
-                                    </NavLink>
-                                </li>
-                            ))}
-
-                        </ul>
-                    </div>
-
                 </div>
+                {isDrawerOpen && (
+                    <ul
+                        tabIndex={0}
+                        className="fixed left-0 right-0 top-28 w-full h-full menu z-50  shadow-sm justify-content items-center drawer-bg"
+                    >
+                        {navBarContent.map(({ to, label }) => (
+                            <li key={to}>
+                                <NavLink
+                                    to={to}
+                                    onClick={() => setIsOpen(false)}
+                                    className={({ isActive }) =>
+                                        `text-base transition-all duration-300 ease-in-out ${isActive ? "opacity-100" : "opacity-60"
+                                        } hover:opacity-80`
+                                    }
+                                >
+                                    {label}
+                                </NavLink>
+                            </li>
+                        ))}
+                        <SetColorMode isDrawerOpen={isDrawerOpen} />
+                    </ul>
+                )
+                }
+
             </div>
             <div className="navbar-center">
-                <div className="hidden md:flex w-16 h-auto rounded-full ">
+                <div className="hidden md:flex lg:w-16 md:w-14 h-auto rounded-full ">
                     <Link to="/">
                         <img src="/img/Logo.png" alt="Logo" />
                     </Link>
                 </div>
             </div>
             <div className="navbar-end">
-                <div className='flex md:flex-row space-x-4'>
+                <div className='flex md:flex-row lg:space-x-4 space-x-2'>
                     { /* 用戶按鈕 */}
                     <UserInfo />
                     {/* <button className="md:flex w-8 h-8 items-center btn btn-ghost btn-circle">
@@ -79,7 +88,7 @@ const NavBar = () => {
 
         <div className="w-full navbar md:justify-between items-center">
             <ul
-                className="w-full flex md:flex-row justify-between items-center md:mx-70 gap-10 md:gap-4">
+                className="w-full flex md:flex-row justify-between items-center mx-40 lg:mx-70 gap-10 md:gap-4">
                 {navBarContent.map(({ to, label }) => (
                     <li key={to}>
                         <NavLink

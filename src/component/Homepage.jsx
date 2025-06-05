@@ -50,7 +50,7 @@ function Homepage({ product }) {
                 <div className="flex flex-col items-center gap-4">
                     <img
                         alt={chiffonCake.name}
-                        className="w-[350px] h-auto rounded-xl"
+                        className="w-[300px] md:w-[350px] h-auto rounded-xl"
                         src={chiffonCake.cover}
                     />
                 </div>

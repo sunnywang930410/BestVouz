@@ -35,11 +35,11 @@ const Carousel = ({ products = [] }) => {
             </button>
 
             {/* 卡片群組（有動畫） */}
-            <div className="w-[935px] h-[400px] relative overflow-hidden">
+            <div className=" flex w-[920px] h-[400px] relative overflow-hidden justify-center">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={startIndex} // 每次切換讓整排重繪
-                        className="absolute top-0 left-0 flex gap-4"
+                        className="absolute top-0 left-1/2 -translate-x-1/2 flex gap-4"
                         custom={direction}
                         initial={{ x: direction > 0 ? 300 : -300, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
@@ -49,7 +49,7 @@ const Carousel = ({ products = [] }) => {
                         {visibleProducts.map((item) => (
                             <motion.div
                                 key={item.id}
-                                className="card w-75 h-auto bg-primary shadow-xl"
+                                className="flex card md:w-60 lg:w-72 h-auto bg-primary shadow-xl itmes-center justify-center"
                                 layout
                             >
                                 <Link to={`/product/${item.id}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="w-full h-full">

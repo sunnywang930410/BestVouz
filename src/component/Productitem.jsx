@@ -66,16 +66,16 @@ const ProductItem = ({ product }) => {
 
             {/* Modal 彈窗 */}
             <dialog ref={dialogRef} className="modal">
-                <div className="modal-box max-w-3xl body-bg">
+                <div className="flex modal-box max-w-3xl body-bg h-[400px]">
                     {selectedItem && (
-                        <div className="flex flex-row items-start">
+                        <div className="flex flex-row items-center">
                             <div className="w-1/3">
                                 <img src={selectedItem.cover} alt={selectedItem.name} className="w-full h-auto rounded-xl" />
                             </div>
                             <div className="w-2/3 flex flex-col text-left ml-2">
                                 <h4 className="text-lg font-bold mb-2">{selectedItem.name}</h4>
                                 <h5 className="mb-4">{selectedItem.description}</h5>
-                                <h4 className="mb-4">${selectedItem.price}</h4>
+                                <h4 className="text-lg mb-4">${selectedItem.price}</h4>
                                 <button
                                     onClick={() => {
                                         const dialog = document.getElementById("item_modal");

@@ -65,17 +65,17 @@ const MoveInVertical = () => {
 
         return (
             <div
-                className={`rounded-xl bg-neutral border-2 border-primary w-[200px] md:w-[200px] h-[280px] shadow transform ${getRotationClass(index)} ${getOffsetClass(index)}  transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
+                className={`flex flex-col rounded-xl bg-neutral border-2 border-primary w-[200px] md:w-[150px] md:h-[230px] lg:w-[200px] lg:h-[280px] shadow transform ${getRotationClass(index)} ${getOffsetClass(index)}  transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
             >
-                <figure className="w-full h-[200px] p-4">
+                <figure className="w-full h-auto p-4">
                     <img
                         src={picture.url}
                         alt={picture.title}
                         className="rounded-xl w-full h-auto object-contain"
                     />
                 </figure>
-                <div className="card-body items-center text-center p-4 pt-0">
-                    <h2 className="text-base">{picture.title}</h2>
+                <div className="card-body items-center text-center lg:p-4 pt-0">
+                    <h2 className="md:text-sm lg:text-base">{picture.title}</h2>
                 </div>
             </div>
         )
@@ -90,7 +90,7 @@ const MoveInVertical = () => {
             </div>
             <div className="flex justify-end">
                 <Link to="/comment">
-                    <button className="p-2 pr-4 pl-4 cursor-pointer bg-primary rounded-lg shadow-lg hover:bg-gray-200 transition">
+                    <button className="p-1 pr-2 pl-2 lg:p-2 lg:pr-4 lg:pl-4 cursor-pointer bg-primary rounded-lg shadow-lg hover:bg-gray-200 transition">
                         <MoveRight />
                     </button>
                 </Link>

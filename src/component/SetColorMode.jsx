@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Sun, Moon } from "lucide-react";
 import { selectLightMode, setColorMode } from "@/redux/colorSlice";
 
-export default function SetColorMode({ isDrawerOpen = false }) {
+export default function SetColorMode({ isDrawerOpen }) {
     const lightMode = useSelector(selectLightMode);
     const dispatch = useDispatch();
 
@@ -18,16 +18,16 @@ export default function SetColorMode({ isDrawerOpen = false }) {
     }
 
     return (
-        <div className="hidden md:flex items-center gap-2">
+        <div className="md:flex items-center gap-2">
             {isDrawerOpen ? (
                 <button
                     onClick={toggleColor}
-                    className="text-base font-medium hover:text-base-0 pt-10"
+                    className="text-base font-medium hover:text-base-0 pt-2"
                 >
                     {lightMode ? '深色模式' : '淺色模式'}
                 </button>
             ) : (
-                <div className="w-12 h-6">
+                <div className="md:flex hidden w-12 h-6">
                     <input
                         type="checkbox"
                         className="toggle theme-controller"

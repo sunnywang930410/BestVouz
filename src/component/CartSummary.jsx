@@ -15,7 +15,7 @@ function CartSummary() {
   return (
     <>
       <div className="drawer-end">
-      <input
+        <input
           id="cartModal"
           type="checkbox"
           className="drawer-toggle"
@@ -27,14 +27,14 @@ function CartSummary() {
         <nav onClick={toggleModal} className="w-8 h-8 items-center cursor-pointer">
           <div className="indicator">
             {count > 0 && (
-              <span className="indicator-item badge badge-secondary text-white">
+              <span className="indicator-item badge badge-secondary text-white md:text-sm text-xs">
                 {count}
               </span>
             )}
             <div className="w-8 h-8">
               <ShoppingCart
                 strokeWidth={2.5}
-                className="w-8 h-8 md:flex text-current group-hover:scale-105 transition-transform"
+                className="sm:w-6 md:w-7 lg:w-8 h-auto md:flex text-current group-hover:scale-105 transition-transform"
               />
             </div>
           </div>

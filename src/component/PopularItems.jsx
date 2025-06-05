@@ -104,9 +104,9 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                     <h2 className="text-2xl font-bold m-6">人氣商品</h2>
                     <div className="flex flex-row justify-center items-center overflow-x-auto">
                         {popularItems.map((item) => (
-                            <div key={item.id} className="flex-shrink-0 w-60 flex flex-col items-center mb-4 mt-4">
+                            <div key={item.id} className="flex-shrink-0 w-40 md:w-50 lg:w-60 flex flex-col items-center mb-4 mt-4">
 
-                                <div className="relative group w-60 h-60 rounded-xl overflow-hidden">
+                                <div className="relative group w-40 md:w-50 lg:w-60 h-auto rounded-xl overflow-hidden">
                                     <img
                                         src={item.url}
                                         alt={item.name}
@@ -150,12 +150,12 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
 
 
 
-            <dialog id="item_modal" className="modal">
-                <div className="modal-box max-w-3xl body-bg">
+            <dialog id="item_modal" className="modal ">
+                <div className="flex modal-box max-w-3xl body-bg h-[400px] ">
                     {selectedItem && (
-                        <div className="flex flex-row items-start">
+                        <div className="flex flex-row items-center ">
                             {/* 圖片區 */}
-                            <div className="w-1/3">
+                            <div className="flex w-1/3 ">
                                 <img
                                     src={selectedItem.url}
                                     alt={selectedItem.name}
@@ -164,10 +164,10 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                             </div>
 
                             {/* 文字區 */}
-                            <div className="w-2/3 flex flex-col text-left ml-2">
+                            <div className="w-2/3 flex flex-col text-left ml-2  ">
                                 <h4 className="text-lg font-bold mb-2">{selectedItem.name}</h4>
-                                <h5 className="mb-4">{selectedItem.description}</h5>
-                                <h4 className="mb-4">${selectedItem.price}</h4>
+                                <h5 className="mb-4 custom-text-gray-500">{selectedItem.description}</h5>
+                                <h4 className="text-lg mb-4">${selectedItem.price}</h4>
 
                                 <button
                                     onClick={() => {

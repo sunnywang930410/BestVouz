@@ -27,6 +27,9 @@ const queryClient = new QueryClient();
 
 import Success from '../pages/Success'
 import { selectLightMode } from './redux/colorSlice';
+import { FAQ } from '../pages/FAQ';
+import { Comment } from '../pages/Comment';
+import { About } from '../pages/About';
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -50,6 +53,9 @@ function App() {
                       <Route path='register' element={<Register />} />
                       <Route path='profile' element={<Profile />} />
                     </Route>
+                    <Route path='/FAQ' element={<FAQ />} />
+                    <Route path='/comment' element={<Comment />} />
+                    <Route path='/About' element={<About />} />
                   </Routes>
                   <Footer />
                 </main>
