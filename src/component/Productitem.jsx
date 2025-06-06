@@ -81,6 +81,7 @@ const ProductItem = ({ product }) => {
                                         const dialog = document.getElementById("item_modal");
                                         if (dialog) dialog.close();
                                         navigate(`/product/${selectedItem.id}`);
+                                        window.scrollTo(0, 0);
                                     }}
                                     className="mt-auto  px-4 py-2 bg-secondary text-white rounded-md hover:bg-secondary/90 transition"
                                 >

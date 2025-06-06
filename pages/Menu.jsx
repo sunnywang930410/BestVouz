@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Productlist from "../src/component/Productlist";
 import product from "../src/json/customize.json";
 import PopularItems from "../src/component/PopularItems";
+import { Link } from "react-router";
 
 const Menu = () => {
 
@@ -64,7 +65,7 @@ const Menu = () => {
                 <div className="breadcrumbs text-xs sm:text-sm mb-2 ml-2">
                     <ul>
                         <li><a href="/">首頁</a></li>
-                        <li><a href="/menu">蛋糕種類</a></li>
+                        <li><Link to={"/menu"}>蛋糕種類</Link></li>
                         <li><a
                             onClick={() => {
                                 // 重新觸發篩選，即使點的是相同分類
