@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useLogout, useUpdateProfile, useUserInfo } from "../react-query";
 import { getMyOrders } from "../api/fireAuth/index";
 import { format } from "date-fns";
+import { CircleIcon } from "lucide-react";
 
 const ProfileCard = () => {
+    // 更換頭像
+    const avatarUrl = "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp";
+
     const { data: userInfo } = useUserInfo();
     const user = { uid: userInfo?.uid };
     const logout = useLogout();
@@ -57,8 +61,8 @@ const ProfileCard = () => {
                 const data = await getMyOrders();
                 setOrders(data);
                 if (data.length > 0) {
-                setExpandedOrderId(data[0].id); 
-            }
+                    setExpandedOrderId(data[0].id);
+                }
             } finally {
                 setLoading(false);
             }
@@ -80,7 +84,17 @@ const ProfileCard = () => {
         <div className="mt-12 md:mt-30 lg:mt-30 p-4">
             <div className="text-left flex justify-between items-center gap-0 md:gap-12">
                 <div className="flex flex-row item-center gap-8">
-                    <img alt="Avatar" />
+                    {userInfo ? (
+                        // 已登入 → 顯示頭像
+                        <div className="rounded-full overflow-hidden w-15 md:w-20 h-auto">
+                            <img src={avatarUrl} alt="User Avatar" />
+                        </div>
+                    ) : (
+                        // 未登入 → 顯示 icon
+                        <div className="bg-gray-200 rounded-full flex items-center justify-center w-full h-full">
+                            <CircleIcon className="w-12 h-12 text-gray-500" />
+                        </div>
+                    )}
                     <span className="text-lg md:text-xl lg:text-2xl">{userInfo.username}</span>
                 </div>
                 <button className="text-right text-base lg:text-lg px-4 py-2 rounded-lg border border-primary hover:bg-neutral" onClick={handleLogout}>登出</button>
