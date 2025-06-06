@@ -53,19 +53,19 @@ const MoveInVertical = () => {
         // 新增位移效果函數
         const getOffsetClass = (index) => {
             const offsets = [
-                'mt-0',
-                'mt-30',
-                'mt-64',
-                'mt-20',
-                'mt-34',
-                'mt-6'
+                'md:mt-0',
+                'md:mt-30',
+                'md:mt-64',
+                'md:mt-20',
+                'md:mt-34',
+                'md:mt-6'
             ];
             return offsets[index % offsets.length];
         };
 
         return (
             <div
-                className={`flex flex-col rounded-xl bg-neutral border-2 border-primary w-[200px] md:w-[150px] md:h-[230px] lg:w-[200px] lg:h-[280px] shadow transform ${getRotationClass(index)} ${getOffsetClass(index)}  transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
+                className={`flex flex-col justify-center rounded-xl bg-neutral border-2 border-primary w-[130px] sm:w-[150px] md:h-[230px] lg:w-[200px] lg:h-[280px] shadow transform ${getRotationClass(index)} ${getOffsetClass(index)}  transition-all duration-300 ease-in-out hover:rotate-0 hover:scale-105 hover:shadow-lg`}
             >
                 <figure className="w-full h-auto p-4">
                     <img
@@ -82,13 +82,13 @@ const MoveInVertical = () => {
     }
 
     return (
-        <div className="container px-4">
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-6 items-center justify-center ">
+        <div className=" flex flex-col  m-10">
+            <div className="m-10  grid grid-cols-2  md:grid-cols-6 gap-2 items-center justify-items-center ">
                 {picture.map((pic, index) => (
                     <Card key={pic.ID} picture={pic} index={index} />
                 ))}
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-center md:justify-end">
                 <Link to="/comment">
                     <button className="p-1 pr-2 pl-2 lg:p-2 lg:pr-4 lg:pl-4 cursor-pointer bg-primary rounded-lg shadow-lg hover:bg-gray-200 transition">
                         <MoveRight />

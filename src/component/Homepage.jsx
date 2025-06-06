@@ -44,8 +44,8 @@ function Homepage({ product }) {
 
 
     return (
-        <div className="justify-center pt-20 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-10 pt-20">
+        <div className="flex flex-col justify-center md:pt-20 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-8 p-10 pt-20">
                 {/* 左側：蛋糕圖片、名稱、原價  */}
                 <div className="flex flex-col items-center gap-4">
                     <img
@@ -77,13 +77,13 @@ function Homepage({ product }) {
             <div>
                 <PopularItems />
             </div>
-            <div className="relative p-16 px-32">
-                <h2 className={`text-2xl font-bold mb-2`}>
+            <div className="justify-center items-center">
+                <h2 className={`text-2xl font-bold mt-6 mb-2`}>
                     為您生命中重要的人獻上最好的祝福
                 </h2>
                 <MoveInVertical />
             </div>
-            <hr></hr>
+            <hr className="w-[300px] sm:w-[500px] md:w-[700px] lg:w-[800px] mx-auto"></hr>
             <div className="pt-8 justify-center items-center">
                 <h2 className={`text-2xl font-bold mb-2 text-center`}>
                     選擇你想要的蛋糕

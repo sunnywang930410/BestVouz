@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <div className="relative w-screen left-[50%] right-[50%] mx-[-50vw]  ">
+        <div className="relative w-full   ">
             < footer className="footer footer-bg  justify-around items-center md:footer-horizontal text-base-content p-10" >
                 <div>
                     <Link

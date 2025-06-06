@@ -102,17 +102,17 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                 // 原本的橫向滑動版本
                 <div className="flex flex-col items-center mb-4 mt-4">
                     <h2 className="text-2xl font-bold m-6">人氣商品</h2>
-                    <div className="flex flex-row justify-center items-center overflow-x-auto">
+                    <div className="grid grid-cols-2  md:grid-cols-4 gap-4 justify-center items-center overflow-x-auto">
                         {popularItems.map((item) => (
-                            <div key={item.id} className="flex-shrink-0 w-40 md:w-50 lg:w-60 flex flex-col items-center mb-4 mt-4">
+                            <div key={item.id} className="flex-shrink-0 sm:w-40 md:w-50 lg:w-60 flex flex-col items-center mb-4 mt-4">
 
-                                <div className="relative group w-40 md:w-50 lg:w-60 h-auto rounded-xl overflow-hidden">
+                                <div className="relative group w-30 md:w-50 lg:w-60 h-auto rounded-xl overflow-hidden">
                                     <img
                                         src={item.url}
                                         alt={item.name}
                                         className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
                                     />
-                                    <div className="absolute inset-0 flex items-center justify-center gap-4 
+                                    <div className="absolute inset-0 flex items-center justify-center gap-2 lg:gap-4 
                 bg-black/40 opacity-0 translate-y-full 
                 group-hover:translate-y-0 group-hover:opacity-100 
                 transition-all duration-500 ease-in-out">
@@ -124,7 +124,7 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                                             }}
                                             className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
                                         >
-                                            <ShoppingCart className="w-8 h-auto text-secondary" />
+                                            <ShoppingCart className="w-4 sm:w-6 md:w-8 h-auto text-secondary" />
 
                                         </button>
 
@@ -132,7 +132,7 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                                             onClick={() => handleOpenModal(item)}
                                             className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
                                         >
-                                            <Search className="w-8 h-auto text-secondary" />
+                                            <Search className="w-4 sm:w-6 md:w-8 h-auto text-secondary" />
                                         </button>
                                     </div>
                                 </div>
