@@ -4,6 +4,8 @@ import MoveInVertical from "./MoveInVertical";
 import { useEffect, useState } from "react";
 import PopularItems from "./PopularItems";
 import decorations from '../json/ButterAndFruits.json'
+
+
 function Homepage({ product }) {
     const [selectedDecoration, setSelectedDecoration] = useState(null);
     const navigate = useNavigate();

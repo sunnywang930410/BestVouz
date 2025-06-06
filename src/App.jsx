@@ -30,6 +30,7 @@ import { selectLightMode } from './redux/colorSlice';
 import { FAQ } from '../pages/FAQ';
 import { Comment } from '../pages/Comment';
 import { About } from '../pages/About';
+import ScrollToTopButton from './component/ScrollToTopButtton';
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -57,6 +58,7 @@ function App() {
                     <Route path='/comment' element={<Comment />} />
                     <Route path='/About' element={<About />} />
                   </Routes>
+                  <ScrollToTopButton />
                   <Footer />
                 </main>
               </BrowserRouter>
