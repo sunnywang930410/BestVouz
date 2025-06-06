@@ -63,10 +63,10 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
     return (
         <div className="mt-4 mb-8">
             {isInMenu ? (
-                // ✅ 三欄網格版本
-                <div className="grid md:grid-cols-3 px-4 justify-center items-center">
+                //三欄網格版本
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-4 justify-center items-center">
                     {sortedPopularProducts.map((item) => (
-                        <div key={item.id} className="w-[270px] justify-center items-center rounded-xl overflow-hidden relative group">
+                        <div key={item.id} className="justify-center items-center rounded-xl overflow-hidden relative group">
                             <div className="relative group w-full h-auto rounded-xl overflow-hidden">
                                 <img
                                     src={item.url}
@@ -104,9 +104,9 @@ const PopularItems = ({ isInMenu = false, priceSort }) => {
                     <h2 className="text-2xl font-bold m-6">人氣商品</h2>
                     <div className="grid grid-cols-2  md:grid-cols-4 gap-4 justify-center items-center overflow-x-auto">
                         {popularItems.map((item) => (
-                            <div key={item.id} className="flex-shrink-0 sm:w-40 md:w-50 lg:w-60 flex flex-col items-center mb-4 mt-4">
+                            <div key={item.id} className="flex-shrink-0 w-40 md:w-50 lg:w-60 flex flex-col items-center mb-4 mt-4">
 
-                                <div className="relative group w-30 md:w-50 lg:w-60 h-auto rounded-xl overflow-hidden">
+                                <div className="relative group w-40 md:w-50 lg:w-60 h-auto rounded-xl overflow-hidden">
                                     <img
                                         src={item.url}
                                         alt={item.name}

@@ -58,10 +58,10 @@ const Menu = () => {
 
 
     return (
-        <div className="flex flex-row mt-12 justify-center w-full mt-50">
+        <div className="flex flex-row mt-12 justify-center w-full mt-50 ml-2 mr-2">
             {/* 側邊欄 */}
             <div>
-                <div className="breadcrumbs text-sm mb-2">
+                <div className="breadcrumbs text-xs sm:text-sm mb-2 ml-2">
                     <ul>
                         <li><a href="/">首頁</a></li>
                         <li><a href="/menu">蛋糕種類</a></li>
@@ -79,7 +79,7 @@ const Menu = () => {
                         </a></li>
                     </ul>
                 </div>
-                <ul className="menu w-70 text-lg">
+                <ul className="menu w-50 md:w-60 lg:w-70 text-xs sm:text-sm md:text-base lg:text-lg">
 
                     <li>
                         <a onClick={handleAllClick} className={getClass("all", "全部商品")}>
@@ -131,13 +131,13 @@ const Menu = () => {
             </div>
 
             {/* 主內容 */}
-            <div className="mb-10 ml-6 w-full max-w-[900px] justify-center items-center">
+            <div className="mb-10 ml-6 mr-6 w-full max-w-[900px] justify-center items-center">
                 {filter.type === "tags" && filter.value === "人氣商品" ? (
                     <>
-                        <div className="flex justify-between items-center mb-2">
-                            <h2 className="text-2xl font-bold text-start ">人氣商品</h2>
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-2">
+                            <h2 className="text-2xl font-bold text-start">人氣商品</h2>
                             <select
-                                className="select select-bordered max-w-xs"
+                                className="select select-bordered  w-[150px] md:w-[180px] lg:max-w-xs"
                                 value={priceSort}
                                 onChange={(e) => setPriceSort(e.target.value)}
                             >
@@ -152,12 +152,12 @@ const Menu = () => {
                     </>
                 ) : (
                     <>
-                        <div className="flex justify-between items-center mb-2">
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-2">
                             <h2 className="text-2xl font-bold text-start">
                                 {filter.type === "all" ? "全部商品" : filter.value}
                             </h2>
                             <select
-                                className="select select-bordered max-w-xs"
+                                className="select select-bordered  w-[150px] md:w-[180px] lg:max-w-xs"
                                 value={priceSort}
                                 onChange={(e) => setPriceSort(e.target.value)}
                             >

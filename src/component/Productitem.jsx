@@ -24,7 +24,7 @@ const ProductItem = ({ product }) => {
 
 
     return (
-        <div className="w-[270px] body-bg flex-col justify-center items-center">
+        <div className=" body-bg flex-col justify-center items-center">
             {/* 圖片區塊 */}
             <div key={product.id} className="justify-center items-center rounded-xl overflow-hidden relative group">
                 <img
@@ -32,7 +32,7 @@ const ProductItem = ({ product }) => {
                     src={product.cover}
                     alt={product.name}
                 />
-                <div className="absolute inset-0 flex items-center justify-center gap-4 
+                <div className="absolute inset-0 flex items-center justify-center gap-2 lg:gap-4
                 bg-black/40 opacity-0 translate-y-full 
                 group-hover:translate-y-0 group-hover:opacity-100 
                 transition-all duration-500 ease-in-out">
@@ -43,7 +43,7 @@ const ProductItem = ({ product }) => {
                         }}
                         className="p-2 cursor-pointer border-2 border-secondary bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
                     >
-                        <ShoppingCart className="w-8 h-auto text-secondary" />
+                        <ShoppingCart className="w-4 sm:w-6 md:w-8 h-auto text-secondary" />
 
                     </button>
 
@@ -51,15 +51,15 @@ const ProductItem = ({ product }) => {
                         onClick={() => handleOpenModal(product)}
                         className="p-2 cursor-pointer border-2 border-gray-300 bg-gray-300 rounded-lg shadow-lg hover:bg-gray-200 transition"
                     >
-                        <Search className="w-8 h-auto text-secondary" />
+                        <Search className="w-4 sm:w-6 md:w-8 h-auto text-secondary" />
                     </button>
                 </div>
             </div>
 
             {/* 內容區塊 */}
             <div className="flex flex-col justify-center items-center">
-                <h4 className="text-lg font-bold">{product.name}</h4>
-                <h5 className="">${product.price}</h5>
+                <h4 className="text-sm md:text-base lg:text-lg font-bold">{product.name}</h4>
+                <h5 className="text-xs md:text-sm lg:text-base">${product.price}</h5>
             </div>
 
 
