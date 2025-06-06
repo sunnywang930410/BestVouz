@@ -37,7 +37,7 @@ const RegisterCard = ({ redirect }) => {
     return (
         <form
             onSubmit={onFinish}
-            className="border-2 border-radius border-primary p-8 mb-15  mx-auto w-[500px] rounded-xl shadow-md space-y-4 content mt-40"
+            className="border-2 border-radius border-primary p-8 mb-15  mx-auto w-[350px]  md:w-[450px]  lg:w-[500px] rounded-xl shadow-md space-y-4 content  mt-20 md:mt-30 lg:mt-40"
         >
             <div>
                 <h1 className="text-lg font-bold">註冊</h1>
